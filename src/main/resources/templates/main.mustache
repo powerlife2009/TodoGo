@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+<div>
+    <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <input type="submit" value="Logout">
+    </form>
+</div>
+<div>
+    <form method="post">
+        <input type="text" name="text" placeholder="New todo">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <button type="submit">Create</button>
+    </form>
+</div>
+<div>List my todos</div>
+{{#tasks}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{text}}</span>
+    </div>
+{{/tasks}}
+</body>
+</html>
