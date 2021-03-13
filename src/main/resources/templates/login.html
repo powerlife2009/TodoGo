@@ -5,7 +5,7 @@
     <title>Title</title>
     <div th:replace="fragments/header :: header-css"></div>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <div th:replace="fragments/header :: navbar"></div>
 <div class="container mt-5">
@@ -30,6 +30,7 @@
     <a href="/registration">Registration</a>
 </div>
 
+<div class="wrapper flex-grow-1"></div>
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/footer :: scripts"></div>
 

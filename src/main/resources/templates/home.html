@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <div th:replace="fragments/header :: header-css"></div>
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column min-vh-100">
 
 <div th:replace="fragments/header :: navbar"></div>
 
-    <main role="main" class="flex-shrink-8">
-        <div class="container mt-5">
-            <div class="jumbotron">
-                <h1 class="display-4">
-                    Hello, user!
-                </h1>
-            </div>
+<main role="main" class="flex-shrink-8">
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">
+                Hello, user!
+            </h1>
         </div>
-    </main>
-<div class="hu">Hello</div>
+    </div>
+</main>
+
+<div class="wrapper flex-grow-1"></div>
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/footer :: scripts"></div>
 
