@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:replace="fragments/header :: header-css"></div>
+</head>
+<body>
+
+<div th:replace="fragments/header :: navbar"></div>
+<div class="container mt-5">
+    <div>
+        <form th:action="@{/main}" th:method="post">
+            <label><input type="text" th:name="text" placeholder="New todo"></label>
+            <button type="submit">Create</button>
+        </form>
+    </div>
+    <H2>List my todos</H2>
+    <tr th:each="task : ${tasks}">
+        <div>
+            <td th:text="${task.text}"></td>
+        </div>
+    </tr>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer :: scripts"></div>
+
+</body>
+</html>
