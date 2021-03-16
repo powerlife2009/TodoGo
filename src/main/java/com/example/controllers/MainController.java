@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
+@RequestMapping("/main")
 public class MainController {
 
     private final TaskService taskService;
@@ -23,14 +25,14 @@ public class MainController {
     }
 
 
-    @GetMapping("/main")
+    @GetMapping
     public String main(@AuthenticationPrincipal User user, Model model) {
         Iterable<Task> taskList = taskService.findAllByUser(user);
         model.addAttribute("tasks", taskList);
         return "main";
     }
 
-    @PostMapping("/main")
+    @PostMapping
     public String createTodo(@AuthenticationPrincipal User user,
                              @RequestParam String text, Model model) {
         Task task = new Task(text, user);

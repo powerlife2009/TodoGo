@@ -5,9 +5,7 @@ import com.example.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/registration")
@@ -22,12 +20,13 @@ public class RegistrationController {
     }
 
     @GetMapping
-    public String registerForm() {
+    public String registerForm(Model model) {
+        model.addAttribute("newUser", new User());
         return "registration";
     }
 
     @PostMapping
-    public String addUser(User user, Model model) {
+    public String addUser(@ModelAttribute User user, Model model) {
 
         if(!userService.saveUser(user)){
             model.addAttribute("message", "User exists");

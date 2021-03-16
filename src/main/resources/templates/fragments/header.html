@@ -1,47 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <div th:fragment="header-css">
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css"/>
     </div>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="navbar">
-    <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">TodoGO</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <div sec:authorize="isAuthenticated()">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/main}">Home</a>
+<div th:fragment="navbar">
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container" uk-navbar>
+
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active"><a th:href="@{/}">TodoGO</a></li>
+                    <li><a th:href="@{/main}" sec:authorize="isAuthenticated()">Home</a></li>
+                </ul>
+            </div>
+
+            <div class="uk-navbar-right uk-margin-right">
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a href="#" sec:authorize="isAuthenticated()">
+                            <span th:text="${#authentication.name}"></span>
+                        </a>
+                        <div uk-dropdown="pos: top-right">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-active"><a href="#">Active</a></li>
+                                <li><a href="#">Item</a></li>
+                                <li class="uk-nav-header">Header</li>
+                                <li><a href="#">Item</a></li>
+                                <li><a href="#">Item</a></li>
+                                <li class="uk-nav-divider"></li>
+                                <form th:action="@{/logout}" method="post">
+                                    <button class="uk-button uk-button-text" type="submit">Sign Out
+                                    </button>
+                                </form>
+                            </ul>
+                        </div>
                     </li>
-                </div>
-                <div sec:authorize="isAnonymous()">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/main}">Sign In</a>
-                    </li>
-                </div>
-            </ul>
-        </div>
-        <div sec:authorize="isAuthenticated()">
-        <span class="navbar-text">
-        <div th:text="${#authentication.name}"></div>
-        </span>
-        </div>
-        <div sec:authorize="isAuthenticated()">
-            <form th:action="@{/logout}" method="post">
-                <button class="btn btn-dark" type="submit">Sign Out</button>
-            </form>
-        </div>
+                    <li><a th:href="@{/main}" sec:authorize="isAnonymous()">Sign In</a></li>
+                </ul>
+            </div>
+        </nav>
     </div>
-</nav>
+</div>
 </body>
 </html>
