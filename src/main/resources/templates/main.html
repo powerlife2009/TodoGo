@@ -8,49 +8,49 @@
 <body>
 
 <div th:replace="fragments/header :: navbar"></div>
-<div th:replace="fragments/header :: panel"></div>
 
+<div uk-grid>
 
-<div class="uk-container uk-margin-xlarge-top">
-
-    <a class="uk-button uk-button-default" href="#modal-center" uk-toggle>Create new Todo</a>
-
-    <div id="modal-center" class="uk-flex-top" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-            <div class="uk-text-center">
-                <h1>New todo</h1>
-            </div>
-            <div class="uk-margin">
-                <form th:action="@{/main}" th:method="post">
-                    <input class="uk-input uk-form-width-large" type="text" th:name="text"
-                           placeholder="Enter a name for new Todo">
-                    <div class="uk-text-center uk-margin">
-                        <button class="uk-button uk-button-primary" type="submit">Сохранить</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+    <div class="uk-width-auto uk-background-muted">
+        <div th:replace="fragments/left-panel :: panel"></div>
     </div>
 
-    <table class="uk-table uk-table-hover uk-table-divider">
+    <div class="uk-width-expand">
 
-        <thead>
-        <tr>
-            <th>Task</th>
-            <th>User</th>
-        </tr>
-        </thead>
+        <div th:replace="fragments/create_todo :: createNewTodo"></div>
 
-        <tbody>
-        <tr th:each="task : ${tasks}">
-            <td><span th:text="${task.text}"></span></td>
-            <td><span th:text="${#authentication.name}"></span></td>
-        </tr>
-        </tbody>
-    </table>
+        <div class="uk-container uk-margin-medium-top uk-background-muted">
 
+            <table class="uk-table uk-table-hover uk-table-divider">
+
+                <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>PR</th>
+                    <th>DT</th>
+                    <th>GR</th>
+                    <th>NF</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="task : ${tasks}">
+                    <td><span th:text="${task.getText()}"></span></td>
+                    <td><span th:text="${task.getPriority()}"></span></td>
+                    <td><span th:text="${task.getDate()}"></span></td>
+                    <td><span th:text="${task.getType()}"></span></td>
+                    <td>...</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="uk-text-center uk-margin">
+            <a href="#" uk-totop uk-scroll></a>
+        </div>
+    </div>
 </div>
+
+
 <div th:replace="fragments/footer :: scripts"></div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>

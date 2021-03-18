@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import java.time.LocalDate;
+
+
 @Controller
 @RequestMapping("/main")
 public class MainController {
@@ -34,8 +37,9 @@ public class MainController {
 
     @PostMapping
     public String createTodo(@AuthenticationPrincipal User user,
-                             @RequestParam String text, Model model) {
-        Task task = new Task(text, user);
+                             @RequestParam String text, String date, String type, Integer priority, Model model) {
+
+        Task task = new Task(text, user,LocalDate.parse(date), type, priority);
         taskService.saveTask(task);
         Iterable<Task> taskList = taskService.findAllByUser(user);
         model.addAttribute("tasks", taskList);
