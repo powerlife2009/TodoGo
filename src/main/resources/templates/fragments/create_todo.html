@@ -16,7 +16,7 @@
                     <h1>New todo</h1>
                 </div>
                 <div class="uk-margin">
-                    <form th:action="@{/main}" th:method="post">
+                    <form th:action="@{/main/create}" th:method="post">
                         <div class="uk-margin">
                             <input class="uk-input uk-form-width-large" type="text" th:name="text"
                                    placeholder="Enter a name for new Todo">
@@ -51,6 +51,10 @@
                                     <option>5</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                            <label><input class="uk-radio" type="radio" th:name="notification" th:value="true" checked> true</label>
+                            <label><input class="uk-radio" type="radio" th:name="notification" th:value="false"> false</label>
                         </div>
                         <button class="uk-button uk-button-primary" type="submit">Сохранить</button>
                     </form>

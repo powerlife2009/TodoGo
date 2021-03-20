@@ -25,6 +25,7 @@
 
                 <thead>
                 <tr>
+                    <th></th>
                     <th>Task</th>
                     <th>PR</th>
                     <th>DT</th>
@@ -35,11 +36,31 @@
 
                 <tbody>
                 <tr th:each="task : ${tasks}">
-                    <td><span th:text="${task.getText()}"></span></td>
+                    <td>
+                        <form th:action="@{/main/delete}" method="post">
+                            <input type="hidden" name="id" th:value="${task.id}"/>
+                            <button class="uk-button uk-button-link" type="submit">
+                                <span uk-icon="trash"></span>
+                            </button>
+                        </form>
+                    </td>
+
+                    <td>
+                        <a href="#modal-editor" uk-toggle><span th:text="${task.getText()}"></span></a>
+
+                        <div id="modal-editor" class="uk-flex-top" uk-modal>
+                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                                <button class="uk-modal-close-default" type="button" uk-close></button>
+                                <div class="uk-text-center">
+                                    <h1>Edit</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                     <td><span th:text="${task.getPriority()}"></span></td>
                     <td><span th:text="${task.getDate()}"></span></td>
                     <td><span th:text="${task.getType()}"></span></td>
-                    <td>...</td>
+                    <td><span th:text="${task.getNotification()}"></span></td>
                 </tr>
                 </tbody>
             </table>

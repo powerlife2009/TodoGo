@@ -13,6 +13,7 @@ public class Task {
     private LocalDate date;
     private String type;
     private Integer priority;
+    private Boolean notification;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
@@ -20,12 +21,22 @@ public class Task {
     public Task() {
     }
 
-    public Task(String text, User user, LocalDate date, String type, Integer priority) {
+    public Task(String text, User user, LocalDate date, String type, Integer priority, Boolean notification) {
         this.text = text;
         this.user = user;
         this.date = date;
         this.type = type;
         this.priority = priority;
+        this.notification = notification;
+    }
+
+
+    public Boolean getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Boolean notification) {
+        this.notification = notification;
     }
 
     public Integer getPriority() {
