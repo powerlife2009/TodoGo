@@ -2,6 +2,7 @@ package com.example.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class Task {
@@ -10,10 +11,11 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String text;
-    private LocalDate date;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
     private String type;
     private Integer priority;
-    private Boolean notification;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
@@ -21,22 +23,12 @@ public class Task {
     public Task() {
     }
 
-    public Task(String text, User user, LocalDate date, String type, Integer priority, Boolean notification) {
+    public Task(String text, User user, Date date, String type, Integer priority) {
         this.text = text;
         this.user = user;
         this.date = date;
         this.type = type;
         this.priority = priority;
-        this.notification = notification;
-    }
-
-
-    public Boolean getNotification() {
-        return notification;
-    }
-
-    public void setNotification(Boolean notification) {
-        this.notification = notification;
     }
 
     public Integer getPriority() {
@@ -55,12 +47,12 @@ public class Task {
         this.type = type;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
 
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -87,4 +79,4 @@ public class Task {
     public void setUser(User user) {
         this.user = user;
     }
-}
+    }

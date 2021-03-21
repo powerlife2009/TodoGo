@@ -6,20 +6,35 @@
 <body>
 <div th:fragment="panel">
     <div class="uk-margin-xlarge-top">
+
         <div class="uk-margin uk-margin-left uk-margin-right">
             <button class="uk-button uk-button-link uk-margin">
                 <span uk-icon="icon: play; ratio:2"></span>
             </button>
+            <div uk-drop="pos: right-center">
+                <div class="uk-card uk-card-body uk-card-default">В этом блоке отображаются задачи на сегодня
+                </div>
+            </div>
         </div>
+
         <div class="uk-margin uk-margin-left uk-margin-right">
             <button class="uk-button uk-button-link uk-margin">
                 <span uk-icon="icon: warning; ratio:2"></span>
             </button>
+            <div uk-drop="pos: right-center">
+                <div class="uk-card uk-card-body uk-card-default">В этом блоке отображаются только важные задачи
+                </div>
+            </div>
         </div>
+
         <div class="uk-margin uk-margin-left uk-margin-right">
             <button class="uk-button uk-button-link uk-margin">
                 <span uk-icon="icon: grid; ratio:2"></span>
             </button>
+            <div uk-drop="pos: right-center">
+                <div class="uk-card uk-card-body uk-card-default">В этом блоке отображаются группы
+                </div>
+            </div>
         </div>
     </div>
 </div>

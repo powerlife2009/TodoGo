@@ -7,12 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
+import java.sql.Date;
+import java.text.spi.DateFormatProvider;
 import java.time.LocalDate;
 
 
@@ -30,8 +29,7 @@ public class MainController {
 
     @GetMapping
     public String main(@AuthenticationPrincipal User user, Model model) {
-        Iterable<Task> taskList = taskService.findAllByUser(user);
-        model.addAttribute("tasks", taskList);
+        listTodo(user, model);
         return "main";
     }
 
@@ -40,26 +38,44 @@ public class MainController {
                              @RequestParam String text,
                              @RequestParam String date,
                              @RequestParam String type,
-                             @RequestParam Integer priority,
-                             @RequestParam Boolean notification,
-                             Model model) {
+                             @RequestParam Integer priority) {
 
-        Task task = new Task(text, user,LocalDate.parse(date), type, priority, notification);
+        Task task = new Task(text, user, Date.valueOf(date), type, priority);
         taskService.saveTask(task);
-        Iterable<Task> taskList = taskService.findAllByUser(user);
-        model.addAttribute("tasks", taskList);
         return "redirect:/main";
     }
 
     @PostMapping("/delete")
-    public String deleteTodo(@AuthenticationPrincipal User user,
-                             @RequestParam String id,
-                             Model model) {
+    public String deleteTodo(@RequestParam String id) {
         Long todoId = Long.parseLong(id);
         taskService.deleteTodo(todoId);
-
-        Iterable<Task> taskList = taskService.findAllByUser(user);
-        model.addAttribute("tasks", taskList);
         return "redirect:/main";
     }
+
+    @PostMapping("/edit")
+    public String editTodo(@RequestParam String id,
+                           @RequestParam String text,
+                           @RequestParam String date,
+                           @RequestParam String type,
+                           @RequestParam Integer priority) {
+        Long todoId = Long.parseLong(id);
+
+        Task task = taskService.getTask(todoId);
+
+        task.setText(text);
+        task.setDate(Date.valueOf(date));
+        task.setPriority(priority);
+        task.setType(type);
+
+        taskService.saveTask(task);
+
+        return "redirect:/main";
+    }
+
+
+    public void listTodo(User user, Model model) {
+        Iterable<Task> taskList = taskService.findAllByUser(user);
+        model.addAttribute("tasks", taskList);
+    }
+
 }

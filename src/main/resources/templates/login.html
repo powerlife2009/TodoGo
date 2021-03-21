@@ -15,16 +15,22 @@
         <h1 class="uk-heading-medium uk-text-center">Sign In</h1>
 
         <div class="uk-margin">
-            <input class="uk-input uk-form-width-large" type="text" name="username" placeholder="Login">
+            <div class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                <input class="uk-input uk-form-width-large" type="text" name="username" placeholder="Login">
+            </div>
         </div>
 
         <div class="uk-margin">
-            <input class="uk-input uk-form-width-large" type="password" name="password" placeholder="Password">
+            <div class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                <input class="uk-input uk-form-width-large" type="password" name="password" placeholder="Password">
+            </div>
         </div>
-
-        <button class="uk-button uk-button-secondary" type="submit">Sign In</button>
-        <a class="uk-link-heading uk-margin-left" href="/registration">Sign Up</a>
-
+        <div class="uk-text-center">
+            <button class="uk-button uk-button-secondary" type="submit">Sign In</button>
+            <a class="uk-link-heading uk-margin-left" href="/registration">Sign Up</a>
+        </div>
     </form>
 </div>
 <div th:replace="fragments/footer :: scripts"></div>

@@ -11,54 +11,56 @@
 
         <div id="modal-center" class="uk-flex-top" uk-modal>
             <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <button class="uk-modal-close-outside" type="button" uk-close></button>
+
                 <div class="uk-text-center">
-                    <h1>New todo</h1>
+                    <h1>new todo</h1>
                 </div>
-                <div class="uk-margin">
-                    <form th:action="@{/main/create}" th:method="post">
-                        <div class="uk-margin">
-                            <input class="uk-input uk-form-width-large" type="text" th:name="text"
-                                   placeholder="Enter a name for new Todo">
+
+                <form th:action="@{/main/create}" th:method="post">
+
+                    <div class="uk-grid-small" uk-grid>
+
+                        <div class="uk-width-1-1">
+                            <input class="uk-input" type="text" th:name="text" placeholder="text">
                         </div>
-                        <div class="uk-margin">
-                            <input class="uk-input uk-form-width-large" type="date" th:name="date">
+
+                        <div class="uk-width-1-3@s">
+                            <input class="uk-input" type="date" th:name="date">
                         </div>
-                        <div class="uk-width-3-4@s">
-                            <div class="uk-margin">
-                                <div class="uk-form-controls">
-                                    <select class="uk-select" type="text" th:name="type">
-                                        <option>Add in group</option>
-                                        <option>Shop</option>
-                                        <option>Home</option>
-                                        <option>Work</option>
-                                        <option>Friends</option>
-                                        <option>Family</option>
-                                        <option>Hobby</option>
-                                        <option>Money</option>
-                                        <option>Auto</option>
-                                    </select>
-                                </div>
-                            </div>
+
+                        <div class="uk-width-1-3@s">
+                            <select class="uk-select" type="text" th:name="type">
+                                <option>without group</option>
+                                <option>Shop</option>
+                                <option>Home</option>
+                                <option>Work</option>
+                                <option>Friends</option>
+                                <option>Family</option>
+                                <option>Hobby</option>
+                                <option>Money</option>
+                                <option>Auto</option>
+                            </select>
                         </div>
-                        <div class="uk-width-1-4@s">
-                            <div class="uk-form-controls">
-                                <select class="uk-select" type="number" th:name="priority">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
+
+                        <div class="uk-width-1-3@s">
+                            <select class="uk-select" type="number" th:name="priority">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
                         </div>
-                        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                            <label><input class="uk-radio" type="radio" th:name="notification" th:value="true" checked> true</label>
-                            <label><input class="uk-radio" type="radio" th:name="notification" th:value="false"> false</label>
+                    </div>
+
+                    <div class="uk-margin">
+                        <div class="uk-text-center">
+                            <button class="uk-button uk-button-primary" type="submit">Сохранить</button>
                         </div>
-                        <button class="uk-button uk-button-primary" type="submit">Сохранить</button>
-                    </form>
-                </div>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>

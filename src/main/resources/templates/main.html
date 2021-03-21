@@ -18,49 +18,51 @@
     <div class="uk-width-expand">
 
         <div th:replace="fragments/create_todo :: createNewTodo"></div>
-
+        <div class="uk-text-center uk-margin-xlarge-left uk-margin-xlarge-right">
+            <div>
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-text-center@s uk-card-body">
+                        Делай то, что ты боишься делать. Это лучший способ обрести уверенность в себе.
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="uk-container uk-margin-medium-top uk-background-muted">
 
             <table class="uk-table uk-table-hover uk-table-divider">
 
                 <thead>
                 <tr>
-                    <th></th>
-                    <th>Task</th>
-                    <th>PR</th>
-                    <th>DT</th>
-                    <th>GR</th>
-                    <th>NF</th>
+                    <th class="uk-width-small"></th>
+                    <th class="uk-table-expand">Task</th>
+                    <th class="uk-width-small">DT</th>
+                    <th class="uk-table-shrink">PR</th>
+                    <th class="uk-table-shrink">GR</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr th:each="task : ${tasks}">
                     <td>
-                        <form th:action="@{/main/delete}" method="post">
-                            <input type="hidden" name="id" th:value="${task.id}"/>
-                            <button class="uk-button uk-button-link" type="submit">
-                                <span uk-icon="trash"></span>
-                            </button>
-                        </form>
+                        <ul class="uk-iconnav">
+                            <li>
+                                <div th:include="fragments/edit_todo :: editTodo(${task})"></div>
+                            </li>
+                            <li>
+                                <form th:action="@{/main/delete}" method="post">
+                                    <input type="hidden" name="id" th:value="${task.id}"/>
+                                    <button class="uk-button uk-button-link" type="submit">
+                                        <span uk-icon="trash"></span>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
                     </td>
 
-                    <td>
-                        <a href="#modal-editor" uk-toggle><span th:text="${task.getText()}"></span></a>
-
-                        <div id="modal-editor" class="uk-flex-top" uk-modal>
-                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-                                <button class="uk-modal-close-default" type="button" uk-close></button>
-                                <div class="uk-text-center">
-                                    <h1>Edit</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td><span th:text="${task.getPriority()}"></span></td>
-                    <td><span th:text="${task.getDate()}"></span></td>
-                    <td><span th:text="${task.getType()}"></span></td>
-                    <td><span th:text="${task.getNotification()}"></span></td>
+                    <td th:text="${task.getText()}"></td>
+                    <td th:text="${#dates.format(task.date, 'dd.MMM.yyyy')}"></td>
+                    <td th:text="${task.getPriority()}"></td>
+                    <td th:text="${task.getType()}"></td>
                 </tr>
                 </tbody>
             </table>
