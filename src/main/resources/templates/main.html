@@ -35,9 +35,27 @@
                 <tr>
                     <th class="uk-width-small"></th>
                     <th class="uk-table-expand">Task</th>
-                    <th class="uk-width-small">DT</th>
-                    <th class="uk-table-shrink">PR</th>
-                    <th class="uk-table-shrink">GR</th>
+                    <th class="uk-width-small">
+                        <form th:action="@{/byDate}" method="post">
+                            <button class="uk-button uk-button-link" type="submit">
+                                DT
+                            </button>
+                        </form>
+                    </th>
+                    <th class="uk-table-shrink">
+                        <form th:action="@{/byPriority}" method="post">
+                            <button class="uk-button uk-button-link" type="submit">
+                                PR
+                            </button>
+                        </form>
+                    </th>
+                    <th class="uk-table-shrink">
+                        <form th:action="@{/byType}" method="post">
+                            <button class="uk-button uk-button-link" type="submit">
+                                GR
+                            </button>
+                        </form>
+                    </th>
                 </tr>
                 </thead>
 
