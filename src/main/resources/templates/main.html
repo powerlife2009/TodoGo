@@ -46,7 +46,7 @@
                     <td>
                         <ul class="uk-iconnav">
                             <li>
-                                <div th:include="fragments/edit_todo :: editTodo(${task})"></div>
+                                <div th:replace="fragments/edit_todo :: editTodo(${task})"></div>
                             </li>
                             <li>
                                 <form th:action="@{/main/delete}" method="post">

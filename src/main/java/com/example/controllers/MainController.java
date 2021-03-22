@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.sql.Date;
-import java.text.spi.DateFormatProvider;
-import java.time.LocalDate;
 
 
 @Controller
@@ -46,21 +43,19 @@ public class MainController {
     }
 
     @PostMapping("/delete")
-    public String deleteTodo(@RequestParam String id) {
-        Long todoId = Long.parseLong(id);
-        taskService.deleteTodo(todoId);
+    public String deleteTodo(@RequestParam Long id) {
+        taskService.deleteTodo(id);
         return "redirect:/main";
     }
 
     @PostMapping("/edit")
-    public String editTodo(@RequestParam String id,
+    public String editTodo(@RequestParam Long id,
                            @RequestParam String text,
                            @RequestParam String date,
                            @RequestParam String type,
                            @RequestParam Integer priority) {
-        Long todoId = Long.parseLong(id);
 
-        Task task = taskService.getTask(todoId);
+        Task task = taskService.getTask(id);
 
         task.setText(text);
         task.setDate(Date.valueOf(date));
