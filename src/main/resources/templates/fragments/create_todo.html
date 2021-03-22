@@ -6,61 +6,99 @@
 </head>
 <body>
 <div th:fragment="createNewTodo">
-    <div uk-sticky="offset: 100">
-        <a href="#modal-center" uk-icon="icon: plus-circle; ratio: 3.5" uk-tooltip="Create new Todo" uk-toggle></a>
 
-        <div id="modal-center" class="uk-flex-top" uk-modal>
-            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-                <button class="uk-modal-close-outside" type="button" uk-close></button>
 
-                <div class="uk-text-center">
-                    <h1>new todo</h1>
+    <div class="uk-margin-large-top">
+        <div class="uk-margin uk-margin-left">
+
+            <a href="#modal-center" uk-icon="icon: plus-circle; ratio: 3.5" uk-tooltip="Create new Todo" uk-toggle></a>
+
+            <div id="modal-center" class="uk-flex-top" uk-modal>
+                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                    <button class="uk-modal-close-outside" type="button" uk-close></button>
+
+                    <div class="uk-text-center">
+                        <h1>new todo</h1>
+                    </div>
+
+                    <form th:action="@{/main/create}" th:method="post">
+
+                        <div class="uk-grid-small" uk-grid>
+
+                            <div class="uk-width-1-1">
+                                <input class="uk-input" type="text" th:name="text" placeholder="text">
+                            </div>
+
+                            <div class="uk-width-1-3@s">
+                                <input class="uk-input" type="date" th:name="date">
+                            </div>
+
+                            <div class="uk-width-1-3@s">
+                                <select class="uk-select" type="text" th:name="type">
+                                    <option>without group</option>
+                                    <option>Shop</option>
+                                    <option>Home</option>
+                                    <option>Work</option>
+                                    <option>Friends</option>
+                                    <option>Family</option>
+                                    <option>Hobby</option>
+                                    <option>Money</option>
+                                    <option>Auto</option>
+                                </select>
+                            </div>
+
+                            <div class="uk-width-1-3@s">
+                                <select class="uk-select" type="number" th:name="priority">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
+                            <div class="uk-text-center">
+                                <button class="uk-button uk-button-primary" type="submit">Сохранить</button>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
+            </div>
+        </div>
 
-                <form th:action="@{/main/create}" th:method="post">
+        <div class="uk-margin uk-margin-large-top uk-margin-left">
+            <a href="#" uk-icon="icon: clock; ratio: 3.5"></a>
+            <div uk-dropdown="pos: right-center">
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                    <li class="uk-active"><a href="#">Активный</a></li>
+                    <li><a href="#">Ссылка</a></li>
+                    <li><a href="#">Ссылка</a></li>
+                </ul>
+            </div>
+        </div>
 
-                    <div class="uk-grid-small" uk-grid>
+        <div class="uk-margin uk-margin-left">
+            <a href="#" uk-icon="icon: warning; ratio: 3.5"></a>
+            <div uk-dropdown="pos: right-center">
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                    <li class="uk-active"><a href="#">Активный</a></li>
+                    <li><a href="#">Ссылка</a></li>
+                    <li><a href="#">Ссылка</a></li>
+                </ul>
+            </div>
+        </div>
 
-                        <div class="uk-width-1-1">
-                            <input class="uk-input" type="text" th:name="text" placeholder="text">
-                        </div>
-
-                        <div class="uk-width-1-3@s">
-                            <input class="uk-input" type="date" th:name="date">
-                        </div>
-
-                        <div class="uk-width-1-3@s">
-                            <select class="uk-select" type="text" th:name="type">
-                                <option>without group</option>
-                                <option>Shop</option>
-                                <option>Home</option>
-                                <option>Work</option>
-                                <option>Friends</option>
-                                <option>Family</option>
-                                <option>Hobby</option>
-                                <option>Money</option>
-                                <option>Auto</option>
-                            </select>
-                        </div>
-
-                        <div class="uk-width-1-3@s">
-                            <select class="uk-select" type="number" th:name="priority">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="uk-margin">
-                        <div class="uk-text-center">
-                            <button class="uk-button uk-button-primary" type="submit">Сохранить</button>
-                        </div>
-                    </div>
-
-                </form>
+        <div class="uk-margin uk-margin-left">
+            <a href="#" uk-icon="icon: grid; ratio: 3.5"></a>
+            <div uk-dropdown="pos: right-center">
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                    <li class="uk-active"><a href="#">Активный</a></li>
+                    <li><a href="#">Ссылка</a></li>
+                    <li><a href="#">Ссылка</a></li>
+                </ul>
             </div>
         </div>
     </div>

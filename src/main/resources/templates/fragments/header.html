@@ -9,56 +9,63 @@
 </head>
 <body>
 <div th:fragment="navbar">
-        <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
-            <nav class="uk-navbar-container" uk-navbar>
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container" uk-navbar>
 
-                <div class="uk-navbar-left">
-                    <ul class="uk-navbar-nav">
-                        <li>
-                            <a th:href="@{/main}" sec:authorize="isAuthenticated()">
-                                <div class="uk-margin-small-left">
-                                    <span uk-icon="icon: home; ratio: 2"></span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="uk-navbar-center">
-                    <ul class="uk-navbar-nav">
-                        <li class="uk-active">
-                            <a th:href="@{/}"><h2>TodoGO</h2></a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="uk-navbar-right uk-margin-right">
-                    <ul class="uk-navbar-nav">
-                        <li>
-                            <a href="#" sec:authorize="isAuthenticated()">
-                                <span uk-icon="icon: user; ratio: 2"></span>
-                            </a>
-                            <div uk-dropdown="mode: click">
-                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li class="uk-active">
-                                    <li class="uk-nav-header">
-                                        <span th:text="${#authentication.name}"></span>
-                                    </li>
-                                    <li><a href="#">Item</a></li>
-                                    <li><a href="#">Item</a></li>
-                                    <li class="uk-nav-divider"></li>
-                                    <form th:action="@{/logout}" method="post">
-                                        <button class="uk-button uk-button-text" type="submit">Sign Out
-                                        </button>
-                                    </form>
-                                </ul>
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a th:href="@{/main}" sec:authorize="isAuthenticated()">
+                            <div class="uk-margin-small-left">
+                                <span uk-icon="icon: home; ratio: 2"></span>
                             </div>
-                        </li>
-                        <li><a th:href="@{/main}" sec:authorize="isAnonymous()">Sign In</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="uk-navbar-center">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active">
+                        <a th:href="@{/}"><h2>TodoGO</h2></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="uk-navbar-right uk-margin-right">
+                <ul class="uk-navbar-nav">
+                    <div class="uk-navbar-item">
+
+                            <form th:action="@{/search}" th:method="post" class="uk-search uk-search-navbar"
+                                  sec:authorize="isAuthenticated()">
+                                <span uk-search-icon></span>
+                                <input class="uk-search-input" type="search"
+                                       th:name="searchText" placeholder="search">
+                            </form>
+                    </div>
+                    <li>
+                        <a href="#" sec:authorize="isAuthenticated()">
+                            <span uk-icon="icon: user; ratio: 2"></span>
+                        </a>
+                        <div uk-dropdown="mode: click">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-active">
+                                <li class="uk-nav-header">
+                                    <span th:text="${#authentication.name}"></span>
+                                </li>
+                                <li class="uk-nav-divider"></li>
+                                <form th:action="@{/logout}" method="post">
+                                    <button class="uk-button uk-button-text" type="submit">Sign Out
+                                    </button>
+                                </form>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a th:href="@{/main}" sec:authorize="isAnonymous()">Sign In</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </div>
 </body>
 </html>

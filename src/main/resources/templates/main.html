@@ -11,14 +11,14 @@
 
 <div uk-grid>
 
-    <div class="uk-width-auto uk-background-muted">
-        <div th:replace="fragments/left-panel :: panel"></div>
+    <div class="uk-width-auto">
+        <div th:replace="fragments/create_todo :: createNewTodo"></div>
     </div>
 
     <div class="uk-width-expand">
 
-        <div th:replace="fragments/create_todo :: createNewTodo"></div>
-        <div class="uk-text-center uk-margin-xlarge-left uk-margin-xlarge-right">
+
+        <div class="uk-text-center uk-margin uk-margin-medium-top uk-margin-xlarge-left uk-margin-xlarge-right">
             <div>
                 <div class="uk-card uk-card-default uk-card-small">
                     <div class="uk-text-center@s uk-card-body">
@@ -27,7 +27,8 @@
                 </div>
             </div>
         </div>
-        <div class="uk-container uk-margin-medium-top uk-background-muted">
+
+        <div class="uk-container">
 
             <table class="uk-table uk-table-hover uk-table-divider">
 

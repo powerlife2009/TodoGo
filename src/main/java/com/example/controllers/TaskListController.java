@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Comparator;
 import java.util.List;
@@ -48,6 +49,18 @@ public class TaskListController {
         List<Task> tasks = taskService.findAllByUser(user);
         tasks = tasks.stream()
                 .sorted(Comparator.comparing(Task::getType))
+                .collect(Collectors.toList());
+        model.addAttribute("tasks", tasks);
+        return "main";
+    }
+
+    @PostMapping("/search")
+    public String searchTodo(@AuthenticationPrincipal User user,
+                             @RequestParam String searchText,
+                             Model model) {
+        List<Task> tasks = taskService.findAllByUser(user);
+        tasks = tasks.stream()
+                .filter(task -> task.getText().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(Collectors.toList());
         model.addAttribute("tasks", tasks);
         return "main";
