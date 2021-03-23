@@ -5,10 +5,14 @@ import com.example.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
+
 @Controller
-@RequestMapping("/registration")
 public class RegistrationController {
 
     private final UserService userService;
@@ -19,18 +23,21 @@ public class RegistrationController {
 
     }
 
-    @GetMapping
+    @GetMapping("/registration")
     public String registerForm(Model model) {
-        model.addAttribute("newUser", new User());
+        model.addAttribute("user", new User());
         return "registration";
     }
 
-    @PostMapping
-    public String addUser(@ModelAttribute User user, Model model) {
-
-        if(!userService.saveUser(user)){
-            model.addAttribute("message", "User exists");
+    @PostMapping("/registration")
+    public String addUser(@Valid User user, BindingResult errors, Model model) {
+        if (errors.hasErrors()) {
             return "registration";
+        } else {
+            if (!userService.saveUser(user)) {
+                model.addAttribute("message", "User exists");
+                return "registration";
+            }
         }
         return "redirect:/login";
     }

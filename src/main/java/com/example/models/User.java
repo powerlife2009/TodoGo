@@ -1,11 +1,13 @@
 package com.example.models;
 
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
+
 import java.util.Collection;
 import java.util.Collections;
 
@@ -17,8 +19,15 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
+    @NotBlank(message = "userName is required")
     private String username;
+
+    @NotBlank(message = "password is required")
     private String password;
+
+    @NotBlank(message = "email is required")
+    @Email(message = "is not valid email")
     private String email;
 
     @Enumerated(EnumType.STRING)

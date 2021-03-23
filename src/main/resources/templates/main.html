@@ -12,7 +12,7 @@
 <div uk-grid>
 
     <div class="uk-width-auto">
-        <div th:replace="fragments/create_todo :: createNewTodo"></div>
+        <div th:replace="fragments/create_todo :: createNewTodo(${newTask})"></div>
     </div>
 
     <div class="uk-width-expand">

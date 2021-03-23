@@ -1,7 +1,8 @@
 package com.example.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -13,6 +14,7 @@ public class Task {
     private String text;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private String type;
     private Integer priority;
@@ -23,9 +25,8 @@ public class Task {
     public Task() {
     }
 
-    public Task(String text, User user, Date date, String type, Integer priority) {
+    public Task(String text, Date date, String type, Integer priority) {
         this.text = text;
-        this.user = user;
         this.date = date;
         this.type = type;
         this.priority = priority;

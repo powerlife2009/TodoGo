@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.Collections;
@@ -31,19 +28,16 @@ public class MainController {
 
     @GetMapping
     public String main(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("newTask", new Task());
         model.addAttribute("tasks", myTodoList(user));
         return "main";
     }
 
     @PostMapping("/create")
     public String createTodo(@AuthenticationPrincipal User user,
-                             @RequestParam String text,
-                             @RequestParam String date,
-                             @RequestParam String type,
-                             @RequestParam Integer priority) {
-
-        Task task = new Task(text, user, Date.valueOf(date), type, priority);
-        taskService.saveTask(task);
+                             @ModelAttribute Task newTask) {
+        newTask.setUser(user);
+        taskService.saveTask(newTask);
         return "redirect:/main";
     }
 
