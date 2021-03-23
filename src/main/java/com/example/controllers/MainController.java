@@ -35,7 +35,7 @@ public class MainController {
 
     @PostMapping("/create")
     public String createTodo(@AuthenticationPrincipal User user,
-                             @ModelAttribute Task newTask) {
+                             @ModelAttribute("newTask") Task newTask) {
         newTask.setUser(user);
         taskService.saveTask(newTask);
         return "redirect:/main";
@@ -43,7 +43,7 @@ public class MainController {
 
     @PostMapping("/delete")
     public String deleteTodo(@RequestParam Long id) {
-        taskService.deleteTodo(id);
+        taskService.deleteTask(id);
         return "redirect:/main";
     }
 

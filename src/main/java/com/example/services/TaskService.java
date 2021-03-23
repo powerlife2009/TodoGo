@@ -27,7 +27,7 @@ private final TaskRepository taskRepository;
         taskRepository.save(task);
     }
 
-    public void deleteTodo(Long id) {
+    public void deleteTask(Long id) {
     taskRepository.deleteById(id);
     }
 
