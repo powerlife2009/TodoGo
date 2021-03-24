@@ -3,6 +3,8 @@ package com.example.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -11,8 +13,11 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotBlank(message = "Please enter text")
     private String text;
 
+    @NotNull(message = "Field date should not be empty")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
@@ -80,4 +85,4 @@ public class Task {
     public void setUser(User user) {
         this.user = user;
     }
-    }
+}

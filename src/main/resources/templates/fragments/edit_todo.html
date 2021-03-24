@@ -4,63 +4,62 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<div th:fragment="editTodo(task)">
+<div th:fragment="editTodo(editTask, newTask)">
 
 
     <button class="uk-button uk-button-link" type="button"
-            uk-toggle th:target="${'#modal-example'+task}">
+            uk-toggle th:target="${'#modal-example'+editTask}">
         <span uk-icon="pencil"></span>
     </button>
 
 
-    <div th:id="${'modal-example'+task}" class="uk-flex-top" uk-modal>
+    <div th:id="${'modal-example'+editTask}" class="uk-flex-top" uk-modal>
         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
             <button class="uk-modal-close-outside" type="button" uk-close></button>
             <div class="uk-text-center">
                 <h1>edit todo</h1>
             </div>
 
-            <form th:action="@{/main/edit}" th:method="post">
-                <input type="hidden" name="id" th:value="${task.id}"/>
+            <form th:action="@{/main/save}" th:method="post" th:object="${newTask}">
+                <input type="hidden" name="id" th:value="${editTask.id}"/>
 
                 <div class="uk-grid-small" uk-grid>
 
                     <div class="uk-width-1-1">
-                        <input class="uk-input" type="text" th:value="${task.text}"
-                               th:name="text"
-                               placeholder="Enter a name for new Todo">
+                        <input class="uk-input" type="text" th:value="${editTask.text}" th:name="text">
                     </div>
 
                     <div class="uk-width-1-3@s">
-                        <input class="uk-input" type="date" th:value="${task.date}"
+                        <input class="uk-input" type="date" th:value="${editTask.date}"
                                th:name="date">
                     </div>
 
                     <div class="uk-width-1-3@s">
-                        <select class="uk-select" type="text" th:value="${task.priority}"
+                        <select class="uk-select" type="text" th:value="${editTask.priority}"
                                 th:name="priority">
-                            <option><span th:text="${task.priority}"></span></option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option th:value="${editTask.priority}"><span th:text="${editTask.priority}"></span>
+                            </option>
+                            <option th:value="${1}">1</option>
+                            <option th:value="${2}">2</option>
+                            <option th:value="${3}">3</option>
+                            <option th:value="${4}">4</option>
+                            <option th:value="${5}">5</option>
                         </select>
                     </div>
 
                     <div class="uk-width-1-3@s">
-                        <select class="uk-select" type="text" th:value="${task.type}"
+                        <select class="uk-select" type="text" th:value="${editTask.type}"
                                 th:name="type">
-                            <option><span th:text="${task.type}"></span></option>
-                            <option>without group</option>
-                            <option>Shop</option>
-                            <option>Home</option>
-                            <option>Work</option>
-                            <option>Friends</option>
-                            <option>Family</option>
-                            <option>Hobby</option>
-                            <option>Money</option>
-                            <option>Auto</option>
+                            <option th:value="${editTask.type}"><span th:text="${editTask.type}"></span></option>
+                            <option th:value="${'without group'}">without group</option>
+                            <option th:value="${'Shop'}">Shop</option>
+                            <option th:value="${'Home'}">Home</option>
+                            <option th:value="${'Work'}">Work</option>
+                            <option th:value="${'Friends'}">Friends</option>
+                            <option th:value="${'Family'}">Family</option>
+                            <option th:value="${'Hobby'}">Hobby</option>
+                            <option th:value="${'Money'}">Money</option>
+                            <option th:value="${'Auto'}">Auto</option>
                         </select>
                     </div>
                 </div>

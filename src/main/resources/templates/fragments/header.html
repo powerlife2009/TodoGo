@@ -36,12 +36,12 @@
                 <ul class="uk-navbar-nav">
                     <div class="uk-navbar-item">
 
-                            <form th:action="@{/search}" th:method="post" class="uk-search uk-search-navbar"
-                                  sec:authorize="isAuthenticated()">
-                                <span uk-search-icon></span>
-                                <input class="uk-search-input" type="search"
-                                       th:name="searchText" placeholder="search">
-                            </form>
+                        <form th:action="@{/search}" th:method="post" class="uk-search uk-search-navbar"
+                              sec:authorize="isAuthenticated()">
+                            <span uk-search-icon></span>
+                            <input class="uk-search-input" type="search"
+                                   th:name="searchText" placeholder="search">
+                        </form>
                     </div>
                     <li>
                         <a href="#" sec:authorize="isAuthenticated()">

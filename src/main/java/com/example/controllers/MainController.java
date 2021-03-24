@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,41 +34,37 @@ public class MainController {
         return "main";
     }
 
-    @PostMapping("/create")
-    public String createTodo(@AuthenticationPrincipal User user,
-                             @ModelAttribute("newTask") Task newTask) {
-        newTask.setUser(user);
-        taskService.saveTask(newTask);
-        return "redirect:/main";
+    @PostMapping("/save")
+    public String saveTodo(@AuthenticationPrincipal User user,
+                           @Valid @ModelAttribute Task newTask,
+                           BindingResult errors,
+                           Model model) {
+        if (errors.hasErrors()) {
+            model.addAttribute("message", "has errors");
+        } else {
+            newTask.setUser(user);
+            taskService.saveTask(newTask);
+            model.addAttribute("message", "successfully");
+        }
+        model.addAttribute("newTask", new Task());
+        model.addAttribute("tasks", myTodoList(user));
+        return "main";
     }
+
 
     @PostMapping("/delete")
-    public String deleteTodo(@RequestParam Long id) {
+    public String deleteTodo(@AuthenticationPrincipal User user,
+                             @RequestParam Long id,
+                             Model model) {
         taskService.deleteTask(id);
-        return "redirect:/main";
-    }
-
-    @PostMapping("/edit")
-    public String editTodo(@RequestParam Long id,
-                           @RequestParam String text,
-                           @RequestParam String date,
-                           @RequestParam String type,
-                           @RequestParam Integer priority) {
-
-        Task task = taskService.getTask(id);
-
-        task.setText(text);
-        task.setDate(Date.valueOf(date));
-        task.setPriority(priority);
-        task.setType(type);
-
-        taskService.saveTask(task);
-
-        return "redirect:/main";
+        model.addAttribute("message", "successfully");
+        model.addAttribute("newTask", new Task());
+        model.addAttribute("tasks", myTodoList(user));
+        return "main";
     }
 
     public List<Task> myTodoList(User user) {
-        List<Task>taskList =taskService.findAllByUser(user);
+        List<Task> taskList = taskService.findAllByUser(user);
         Collections.reverse(taskList);
         return taskList;
     }

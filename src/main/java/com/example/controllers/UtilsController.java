@@ -40,8 +40,11 @@ public class UtilsController {
                              Model model) {
         List<Task> findTaskList = listUtils.searchTask(searchText, user);
 
-        if (findTaskList.isEmpty()) {  // TODO: 24.03.2021 вернет что-то 
-            return "redirect:/main";
+        if (findTaskList.isEmpty()) {
+            model.addAttribute("message", "not found");
+            model.addAttribute("newTask", new Task());
+            model.addAttribute("tasks", findTaskList);
+            return "main";
         } else {
             model.addAttribute("newTask", new Task());
             model.addAttribute("tasks", findTaskList);

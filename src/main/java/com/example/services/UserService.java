@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
 
     public boolean saveUser(User user) {
         User userFromDb = userRepository.findByUsername(user.getUsername());
-        if(userFromDb != null) {
+        if (userFromDb != null) {
             return false;
         }
         user.setRole(Role.ROLE_USER);

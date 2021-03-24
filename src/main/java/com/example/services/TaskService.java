@@ -7,20 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskService {
 
-private final TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
-@Autowired
+    @Autowired
     public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
 
     public List<Task> findAllByUser(User user) {
-    return taskRepository.findAllByUser(user);
+        return taskRepository.findAllByUser(user);
     }
 
     public void saveTask(Task task) {
@@ -28,10 +27,10 @@ private final TaskRepository taskRepository;
     }
 
     public void deleteTask(Long id) {
-    taskRepository.deleteById(id);
+        taskRepository.deleteById(id);
     }
 
     public Task getTask(Long id) {
-    return taskRepository.getOne(id);
+        return taskRepository.getOne(id);
     }
 }

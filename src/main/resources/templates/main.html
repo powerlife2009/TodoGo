@@ -22,7 +22,13 @@
             <div>
                 <div class="uk-card uk-card-default uk-card-small">
                     <div class="uk-text-center@s uk-card-body">
-                        Делай то, что ты боишься делать. Это лучший способ обрести уверенность в себе.
+
+                        <div th:switch="${message}">
+                            <p th:case="'has errors'">ERRORS</p>
+                            <p th:case="'successfully'">SUCCESSFULLY</p>
+                            <p th:case="'not found'">TASK NOT FOUND</p>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -63,7 +69,7 @@
                     <td>
                         <ul class="uk-iconnav">
                             <li>
-                                <div th:replace="fragments/edit_todo :: editTodo(${task})"></div>
+                                <div th:replace="fragments/edit_todo :: editTodo(${task}, ${newTask})"></div>
                             </li>
                             <li>
                                 <form th:action="@{/main/delete}" method="post">
