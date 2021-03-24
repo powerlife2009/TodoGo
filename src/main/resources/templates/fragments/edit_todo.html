@@ -20,7 +20,7 @@
                 <h1>edit todo</h1>
             </div>
 
-            <form th:action="@{/main/save}" th:method="post" th:object="${newTask}">
+            <form th:action="@{/save}" th:method="post" th:object="${newTask}">
                 <input type="hidden" name="id" th:value="${editTask.id}"/>
 
                 <div class="uk-grid-small" uk-grid>
@@ -30,8 +30,7 @@
                     </div>
 
                     <div class="uk-width-1-3@s">
-                        <input class="uk-input" type="date" th:value="${editTask.date}"
-                               th:name="date">
+                        <input class="uk-input" type="date" th:value="${editTask.date}" th:name="date">
                     </div>
 
                     <div class="uk-width-1-3@s">
@@ -51,7 +50,7 @@
                         <select class="uk-select" type="text" th:value="${editTask.type}"
                                 th:name="type">
                             <option th:value="${editTask.type}"><span th:text="${editTask.type}"></span></option>
-                            <option th:value="${'without group'}">without group</option>
+                            <option th:value="${'General'}">General</option>
                             <option th:value="${'Shop'}">Shop</option>
                             <option th:value="${'Home'}">Home</option>
                             <option th:value="${'Work'}">Work</option>

@@ -36,12 +36,18 @@
                 <ul class="uk-navbar-nav">
                     <div class="uk-navbar-item">
 
-                        <form th:action="@{/search}" th:method="post" class="uk-search uk-search-navbar"
-                              sec:authorize="isAuthenticated()">
-                            <span uk-search-icon></span>
-                            <input class="uk-search-input" type="search"
-                                   th:name="searchText" placeholder="search">
-                        </form>
+                        <div>
+                            <a class="uk-navbar-toggle" uk-icon="icon: search; ratio: 1.5"
+                               sec:authorize="isAuthenticated()" href="#"></a>
+                            <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
+                                <form th:action="@{/search}" th:method="post"
+                                      class="uk-search uk-search-navbar uk-width-1-1">
+                                    <input class="uk-search-input" type="search"
+                                           th:name="searchText" placeholder="search" autofocus>
+                                </form>
+                            </div>
+                        </div>
+
                     </div>
                     <li>
                         <a href="#" sec:authorize="isAuthenticated()">
@@ -49,9 +55,9 @@
                         </a>
                         <div uk-dropdown="mode: click">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li class="uk-active">
+
                                 <li class="uk-nav-header">
-                                    <span th:text="${#authentication.name}"></span>
+                                    <a href="/profile"><span th:text="${#authentication.name}"></span></a>
                                 </li>
                                 <li class="uk-nav-divider"></li>
                                 <form th:action="@{/logout}" method="post">
