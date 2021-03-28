@@ -9,10 +9,11 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-public class ListUtils implements Search,Filter,Sorting{
+public class ListUtils implements Search, Filter, Sorting {
 
     private final TaskService taskService;
 
@@ -61,5 +62,14 @@ public class ListUtils implements Search,Filter,Sorting{
                     .collect(Collectors.toList());
         }
         return tasks;
+    }
+
+    public List<Task> getNearestEvents(User user) {
+        List<Task> tasks = taskService.findAllByUser(user);
+
+        return tasks.stream()
+                .sorted(Comparator.comparing(Task::getDate))
+                .limit(5)
+                .collect(Collectors.toList());
     }
 }

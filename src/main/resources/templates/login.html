@@ -6,34 +6,40 @@
     <div th:replace="fragments/header :: header-css"></div>
 </head>
 <body>
+<div id="page-wrapper">
+    <div th:replace="fragments/header :: navbar"></div>
 
-<div th:replace="fragments/header :: navbar"></div>
+    <div class="uk-position-top-center uk-margin-xlarge-top">
+        <form th:action="@{/login}" method="post">
 
-<div class="uk-position-top-center uk-margin-xlarge-top">
-    <form th:action="@{/login}" method="post">
+            <h1 class="uk-heading-medium uk-text-center">Sign In</h1>
 
-        <h1 class="uk-heading-medium uk-text-center">Sign In</h1>
-
-        <div class="uk-margin">
-            <div class="uk-inline">
-                <span class="uk-form-icon" uk-icon="icon: user"></span>
-                <input class="uk-input uk-form-width-large" type="text" th:name="username" placeholder="Login">
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: user"></span>
+                    <input class="uk-input uk-form-width-large" type="text" th:name="username" placeholder="Login">
+                </div>
             </div>
-        </div>
 
-        <div class="uk-margin">
-            <div class="uk-inline">
-                <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                <input class="uk-input uk-form-width-large" type="password" th:name="password" placeholder="Password">
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                    <input class="uk-input uk-form-width-large" type="password" th:name="password"
+                           placeholder="Password">
+                </div>
             </div>
-        </div>
-        <div class="uk-text-center">
-            <button class="uk-button uk-button-secondary" type="submit">Sign In</button>
-            <a class="uk-link-heading uk-margin-left" href="/registration">Sign Up</a>
-        </div>
-    </form>
+            <div class="uk-text-center">
+                <button class="uk-button uk-button-secondary" type="submit">Sign In</button>
+                <a class="uk-link-heading uk-margin-left" href="/registration">Sign Up</a>
+            </div>
+        </form>
+    </div>
 </div>
+
+<footer id="page-footer" class="uk-margin-top" uk-sticky>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+
 <div th:replace="fragments/footer :: scripts"></div>
-<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
