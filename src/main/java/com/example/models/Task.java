@@ -22,6 +22,7 @@ public class Task {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private String type;
+    @NotNull(message = "Field priority should not be empty")
     private Integer priority;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface Filter {
 
-    List<Task> filterTodoBy(String filterBy, User user);
+    List<Task> filterTodoByType(String filterBy, User user);
+
+    List<Task> filterTodoByPriority(Integer priority, User user);
 }

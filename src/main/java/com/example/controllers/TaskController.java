@@ -39,10 +39,9 @@ public class TaskController {
             taskService.saveTask(newTask);
             redirectAttributes.addFlashAttribute("message", "successfully");
         }
-        redirectAttributes.addFlashAttribute("tasks", listUtils.myTodoQueue(user));
+        redirectAttributes.addFlashAttribute("tasks", listUtils.getTaskSorting().sortTodoAsQueue(user));
         return "redirect:/main";
     }
-
 
     @PostMapping("/delete")
     public String deleteTodo(@AuthenticationPrincipal User user,
@@ -50,7 +49,7 @@ public class TaskController {
                              RedirectAttributes redirectAttributes) {
         taskService.deleteTask(id);
         redirectAttributes.addFlashAttribute("message", "successfully");
-        redirectAttributes.addFlashAttribute("tasks", listUtils.myTodoQueue(user));
+        redirectAttributes.addFlashAttribute("tasks", listUtils.getTaskSorting().sortTodoAsQueue(user));
         return "redirect:/main";
     }
 }

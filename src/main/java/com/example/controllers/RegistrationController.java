@@ -35,7 +35,6 @@ public class RegistrationController {
             return "registration";
         } else {
             if (!userService.saveUser(user)) {
-                model.addAttribute("message", "User exists");
                 return "registration";
             }
         }

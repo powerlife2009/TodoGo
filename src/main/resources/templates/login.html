@@ -17,7 +17,8 @@
             <div class="uk-margin">
                 <div class="uk-inline">
                     <span class="uk-form-icon" uk-icon="icon: user"></span>
-                    <input class="uk-input uk-form-width-large" type="text" th:name="username" placeholder="Login">
+                    <input class="uk-input uk-form-width-large" type="text" th:name="username" placeholder="Login"
+                           autofocus="autofocus">
                 </div>
             </div>
 
@@ -39,7 +40,5 @@
 <footer id="page-footer" class="uk-margin-top" uk-sticky>
     <div th:replace="fragments/footer :: footer"></div>
 </footer>
-
-<div th:replace="fragments/footer :: scripts"></div>
 </body>
 </html>

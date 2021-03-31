@@ -26,7 +26,7 @@ public class MainController {
     public String main(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("newTask", new Task());
         model.addAttribute("groups", Groups.values());
-        model.addAttribute("nearest", listUtils.getNearestEvents(user));
+        model.addAttribute("nearest", listUtils.getTaskSorting().sortTodoByDateAndGetNearestEvents(user));
         //model.addAttribute("tasks", listUtils.myTodoQueue(user));
         return "main";
     }
