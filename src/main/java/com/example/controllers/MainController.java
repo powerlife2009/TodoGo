@@ -27,7 +27,7 @@ public class MainController {
         model.addAttribute("newTask", new Task());
         model.addAttribute("groups", Groups.values());
         model.addAttribute("nearest", listUtils.getTaskSorting().sortTodoByDateAndGetNearestEvents(user));
-        //model.addAttribute("tasks", listUtils.myTodoQueue(user));
+        model.addAttribute("defaultList", listUtils.getTaskSorting().sortTodoAsQueue(user));
         return "main";
     }
 }
