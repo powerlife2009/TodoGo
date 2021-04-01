@@ -21,9 +21,17 @@ public class MainController {
         this.listUtils = listUtils;
     }
 
+    @GetMapping("/")
+    public String startPage(@AuthenticationPrincipal User user) {
+        if (user == null) {
+            return "guest_page";
+        }
+        return "home_page";
+    }
 
     @GetMapping("/main")
     public String main(@AuthenticationPrincipal User user, Model model) {
+        System.out.println(user.getName());
         model.addAttribute("newTask", new Task());
         model.addAttribute("groups", Groups.values());
         model.addAttribute("nearest", listUtils.getTaskSorting().sortTodoByDateAndGetNearestEvents(user));

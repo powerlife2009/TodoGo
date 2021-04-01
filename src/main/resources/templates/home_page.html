@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:replace="fragments/header :: header-css"></div>
+</head>
+<body>
+<div id="page-wrapper">
+    <div th:replace="fragments/header :: navbar"></div>
+
+    <div class="uk-margin-xlarge-top uk-position-top-center">
+        <h1>Hello, <span th:text="${#authentication.name}"></span>!</h1>
+    </div>
+
+</div>
+
+<footer id="page-footer" class="uk-margin-top" uk-sticky>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>
