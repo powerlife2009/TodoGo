@@ -9,10 +9,46 @@
 <body>
 <div id="page-wrapper">
     <div th:replace="fragments/header :: navbar"></div>
-
-    <div class="uk-margin-xlarge-top uk-position-top-center">
-        <h1>Hello, guest!</h1>
+    <div class="uk-container">
+        <div class="uk-margin-large-top uk-text-center">
+            <h1>Hello, guest!</h1>
+        </div>
     </div>
+
+
+    <div class="uk-section">
+        <div class="uk-container">
+            <h2>TodoGo is a simple list of daily tasks, with the ability to quickly create, edit, and delete.</h2>
+        </div>
+    </div>
+
+    <div class="uk-section">
+        <div class="uk-container">
+            <h3>Current version: 0.9</h3>
+        </div>
+    </div>
+
+    <div class="uk-section">
+        <div class="uk-container">
+            <h2>Features:</h2><br>
+            <div class=" uk-margin">
+                <h3>Sort tasks by:</h3><br>
+            </div>
+            <div class="uk-margin uk-margin-left">
+                1. Priority<br>
+                2. Date<br>
+                3. Groups<br>
+            </div>
+            Task Filter by:<br>
+            <div class=" uk-margin uk-margin-left">
+                1. The 10 nearest tasks<br>
+                1. Priority number<br>
+                2. Groups
+            </div>
+            <h3><a class="uk-link-heading" th:href="@{/registration}">Try for free</a></h3>
+        </div>
+    </div>
+
 
 </div>
 
