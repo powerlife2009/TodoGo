@@ -28,7 +28,18 @@
 
         <td th:text="${task.getText()}"></td>
         <td th:text="${#dates.format(task.date, 'dd.MMM.yyyy')}"></td>
-        <td th:text="${task.getPriority()}"></td>
+
+
+        <div th:if="${task.getPriority() == 1}">
+            <td><span class="uk-label uk-label-success">o</span></td>
+        </div>
+        <div th:if="${task.getPriority() == 2}">
+            <td><span class="uk-label uk-label-warning">o</span></td>
+        </div>
+        <div th:if="${task.getPriority() == 3}">
+            <td><span class="uk-label uk-label-danger">o</span></td>
+        </div>
+
         <td th:text="${task.getType()}"></td>
     </tr>
 </div>

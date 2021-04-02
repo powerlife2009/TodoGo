@@ -8,17 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
 
 @Controller
-public class RegistrationController {
+public class UserController {
 
     private final UserService userService;
 
     @Autowired
-    public RegistrationController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
 
     }
@@ -35,6 +36,7 @@ public class RegistrationController {
             return "registration";
         } else {
             if (!userService.saveUser(user)) {
+                model.addAttribute("messageExist", "user with this login is already registered");
                 return "registration";
             }
         }

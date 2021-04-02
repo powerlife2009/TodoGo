@@ -80,7 +80,7 @@
                             <ul class="uk-nav uk-navbar-dropdown-nav">
 
                                 <li class="uk-nav-header">
-                                    <a href="/profile"><span th:text="${#authentication.name}"></span></a>
+                                    <span th:text="${#authentication.name}"></span>
                                 </li>
                                 <li class="uk-nav-divider"></li>
                                 <form th:action="@{/logout}" method="post">

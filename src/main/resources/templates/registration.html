@@ -14,6 +14,14 @@
 
             <h1 class="uk-heading-medium uk-text-center">Registration</h1>
 
+            <div th:if="${messageExist != null}">
+                <div class="uk-text-center uk-margin">
+                    <div class="uk-alert-danger" uk-alert>
+                        <p><span th:text="${messageExist}"></span></p>
+                    </div>
+                </div>
+            </div>
+
             <div class="uk-margin">
                 <input class="uk-input uk-form-width-large" type="text" th:field="*{username}" placeholder="Login">
                 <div style="color:red" th:if="${#fields.hasErrors('username')}"
