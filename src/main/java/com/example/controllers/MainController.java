@@ -31,7 +31,6 @@ public class MainController {
 
     @GetMapping("/main")
     public String main(@AuthenticationPrincipal User user, Model model) {
-        System.out.println(user.getName());
         model.addAttribute("newTask", new Task());
         model.addAttribute("groups", Groups.values());
         model.addAttribute("nearest", listUtils.getTaskSorting().sortTodoByDateAndGetNearestEvents(user));
