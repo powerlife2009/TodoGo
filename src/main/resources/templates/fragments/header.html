@@ -5,25 +5,28 @@
     <title>Title</title>
     <div th:fragment="header-css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" th:href="@{css/uikit.min.css}" />
+        <link rel="stylesheet" th:href="@{css/uikit.min.css}"/>
         <script src="js/uikit.min.js"></script>
         <script src="js/uikit-icons.min.js"></script>
         <style>
             html, body {
-                height:100%;
+                height: 100%;
             }
 
             #page-wrapper {
                 min-height: calc(100% - 20px);
                 margin-bottom: -60px;
             }
+
             #page-wrapper:after {
                 content: "";
                 display: block;
             }
+
             #page-footer, #page-wrapper:after {
                 height: 60px;
             }
+
             #page-footer {
                 background-color: #f5f5f5;
             }
@@ -56,9 +59,9 @@
             </div>
 
             <div class="uk-navbar-right uk-margin-right">
+
                 <ul class="uk-navbar-nav">
                     <div class="uk-navbar-item">
-
                         <div>
                             <a class="uk-navbar-toggle" uk-icon="icon: search; ratio: 1.5"
                                sec:authorize="isAuthenticated()" href="#"></a>
@@ -70,28 +73,21 @@
                                 </form>
                             </div>
                         </div>
-
                     </div>
-                    <li>
-                        <a href="#" sec:authorize="isAuthenticated()">
-                            <span uk-icon="icon: user; ratio: 2"></span>
-                        </a>
-                        <div uk-dropdown="mode: click">
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
 
-                                <li class="uk-nav-header">
-                                    <span th:text="${#authentication.name}"></span>
-                                </li>
-                                <li class="uk-nav-divider"></li>
-                                <form th:action="@{/logout}" method="post">
-                                    <button class="uk-button uk-button-text" type="submit">Sign Out
-                                    </button>
-                                </form>
-                            </ul>
-                        </div>
+                    <div class="uk-navbar-item" sec:authorize="isAuthenticated()">
+                        <span th:text="${#authentication.name}"></span>
+                    </div>
+                    <div class="uk-navbar-item" sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" method="post">
+                            <button class="uk-button uk-button-text" type="submit">Sign Out</button>
+                        </form>
+                    </div>
+                    <li sec:authorize="isAnonymous()">
+                        <a th:href="@{/login}" sec:authorize="isAnonymous()">Sign In</a>
                     </li>
-                    <li><a th:href="@{/login}" sec:authorize="isAnonymous()">Sign In</a></li>
                 </ul>
+
             </div>
         </nav>
     </div>

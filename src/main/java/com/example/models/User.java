@@ -21,13 +21,15 @@ public class User implements UserDetails {
     private Long id;
     private String name;
 
-    @NotBlank(message = "userName is required")
+    @NotBlank(message = "field username is required")
+    @Size(min = 3, max = 10, message = "username should be min 3 max 10 symbols ")
     private String username;
 
-    @NotBlank(message = "password is required")
+    @NotBlank(message = "field password is required")
+    @Size(min = 6, message = "password should be min 6 symbols ")
     private String password;
 
-    @NotBlank(message = "email is required")
+    @NotBlank(message = "field email is required")
     @Email(message = "is not valid email")
     private String email;
 
