@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
 
@@ -7,9 +7,30 @@
 <body>
 
 <div th:fragment="footer">
-    <div class="uk-container uk-padding-small">
-        <p class="uk-text-small">TodoGo | copyright(c).</p>
-    </div>
+
+    <nav class="uk-background-muted" uk-navbar>
+
+        <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+                <div class="uk-navbar-item">
+                    TodoGo | copyright(c).
+                </div>
+                <div class="uk-navbar-item" sec:authorize="isAuthenticated()">
+                    <a class="uk-text-right" href="/feedback">Feedback</a>
+                </div>
+            </ul>
+        </div>
+
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav">
+                <li>
+                    <a class="uk-text-italic" th:href="@{/}">
+                        <h1 class="uk-text-muted">TodoGO</h1></a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
 </div>
 </body>
 
