@@ -26,7 +26,7 @@ public class MainController {
         if (user == null) {
             return "guest_page";
         }
-        return "home_page";
+        return "redirect:/main";
     }
 
     @GetMapping("/main")
