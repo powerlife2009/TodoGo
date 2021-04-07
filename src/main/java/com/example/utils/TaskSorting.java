@@ -25,17 +25,23 @@ public class TaskSorting implements Sorting {
     public List<Task> sortTodoBy(String sortBy, User user) {
         List<Task> tasks = taskService.findAllByUser(user);
         switch (sortBy) {
-            case "date": tasks = tasks.stream()
-                    .sorted(Comparator.comparing(Task::getDate))
-                    .collect(Collectors.toList());
+            case "date":
+                tasks = tasks.stream()
+                        .sorted(Comparator.comparing(Task::getDate))
+                        .collect(Collectors.toList());
+                break;
 
-            case "priority": tasks = tasks.stream()
-                    .sorted(Comparator.comparing(Task::getPriority).reversed())
-                    .collect(Collectors.toList());
+            case "priority":
+                tasks = tasks.stream()
+                        .sorted(Comparator.comparing(Task::getPriority).reversed())
+                        .collect(Collectors.toList());
+                break;
 
-            case "type": tasks = tasks.stream()
-                    .sorted(Comparator.comparing(Task::getType))
-                    .collect(Collectors.toList());
+            case "type":
+                tasks = tasks.stream()
+                        .sorted(Comparator.comparing(Task::getType))
+                        .collect(Collectors.toList());
+                break;
         }
         return tasks;
     }
