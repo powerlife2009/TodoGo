@@ -50,7 +50,7 @@
             <div class="uk-navbar-right uk-margin-right">
 
                 <ul class="uk-navbar-nav">
-                    <div class="uk-navbar-item">
+                    <div class="uk-navbar-item" sec:authorize="hasRole('USER')">
                         <div>
                             <a class="uk-navbar-toggle" uk-icon="icon: search; ratio: 1.5"
                                sec:authorize="isAuthenticated()" href="#"></a>

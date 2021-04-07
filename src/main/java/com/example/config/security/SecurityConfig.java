@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
-    private  final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public SecurityConfig(UserService userService,
@@ -31,20 +31,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf()
                 .and()
-                     .authorizeRequests()
-                     .antMatchers("/css/**").permitAll()
-                     .antMatchers("/js/**").permitAll()
-                     .antMatchers("/img/**").permitAll()
-                     .antMatchers("/", "/login", "/registration").permitAll()
-                     .anyRequest().authenticated()
+                .authorizeRequests()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/img/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/", "/login", "/registration").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                     .formLogin()
-                     .loginPage("/login")
-                     .permitAll()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .and()
-                     .logout()
-                     .logoutSuccessUrl("/")
-                     .permitAll();
+                .logout()
+                .logoutSuccessUrl("/")
+                .permitAll();
     }
 
     @Override

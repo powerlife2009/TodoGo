@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.models.Groups;
+import com.example.models.Role;
 import com.example.models.Task;
 import com.example.models.User;
 import com.example.utils.ListUtils;
@@ -9,9 +10,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@RequestMapping("/")
 public class MainController {
 
     private final ListUtils listUtils;
@@ -22,10 +25,13 @@ public class MainController {
         this.listUtils = listUtils;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String startPage(@AuthenticationPrincipal User user) {
         if (user == null) {
             return "guest_page";
+        }
+        if (user.getRole()==Role.ROLE_ADMIN) {
+            return "redirect:/admin";
         }
         return "redirect:/main";
     }

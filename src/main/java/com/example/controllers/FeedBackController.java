@@ -40,9 +40,6 @@ public class FeedBackController {
             return "feedback";
         }
         feedback.setUser(user);
-        System.out.println(feedback.getUser().getEmail());
-        System.out.println(feedback.getFromName());
-        System.out.println(feedback.getText());
         feedBackService.saveFeedBack(feedback);
         return "redirect:/main";
     }
