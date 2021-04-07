@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration</title>
+    <div th:replace="fragments/header :: header-css"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: navbar"></div>
+<div id="page-wrapper">
+
+
+    <div class="uk-container">
+        <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">
+            <thead>
+            <tr>
+                <th>Username</th>
+            </tr>
+            </thead>
+            <tbody>
+            <div th:replace="fragments/list_users :: list(${users})"></div>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+<div class="uk-text-center uk-margin">
+    <a href="#" uk-totop uk-scroll></a>
+</div>
+<footer id="page-footer" class="uk-margin-top" uk-sticky>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

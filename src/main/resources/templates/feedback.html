@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+    <div th:replace="fragments/header :: header-css"></div>
+    <style>
+        textarea {
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: navbar"></div>
+<div id="page-wrapper">
+
+    <div class="uk-position-top-center uk-margin-xlarge-top">
+        <form th:action="@{/send_feedback}" th:method="POST" th:object="${feedback}">
+
+            <h1 class="uk-heading-medium uk-text-center">Feedback form</h1>
+
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <label>
+                        <input class="uk-input uk-form-width-large" type="text"
+                               th:field="*{fromName}" placeholder="Your name" autofocus="autofocus">
+                    </label>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <label>
+                        <textarea class="uk-textarea" rows="5" cols="64" type="text" th:field="*{text}"
+                                  placeholder="Your text"></textarea>
+                    </label>
+                </div>
+            </div>
+            <div class="uk-text-center">
+                <button class="uk-button uk-button-secondary" type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+<footer id="page-footer" class="uk-margin-top" uk-sticky>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>
