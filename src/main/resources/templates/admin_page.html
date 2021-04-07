@@ -9,25 +9,28 @@
 <div th:replace="fragments/header :: navbar"></div>
 <div id="page-wrapper">
 
+    <div class="uk-position-center">
+        <h1 class="uk-heading-medium uk-text-center">Administration</h1>
+        <div class="uk-margin-large-top">
+            <div class="uk-inline uk-margin">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active">
+                        <a th:href="@{/admin/allUsers}">
+                            <div uk-icon="icon: users; ratio: 4" uk-tooltip="All users"></div>
+                        </a>
+                    </li>
 
-    <div class="uk-container">
-        <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">
-            <thead>
-            <tr>
-                <th>Username</th>
-            </tr>
-            </thead>
-            <tbody>
-            <div th:replace="fragments/list_users :: list(${users})"></div>
-            </tbody>
-        </table>
+                    <li class="uk-active">
+                        <a th:href="@{/admin/feedbacks}">
+                            <div uk-icon="icon: mail; ratio: 4" uk-tooltip="Feedback"></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-
-
 </div>
-<div class="uk-text-center uk-margin">
-    <a href="#" uk-totop uk-scroll></a>
-</div>
+
 <footer id="page-footer" class="uk-margin-top" uk-sticky>
     <div th:replace="fragments/footer :: footer"></div>
 </footer>

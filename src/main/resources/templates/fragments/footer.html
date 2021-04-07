@@ -15,8 +15,8 @@
                 <div class="uk-navbar-item">
                     TodoGo | copyright(c).
                 </div>
-                <div class="uk-navbar-item" sec:authorize="isAuthenticated()">
-                    <a class="uk-text-right" href="/feedback">Feedback</a>
+                <div class="uk-navbar-item"  sec:authorize="hasRole('USER')">
+                    <a class="uk-text-right" th:href="@{/feedback}">Feedback</a>
                 </div>
             </ul>
         </div>

@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -35,12 +36,13 @@ public class FeedBackController {
     public String sendFeedback(@AuthenticationPrincipal User user,
                                @Valid @ModelAttribute Feedback feedback,
                                BindingResult errors,
-                               Model model) {
+                               RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             return "feedback";
         }
         feedback.setUser(user);
         feedBackService.saveFeedBack(feedback);
+        //redirectAttributes.addFlashAttribute("message", "successfully");     не работает с вот этим
         return "redirect:/main";
     }
 }

@@ -51,4 +51,13 @@ public class Feedback {
     public void setUser(User user) {
         this.user = user;
     }
+
+
+    public String shortText() {
+        if (text.length() <= 20) {
+            return text;
+        } else {
+            return text.substring(0, 20) + " ...";
+        }
+    }
 }

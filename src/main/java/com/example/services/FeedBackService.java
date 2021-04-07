@@ -5,6 +5,8 @@ import com.example.repos.FeedBackRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FeedBackService {
 
@@ -15,7 +17,12 @@ public class FeedBackService {
         this.feedBackRepos = feedBackRepos;
     }
 
+
     public void saveFeedBack(Feedback feedback) {
         feedBackRepos.save(feedback);
+    }
+
+    public List<Feedback>allFeedbacks() {
+        return feedBackRepos.findAll();
     }
 }

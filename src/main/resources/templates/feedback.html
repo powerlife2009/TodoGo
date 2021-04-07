@@ -24,6 +24,9 @@
                     <label>
                         <input class="uk-input uk-form-width-large" type="text"
                                th:field="*{fromName}" placeholder="Your name" autofocus="autofocus">
+                        <div style="color:red" th:if="${#fields.hasErrors('fromName')}"
+                             th:errors="*{fromName}">fromName Error
+                        </div>
                     </label>
                 </div>
             </div>
@@ -33,6 +36,9 @@
                     <label>
                         <textarea class="uk-textarea" rows="5" cols="64" type="text" th:field="*{text}"
                                   placeholder="Your text"></textarea>
+                        <div style="color:red" th:if="${#fields.hasErrors('text')}"
+                             th:errors="*{text}">text Error
+                        </div>
                     </label>
                 </div>
             </div>
