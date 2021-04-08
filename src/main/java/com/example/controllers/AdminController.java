@@ -24,19 +24,19 @@ public class AdminController {
 
     @GetMapping
     public String adminPage() {
-        return "admin_page";
+        return "admin/admin_page";
     }
 
 
     @GetMapping("/allUsers")
     public String usersList(Model model) {
         model.addAttribute("users", userService.findAllUsers());
-        return "users_list";
+        return "admin/users_list";
     }
 
     @GetMapping("/feedbacks")
     public String feedbackList(Model model) {
         model.addAttribute("feedbacks",feedBackService.allFeedbacks());
-        return "feedback_list";
+        return "admin/feedback_list";
     }
 }

@@ -26,17 +26,17 @@ public class UserController {
     @GetMapping("/registration")
     public String registerForm(Model model) {
         model.addAttribute("user", new User());
-        return "registration";
+        return "logIn/registration";
     }
 
     @PostMapping("/registration")
     public String addUser(@Valid User user, BindingResult errors, Model model) {
         if (errors.hasErrors()) {
-            return "registration";
+            return "logIn/registration";
         } else {
             if (!userService.saveUser(user)) {
                 model.addAttribute("messageExist", "user with this login is already registered");
-                return "registration";
+                return "logIn/registration";
             }
         }
         return "redirect:/login";

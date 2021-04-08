@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Feedbacks</title>
@@ -8,13 +8,14 @@
 <body>
 <div th:replace="fragments/header :: navbar"></div>
 <div id="page-wrapper">
-    <div class="uk-container">
+
+    <h1 class="uk-heading-medium uk-text-center uk-margin-large-top">Feedback</h1>
+
+    <div class="uk-container uk-margin-large-top">
         <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">
             <thead>
             <tr>
                 <th>Text</th>
-            </tr>
-            <tr>
                 <th>From</th>
             </tr>
             </thead>

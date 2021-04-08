@@ -26,17 +26,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/signup", "/login", "/*.css", "/*.jpg").permitAll()
-                .antMatchers("/css/**").permitAll()
-                .antMatchers("/js/**").permitAll()
-                .antMatchers("/img/**").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**").permitAll()
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/main/**").hasAnyRole("USER")
                 .antMatchers("/", "/login", "/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()

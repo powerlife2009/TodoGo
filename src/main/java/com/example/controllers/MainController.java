@@ -42,6 +42,6 @@ public class MainController {
         model.addAttribute("groups", Groups.values());
         model.addAttribute("nearest", listUtils.getTaskSorting().sortTodoByDateAndGetNearestEvents(user));
         model.addAttribute("defaultList", listUtils.getTaskSorting().sortTodoAsQueue(user));
-        return "main";
+        return "main_page";
     }
 }
