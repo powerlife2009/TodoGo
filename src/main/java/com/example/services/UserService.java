@@ -50,4 +50,12 @@ public class UserService implements UserDetailsService {
     public List<User>findAllUsers() {
         return userRepository.findAll();
     }
+
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
+
+    public User findByUserId(Long id) {
+        return userRepository.getOne(id);
+    }
 }

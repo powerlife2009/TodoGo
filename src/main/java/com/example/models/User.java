@@ -10,6 +10,7 @@ import javax.validation.constraints.*;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 
 @Entity
@@ -36,6 +37,11 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private Set<Task> tasks;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private Set<Feedback>feedbacks;
 
     public User() {
     }
@@ -92,6 +98,14 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -116,6 +130,7 @@ public class User implements UserDetails {
     public void setUsername(String username) {
         this.username = username;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

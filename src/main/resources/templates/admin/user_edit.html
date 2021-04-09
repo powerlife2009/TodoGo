@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <div th:replace="fragments/header :: header-css"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: navbar"></div>
+<div id="page-wrapper">
+
+    <div class="uk-position-center">
+        <h1 class="uk-heading-medium uk-text-center uk-margin-large-top" th:text="${user.getUsername()}"></h1>
+
+        <div class="uk-inline uk-margin">
+            <ul class="uk-navbar-nav">
+
+                <li class="uk-active">
+
+                    <a href="#modal-example" uk-toggle><span uk-icon="icon: trash; ratio: 4" uk-tooltip="DELETE"></span></a>
+
+                    <div id="modal-example" class="uk-flex-top" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                            <h2>the user <span th:text="${user.getUsername()}"></span> will be deleted</h2>
+                            <form th:action="@{/admin/users/remove}" method="post">
+                                <input type="hidden" name="id" th:value="${user.id}"/>
+                                <div class="uk-margin">
+                                    <div class="uk-text-center">
+                                        <button class="uk-button uk-button-default uk-modal-close" type="button">
+                                            Cancel
+                                        </button>
+                                        <button class="uk-button uk-button-primary" type="submit">Delete</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<footer id="page-footer" class="uk-margin-top" uk-sticky>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

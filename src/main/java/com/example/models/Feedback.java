@@ -16,7 +16,7 @@ public class Feedback {
     @NotBlank(message = "Please enter text")
     private String text;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     private User user;
 
     public Feedback() {

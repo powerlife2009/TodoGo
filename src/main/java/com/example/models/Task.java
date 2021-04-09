@@ -1,5 +1,7 @@
 package com.example.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -25,7 +27,7 @@ public class Task {
     @NotNull(message = "Field priority should not be empty")
     private Integer priority;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private User user;
 
     public Task() {
