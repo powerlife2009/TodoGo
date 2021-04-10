@@ -64,6 +64,10 @@
                         </div>
                     </div>
 
+
+                    <div class="uk-navbar-item" sec:authorize="hasRole('USER')">
+                        <a th:href="@{/mail}"><span uk-icon="mail"></span></a>
+                    </div>
                     <div class="uk-navbar-item" sec:authorize="isAuthenticated()">
                         <a href="#"><span th:text="${#authentication.name}"></span></a>
                     </div>

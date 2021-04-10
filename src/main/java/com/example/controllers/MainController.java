@@ -30,7 +30,7 @@ public class MainController {
         if (user == null) {
             return "guest_page";
         }
-        if (user.getRole()==Role.ROLE_ADMIN) {
+        if (user.getRole() == Role.ROLE_ADMIN) {
             return "redirect:/admin";
         }
         return "redirect:/main";
@@ -42,6 +42,6 @@ public class MainController {
         model.addAttribute("groups", Groups.values());
         model.addAttribute("nearest", listUtils.getTaskSorting().sortTodoByDateAndGetNearestEvents(user));
         model.addAttribute("defaultList", listUtils.getTaskSorting().sortTodoAsQueue(user));
-        return "main_page";
+        return "user/main_page";
     }
 }

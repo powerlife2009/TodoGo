@@ -16,13 +16,12 @@
             <thead>
             <tr>
                 <th>Text</th>
-                <th>From</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="feedback : ${feedbacks}">
-                <td th:text="${feedback.shortText()}"></td>
-                <td th:text="${feedback.getUser().getUsername()}"></td>
+                <td><a th:href="@{/admin/feedbacks/{id}(id=${feedback.getId()})}" th:text="${feedback.shortText()}"></a>
+                </td>
             </tr>
             </tbody>
         </table>

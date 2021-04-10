@@ -20,6 +20,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String name;
 
     @NotBlank(message = "field username is required")
@@ -41,7 +42,7 @@ public class User implements UserDetails {
     private Set<Task> tasks;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private Set<Feedback>feedbacks;
+    private Set<Message> feedbacks;
 
     public User() {
     }
@@ -106,6 +107,13 @@ public class User implements UserDetails {
         this.tasks = tasks;
     }
 
+    public Set<Message> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(Set<Message> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
 
     @Override
     public boolean isAccountNonExpired() {

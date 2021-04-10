@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class TaskSearch implements Search{
+public class TaskSearch implements Search {
 
     private final TaskService taskService;
 
@@ -18,6 +18,7 @@ public class TaskSearch implements Search{
     public TaskSearch(TaskService taskService) {
         this.taskService = taskService;
     }
+
     @Override
     public List<Task> searchTodoByText(String searchText, User user) {
         List<Task> tasks = taskService.findAllByUser(user);

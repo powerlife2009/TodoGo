@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mail</title>
+    <div th:replace="fragments/header :: header-css"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: navbar"></div>
+<div id="page-wrapper">
+    <h1 class="uk-heading-medium uk-text-center uk-margin-large-top">Inbox</h1>
+
+    <div class="uk-container uk-margin-large-top">
+        <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">
+            <thead>
+            <tr>
+                <th>Message</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="message : ${messages}">
+                <td>
+
+                    <a href="#" uk-toggle th:target="${'#modal-example'+message}"
+                       th:text="${message.shortText()}"></a>
+
+                    <div th:id="${'modal-example'+message}" class="uk-flex-top" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                            <article class="uk-article">
+                                <div class="uk-modal-header">
+                                    <h1 class="uk-article-title">
+                                        subject: <a class="uk-link-reset" href=""><span
+                                            th:text="${message.getSubject()}"></span>
+                                    </a>
+                                    </h1>
+                                </div>
+
+                                <p class="uk-article-meta">Written by ADMIN</p>
+
+                                <p class="uk-text-lead"></p>
+
+                                <p><span th:text="${message.getText()}"></span></p>
+                            </article>
+                            <div class="uk-margin">
+                                <div class="uk-text-center">
+                                    <form th:action="@{/mail/markAsRead}" method="post">
+                                        <input type="hidden" name="id" th:value="${message.id}">
+                                        <button class="uk-button uk-button-primary" type="submit">Ok</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="uk-text-center uk-margin">
+    <a href="#" uk-totop uk-scroll></a>
+</div>
+<footer id="page-footer" class="uk-margin-top" uk-sticky>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

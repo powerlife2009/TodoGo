@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+    <div th:replace="fragments/header :: header-css"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: navbar"></div>
+<div id="page-wrapper">
+    <div class="uk-container uk-margin uk-margin-medium-top">
+        <article class="uk-article">
+
+            <h1 class="uk-article-title">
+                subject: <a class="uk-link-reset" href=""><span th:text="${feedback.getSubject()}"></span>
+            </a>
+            </h1>
+
+            <p class="uk-article-meta">Written by <a th:href="@{/admin/users/{id}(id=${feedback.getUser().getId()})}">
+                <span th:text="${feedback.getUser().getUsername()}"></span>
+            </a></p>
+
+            <p class="uk-text-lead"></p>
+
+            <p><span th:text="${feedback.getText()}"></span></p>
+
+            <div class="uk-grid-small uk-child-width-auto" uk-grid>
+
+
+                <div>
+                    <a class="uk-button uk-button-text" uk-toggle th:target="${'#modal-example'+feedback}">Reply</a>
+
+                    <div th:id="${'modal-example'+feedback}" class="uk-flex-top" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+
+                            <form th:action="@{/admin/feedback/answer}" method="post" th:object="${answer}">
+                                <input type="hidden" name="idOwnerFeedback" th:value="${feedback.getUser().getId()}">
+                                <div class="uk-margin">
+                                    <div class="uk-inline">
+                                        <label>
+                                            <input class="uk-input uk-form-width-large" type="text"
+                                                   th:field="*{subject}" placeholder="Subject" autofocus="autofocus">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="uk-margin">
+                                    <div class="uk-inline">
+                                        <label>
+                                       <textarea class="uk-textarea" rows="5" cols="64" type="text" th:field="*{text}"
+                                                 placeholder="Your text"></textarea>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="uk-margin">
+                                    <div class="uk-text-center">
+                                        <button class="uk-button uk-button-default uk-modal-close" type="button">
+                                            Cancel
+                                        </button>
+                                        <button class="uk-button uk-button-primary" type="submit">Reply</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/admin/feedbacks/remove}" method="post">
+                    <input type="hidden" name="id" th:value="${feedback.id}"/>
+                    <button class="uk-button uk-button-text" type="submit">Delete</button>
+                </form>
+
+            </div>
+
+        </article>
+    </div>
+
+</div>
+<footer id="page-footer" class="uk-margin-top" uk-sticky>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

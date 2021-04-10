@@ -47,8 +47,8 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public List<User>findAllUsers() {
-        return userRepository.findAll();
+    public List<User> findAllUsers(Role role) {
+        return userRepository.findByRole(role);
     }
 
     public void deleteUser(User user) {

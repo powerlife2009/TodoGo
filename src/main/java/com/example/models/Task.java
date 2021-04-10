@@ -1,7 +1,5 @@
 package com.example.models;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -23,7 +21,9 @@ public class Task {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
+
     private String type;
+
     @NotNull(message = "Field priority should not be empty")
     private Integer priority;
 

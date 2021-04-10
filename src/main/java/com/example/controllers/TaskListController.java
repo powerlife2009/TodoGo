@@ -48,8 +48,8 @@ public class TaskListController {
 
     @PostMapping("/filterByType")
     public String filterByType(@AuthenticationPrincipal User user,
-                           @RequestParam String type,
-                           RedirectAttributes redirectAttributes) {
+                               @RequestParam String type,
+                               RedirectAttributes redirectAttributes) {
         List<Task> filterTaskList = listUtils.getTaskFilter().filterTodoByType(type, user);
         if (filterTaskList.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "not found");
@@ -63,7 +63,7 @@ public class TaskListController {
                                    @RequestParam Integer priority,
                                    RedirectAttributes redirectAttributes) {
         List<Task> filterTaskList = listUtils.getTaskFilter().filterTodoByPriority(priority, user);
-        if(filterTaskList.isEmpty()) {
+        if (filterTaskList.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "not found");
         }
         redirectAttributes.addFlashAttribute("tasks", filterTaskList);
