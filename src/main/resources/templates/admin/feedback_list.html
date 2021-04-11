@@ -11,20 +11,52 @@
 
     <h1 class="uk-heading-medium uk-text-center uk-margin-large-top">Feedback</h1>
 
+    <div class="uk-text-center uk-margin uk-margin-medium-top uk-margin-xlarge-left uk-margin-xlarge-right">
+        <div th:switch="${message}">
+            <div th:case="'has errors'">
+                <div class="uk-text-center uk-margin">
+                    <div class="uk-alert-danger" uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <p>ERRORS</p>
+                    </div>
+                </div>
+            </div>
+            <div th:case="'successfully'">
+                <div class="uk-text-center uk-margin">
+                    <div class="uk-alert-success" uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <p>SUCCESSFULLY</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="uk-container uk-margin-large-top">
-        <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">
-            <thead>
-            <tr>
-                <th>Text</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="feedback : ${feedbacks}">
-                <td><a th:href="@{/admin/feedbacks/{id}(id=${feedback.getId()})}" th:text="${feedback.shortText()}"></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="uk-overflow-auto">
+            <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">
+                <thead>
+                <tr>
+                    <th>Text</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="feedback : ${feedbacks}">
+
+                    <td>
+                        <a th:href="@{/admin/feedbacks/{id}(id=${feedback.getId()})}">
+                            <div th:if="${feedback.getMarkAsRead()==false}">
+                                <strong th:text="${feedback.shortText()}"></strong>
+                            </div>
+                            <div th:if="${feedback.getMarkAsRead()==true}">
+                                <span class="uk-text-secondary" th:text="${feedback.shortText()}"></span>
+                            </div>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>
