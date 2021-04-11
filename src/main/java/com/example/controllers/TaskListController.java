@@ -2,7 +2,7 @@ package com.example.controllers;
 
 import com.example.models.Task;
 import com.example.models.User;
-import com.example.utils.ListUtils;
+import com.example.utils.forTodoList.TodoListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,10 +15,10 @@ import java.util.List;
 @Controller
 public class TaskListController {
 
-    private final ListUtils listUtils;
+    private final TodoListUtils listUtils;
 
     @Autowired
-    public TaskListController(ListUtils listUtils) {
+    public TaskListController(TodoListUtils listUtils) {
         this.listUtils = listUtils;
     }
 

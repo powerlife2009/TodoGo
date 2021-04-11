@@ -4,7 +4,7 @@ import com.example.models.Groups;
 import com.example.models.Role;
 import com.example.models.Task;
 import com.example.models.User;
-import com.example.utils.ListUtils;
+import com.example.utils.forTodoList.TodoListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class MainController {
 
-    private final ListUtils listUtils;
+    private final TodoListUtils listUtils;
 
 
     @Autowired
-    public MainController(ListUtils listUtils) {
+    public MainController(TodoListUtils listUtils) {
         this.listUtils = listUtils;
     }
 

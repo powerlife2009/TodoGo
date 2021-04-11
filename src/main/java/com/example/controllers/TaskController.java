@@ -3,7 +3,7 @@ package com.example.controllers;
 import com.example.models.Task;
 import com.example.models.User;
 import com.example.services.TaskService;
-import com.example.utils.ListUtils;
+import com.example.utils.forTodoList.TodoListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -19,10 +19,10 @@ import javax.validation.Valid;
 public class TaskController {
 
     private final TaskService taskService;
-    private final ListUtils listUtils;
+    private final TodoListUtils listUtils;
 
     @Autowired
-    public TaskController(TaskService taskService, ListUtils listUtils) {
+    public TaskController(TaskService taskService, TodoListUtils listUtils) {
         this.taskService = taskService;
         this.listUtils = listUtils;
     }
