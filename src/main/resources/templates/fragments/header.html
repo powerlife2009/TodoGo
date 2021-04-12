@@ -41,7 +41,7 @@
             <div class="uk-navbar-left">
                 <ul class="uk-navbar-nav">
                     <li class="uk-active">
-                        <a class="uk-text-italic" th:href="@{/}">
+                        <a class="uk-logo uk-text-italic" th:href="@{/}">
                             <h1>TodoGO</h1></a>
                     </li>
                 </ul>
@@ -49,21 +49,37 @@
 
             <div class="uk-navbar-right uk-margin-right">
 
-                <ul class="uk-navbar-nav">
-                    <div class="uk-navbar-item" sec:authorize="hasRole('USER')">
-                        <div>
-                            <a class="uk-navbar-toggle" uk-icon="icon: search; ratio: 1.5"
-                               sec:authorize="isAuthenticated()" href="#"></a>
-                            <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
-                                <form th:action="@{/search}" th:method="post"
-                                      class="uk-search uk-search-navbar uk-width-1-1">
-                                    <input class="uk-search-input" type="search"
-                                           th:name="searchText" placeholder="search" autofocus>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                <div sec:authorize="hasRole('USER')">
+                    <form th:action="@{/search}" th:method="post" class="uk-search uk-search-default">
+                        <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+                        <input class="uk-search-input" th:name="searchText" type="search" placeholder="Search...">
+                    </form>
+                </div>
 
+                <ul class="uk-navbar-nav uk-visible@s">
+                    <div class="uk-navbar-item" sec:authorize="hasRole('USER')">
+                        <a th:href="@{/mail}"><span uk-icon="mail"></span></a>
+                    </div>
+                    <div class="uk-navbar-item" sec:authorize="isAuthenticated()">
+                        <a href="#"><span th:text="${#authentication.name}"></span></a>
+                    </div>
+                    <div class="uk-navbar-item" sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" method="post">
+                            <button class="uk-button uk-button-text" type="submit">Sign Out</button>
+                        </form>
+                    </div>
+                    <li class="uk-active" sec:authorize="isAnonymous()">
+                        <a th:href="@{/login}" sec:authorize="isAnonymous()">Sign In</a>
+                    </li>
+                </ul>
+                <a href="#" class="uk-navbar-toggle uk-hidden@s" uk-navbar-toggle-icon uk-toggle="target: #sidenav"></a>
+            </div>
+        </nav>
+
+        <div id="sidenav" uk-offcanvas="overlay: true; mode: push; flip: true" class="uk-offcanvas">
+
+            <div class="uk-offcanvas-bar">
+                <ul class="uk-nav">
 
                     <div class="uk-navbar-item" sec:authorize="hasRole('USER')">
                         <a th:href="@{/mail}"><span uk-icon="mail"></span></a>
@@ -80,9 +96,8 @@
                         <a th:href="@{/login}" sec:authorize="isAnonymous()">Sign In</a>
                     </li>
                 </ul>
-
             </div>
-        </nav>
+        </div>
     </div>
 </div>
 </body>
