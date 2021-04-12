@@ -52,7 +52,9 @@
                     <div sec:authorize="hasRole('USER')">
                         <form th:action="@{/search}" th:method="post" class="uk-search uk-search-default">
                             <a href="" class="uk-search-icon-flip" uk-search-icon></a>
-                            <input class="uk-search-input" th:name="searchText" type="search" placeholder="Search...">
+                            <label>
+                                <input class="uk-search-input" th:name="searchText" type="search" placeholder="Search...">
+                            </label>
                         </form>
                     </div>
                 </ul>
@@ -72,36 +74,43 @@
                         <a th:href="@{/login}" sec:authorize="isAnonymous()">Sign In</a>
                     </li>
                 </ul>
-                <button class="uk-navbar-toggle uk-hidden@s" type="button" uk-icon="menu" uk-toggle="target: #sidenav"></button>
+                <button class="uk-navbar-toggle uk-hidden@s" type="button" uk-icon="menu"
+                        uk-toggle="target: #sidenav"></button>
             </div>
         </nav>
 
-        <div id="sidenav" uk-offcanvas="overlay: true">
+        <div id="sidenav" uk-offcanvas="overlay: true; flip: true">
 
             <div class="uk-offcanvas-bar">
-                <ul class="uk-nav">
-                        <div sec:authorize="hasRole('USER')">
-                            <form th:action="@{/search}" th:method="post" class="uk-search uk-search-default">
-                                <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+
+                <ul class="uk-nav uk-nav-default">
+                    <li sec:authorize="hasRole('USER')">
+                        <form th:action="@{/search}" th:method="post" class="uk-search uk-search-default">
+                            <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+                            <label>
                                 <input class="uk-search-input" th:name="searchText" type="search"
                                        placeholder="Search...">
-                            </form>
-                        </div>
-                        <div class="uk-navbar-item" sec:authorize="hasRole('USER')">
-                            <a th:href="@{/mail}"><span uk-icon="mail"></span></a>
-                        </div>
-                        <div class="uk-navbar-item" sec:authorize="isAuthenticated()">
-                            <a href="#"><span th:text="${#authentication.name}"></span></a>
-                        </div>
-                        <div class="uk-navbar-item" sec:authorize="isAuthenticated()">
-                            <form th:action="@{/logout}" method="post">
-                                <button class="uk-button uk-button-text" type="submit">Sign Out</button>
-                            </form>
-                        </div>
-                        <li class="uk-active" sec:authorize="isAnonymous()">
-                            <a th:href="@{/login}" sec:authorize="isAnonymous()">Sign In</a>
-                        </li>
+                            </label>
+                        </form>
+                    </li>
+                    <li class="uk-margin" sec:authorize="hasRole('USER')">
+                        <a th:href="@{/mail}"><span uk-icon="mail"></span> mail</a>
+                    </li>
+                    <li class="uk-margin" sec:authorize="isAuthenticated()">
+                        <a href="#"><span uk-icon="user"></span> <span th:text="${#authentication.name}"></span></a>
+                    </li>
+                    <li class="uk-nav-divider"></li>
+                    <li sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" method="post">
+                            <button class="uk-button uk-button-text" type="submit">Sign Out</button>
+                        </form>
+                    </li>
+
+                    <li class="uk-active" sec:authorize="isAnonymous()">
+                        <a th:href="@{/login}" sec:authorize="isAnonymous()">Sign In</a>
+                    </li>
                 </ul>
+
             </div>
         </div>
     </div>
