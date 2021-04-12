@@ -72,11 +72,11 @@
                         <a th:href="@{/login}" sec:authorize="isAnonymous()">Sign In</a>
                     </li>
                 </ul>
-                <a href="#" class="uk-navbar-toggle uk-hidden@s" uk-navbar-toggle-icon uk-toggle="target: #sidenav"></a>
+                <button class="uk-navbar-toggle uk-hidden@s" type="button" uk-icon="menu" uk-toggle="target: #sidenav"></button>
             </div>
         </nav>
 
-        <div id="sidenav" uk-offcanvas="overlay: true; mode: push" class="uk-offcanvas">
+        <div id="sidenav" uk-offcanvas="overlay: true">
 
             <div class="uk-offcanvas-bar">
                 <ul class="uk-nav">
