@@ -9,17 +9,52 @@
 <div th:replace="fragments/header :: navbar"></div>
 <div id="page-wrapper">
     <h1 class="uk-heading-medium uk-text-center uk-margin-large-top">Inbox</h1>
+    <div class="uk-text-center uk-margin uk-margin-medium-top uk-margin-xlarge-left uk-margin-xlarge-right">
+        <div th:switch="${message}">
+            <div th:case="'has errors'">
+                <div class="uk-text-center uk-margin">
+                    <div class="uk-alert-danger" uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <p>ERRORS</p>
+                    </div>
+                </div>
+            </div>
+            <div th:case="'successfully'">
+                <div class="uk-text-center uk-margin">
+                    <div class="uk-alert-success" uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <p>SUCCESSFULLY</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="uk-container uk-margin-large-top">
         <div class="uk-overflow-auto">
             <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">
                 <thead>
                 <tr>
-                    <th>Message</th>
+                    <th class="uk-width-small">Action</th>
+                    <th class="uk-table-expand">Message</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="message : ${messages}">
+
+                    <td>
+                        <ul class="uk-iconnav">
+                            <li>
+                                <form th:action="@{/mail/remove}" method="post">
+                                    <input type="hidden" name="id" th:value="${message.id}"/>
+                                    <button class="uk-button uk-button-link" type="submit">
+                                        <span uk-icon="trash"></span>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </td>
+
                     <td>
 
                         <a href="#" uk-toggle th:target="${'#modal-example'+message}">

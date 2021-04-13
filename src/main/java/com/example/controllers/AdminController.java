@@ -78,7 +78,7 @@ public class AdminController {
     }
 
     @PostMapping("/feedbacks/remove")
-    public String removeMessage(@RequestParam Long id,
+    public String removeFeedback(@RequestParam Long id,
                                 RedirectAttributes redirectAttributes) {
         Message feedback = messageService.getMessageById(id);
         messageService.deleteMessage(feedback);

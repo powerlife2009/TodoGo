@@ -68,4 +68,13 @@ public class MessageController {
         messageService.saveMessage(message);
         return "redirect:/mail";
     }
+
+    @PostMapping("/mail/remove")
+    public String removeMessage(@RequestParam Long id,
+                                RedirectAttributes redirectAttributes) {
+        Message message = messageService.getMessageById(id);
+        messageService.deleteMessage(message);
+        redirectAttributes.addFlashAttribute("message", "successfully");
+        return "redirect:/mail";
+    }
 }
