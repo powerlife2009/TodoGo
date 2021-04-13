@@ -47,7 +47,7 @@
                             <li>
                                 <form th:action="@{/mail/remove}" method="post">
                                     <input type="hidden" name="id" th:value="${message.id}"/>
-                                    <button class="uk-button uk-button-link" type="submit">
+                                    <button class="uk-button uk-button-link" type="submit" uk-tooltip="delete">
                                         <span uk-icon="trash"></span>
                                     </button>
                                 </form>

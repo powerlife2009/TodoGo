@@ -23,22 +23,28 @@
             </div>
 
             <div class="uk-margin">
-                <input class="uk-input uk-form-width-large" type="text" th:field="*{username}" placeholder="Login">
+                <label>
+                    <input class="uk-input uk-form-width-large" type="text" th:field="*{username}" placeholder="Login">
+                </label>
                 <div style="color:red" th:if="${#fields.hasErrors('username')}"
                      th:errors="*{username}">userName Error
                 </div>
             </div>
 
             <div class="uk-margin">
-                <input class="uk-input uk-form-width-large" type="password" th:field="*{password}"
-                       placeholder="Password">
+                <label>
+                    <input class="uk-input uk-form-width-large" type="password" th:field="*{password}"
+                           placeholder="Password">
+                </label>
                 <div style="color:red" th:if="${#fields.hasErrors('password')}"
                      th:errors="*{password}">password Error
                 </div>
             </div>
 
             <div class="uk-margin">
-                <input class="uk-input uk-form-width-large" type="text" th:field="*{email}" placeholder="Email">
+                <label>
+                    <input class="uk-input uk-form-width-large" type="text" th:field="*{email}" placeholder="Email">
+                </label>
                 <div style="color:red" th:if="${#fields.hasErrors('email')}"
                      th:errors="*{email}">email Error
                 </div>
