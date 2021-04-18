@@ -28,21 +28,29 @@
             <div class="uk-margin">
                 <div class="uk-inline">
                     <span class="uk-form-icon" uk-icon="icon: user"></span>
-                        <input class="uk-input uk-form-width-large" type="text" th:name="username" placeholder="Login"
-                               autofocus="autofocus">
+                    <input class="uk-input uk-form-width-large" type="text" th:name="username" placeholder="Login"
+                           autofocus="autofocus">
                 </div>
             </div>
 
             <div class="uk-margin">
                 <div class="uk-inline">
                     <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                        <input class="uk-input uk-form-width-large" type="password" th:name="password"
-                               placeholder="Password">
+                    <input class="uk-input uk-form-width-large" type="password" th:name="password"
+                           placeholder="Password">
                 </div>
             </div>
-            <div class="uk-text-center">
-                <button class="uk-button uk-button-secondary" type="submit">Sign In</button>
-                <a class="uk-link-heading uk-margin-left" href="/registration">Sign Up</a>
+
+
+                Remember Me:
+                <input type="checkbox" name="remember-me"/>
+
+
+            <div class="uk-margin">
+                <div class="uk-text-center">
+                    <button class="uk-button uk-button-secondary" type="submit">Sign In</button>
+                    <a class="uk-link-heading uk-margin-left" href="/registration">Sign Up</a>
+                </div>
             </div>
         </form>
     </div>
