@@ -1,9 +1,9 @@
 package com.example.todogo.controllers;
 
-import com.example.todogo.models.Task;
+import com.
+example.todogo.models.Task;
 import com.example.todogo.models.User;
 import com.example.todogo.services.TaskService;
-import com.example.todogo.utils.forTodoList.TodoListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -17,12 +17,10 @@ import javax.validation.Valid;
 public class TaskController {
 
     private final TaskService taskService;
-    private final TodoListUtils listUtils;
 
     @Autowired
-    public TaskController(TaskService taskService, TodoListUtils listUtils) {
+    public TaskController(TaskService taskService) {
         this.taskService = taskService;
-        this.listUtils = listUtils;
     }
 
     @PostMapping("/save")
@@ -37,7 +35,7 @@ public class TaskController {
             taskService.saveTask(newTask);
             redirectAttributes.addFlashAttribute("message", "successfully");
         }
-        redirectAttributes.addFlashAttribute("tasks", listUtils.getTaskSorting().sortTodoAsQueue(user));
+        redirectAttributes.addFlashAttribute("tasks", taskService.sortTasksAsQueue(user));
         return "redirect:/main";
     }
 
@@ -47,7 +45,7 @@ public class TaskController {
                              RedirectAttributes redirectAttributes) {
         taskService.deleteTask(id);
         redirectAttributes.addFlashAttribute("message", "successfully");
-        redirectAttributes.addFlashAttribute("tasks", listUtils.getTaskSorting().sortTodoAsQueue(user));
+        redirectAttributes.addFlashAttribute("tasks", taskService.sortTasksAsQueue(user));
         return "redirect:/main";
     }
 }

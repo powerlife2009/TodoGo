@@ -2,7 +2,7 @@ package com.example.todogo.controllers;
 
 import com.example.todogo.models.Task;
 import com.example.todogo.models.User;
-import com.example.todogo.utils.forTodoList.TodoListUtils;
+import com.example.todogo.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,11 +15,12 @@ import java.util.List;
 @Controller
 public class TaskListController {
 
-    private final TodoListUtils listUtils;
+
+    private final com.example.todogo.services.TaskService
 
     @Autowired
-    public TaskListController(TodoListUtils listUtils) {
-        this.listUtils = listUtils;
+    public TaskListController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
 
@@ -27,7 +28,7 @@ public class TaskListController {
     public String sortBy(@AuthenticationPrincipal User user,
                          @RequestParam String sortBy,
                          RedirectAttributes redirectAttributes) {
-        List<Task> sortedTaskList = listUtils.getTaskSorting().sortTodoBy(sortBy, user);
+        List<Task> sortedTaskList = taskService.getAllTaskSortedBy(user, sortBy);
         redirectAttributes.addFlashAttribute("tasks", sortedTaskList);
         return "redirect:/main";
     }
@@ -37,7 +38,7 @@ public class TaskListController {
     public String search(@AuthenticationPrincipal User user,
                          @RequestParam String searchText,
                          RedirectAttributes redirectAttributes) {
-        List<Task> findTaskList = listUtils.getTaskSearch().searchTodoByText(searchText, user);
+        List<Task> findTaskList = taskService.searchTaskByText(searchText, user);
         if (findTaskList.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "not found");
         }
@@ -50,7 +51,7 @@ public class TaskListController {
     public String filterByType(@AuthenticationPrincipal User user,
                                @RequestParam String type,
                                RedirectAttributes redirectAttributes) {
-        List<Task> filterTaskList = listUtils.getTaskFilter().filterTodoByType(type, user);
+        List<Task> filterTaskList = taskService.filterAllTasksByType(user, type);
         if (filterTaskList.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "not found");
         }
@@ -62,7 +63,7 @@ public class TaskListController {
     public String filterByPriority(@AuthenticationPrincipal User user,
                                    @RequestParam Integer priority,
                                    RedirectAttributes redirectAttributes) {
-        List<Task> filterTaskList = listUtils.getTaskFilter().filterTodoByPriority(priority, user);
+        List<Task> filterTaskList = taskService.filterAllTasksByPriority(user, priority);
         if (filterTaskList.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "not found");
         }

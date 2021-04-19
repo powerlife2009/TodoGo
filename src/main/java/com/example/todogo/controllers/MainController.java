@@ -4,7 +4,7 @@ import com.example.todogo.models.Groups;
 import com.example.todogo.models.Role;
 import com.example.todogo.models.Task;
 import com.example.todogo.models.User;
-import com.example.todogo.utils.forTodoList.TodoListUtils;
+import com.example.todogo.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class MainController {
 
-    private final TodoListUtils listUtils;
-
+    private final TaskService taskService;
 
     @Autowired
-    public MainController(TodoListUtils listUtils) {
-        this.listUtils = listUtils;
+    public MainController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @GetMapping
@@ -40,8 +39,8 @@ public class MainController {
     public String main(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("newTask", new Task());
         model.addAttribute("groups", Groups.values());
-        model.addAttribute("nearest", listUtils.getTaskSorting().sortTodoByDateAndGetNearestEvents(user));
-        model.addAttribute("defaultList", listUtils.getTaskSorting().sortTodoAsQueue(user));
+        model.addAttribute("nearest", taskService.getTasksSortedByDateAndNearestFive(user));
+        model.addAttribute("defaultList", taskService.sortTasksAsQueue(user));
         return "user/main_page";
     }
 }
