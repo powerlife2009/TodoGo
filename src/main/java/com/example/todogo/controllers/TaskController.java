@@ -1,7 +1,6 @@
 package com.example.todogo.controllers;
 
-import com.
-example.todogo.models.Task;
+import com.example.todogo.models.Task;
 import com.example.todogo.models.User;
 import com.example.todogo.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -26,30 +26,12 @@ public class TaskService {
         return taskRepository.findAllByUser(user, Sort.by(sortBy));
     }
 
-    public List<Task> getTasksSortedByDateAndNearestFive(User user) {
-        return taskRepository.findAllByUser(user).stream()
-                .sorted(Comparator.comparing(Task::getDate))
-                .limit(5)
-                .collect(Collectors.toList());
-    }
-
-    public List<Task> getAllTask(User user) {
-        return taskRepository.findAllByUser(user);
-    }
-
-    public List<Task> filterAllTasksByType(User user, String type) {
-        return taskRepository.findAllByUserAndType(user, type);
-    }
-
     public List<Task> sortTasksAsQueue(User user) {
         return taskRepository.findAllByUser(user, Sort.by(Sort.Direction.DESC, ("id")));
     }
 
-    public List<Task> searchTaskByText(User user, String searchText) {
-        List<Task> tasks = taskRepository.findAllByUser(user);
-        return tasks.stream()
-                .filter(task -> task.getText().toLowerCase().contains(searchText.toLowerCase()))
-                .collect(Collectors.toList());
+    public List<Task> filterAllTasksByType(User user, String type) {
+        return taskRepository.findAllByUserAndType(user, type);
     }
 
     public List<Task> filterAllTasksByPriority(User user, Integer priority) {
@@ -64,8 +46,26 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-    public Task getTaskById(Long id) {
-        return taskRepository.getOne(id);
+
+
+
+
+    public List<Task> getTasksSortedByDateAndNearestFive(User user) {
+        return taskRepository.findAllByUser(user).stream()
+                .sorted(Comparator.comparing(Task::getDate))
+                .limit(5)
+                .collect(Collectors.toList());
     }
+
+
+    public List<Task> searchTaskByText(User user, String searchText) {
+        List<Task> tasks = taskRepository.findAllByUser(user);
+        return tasks.stream()
+                .filter(task -> task.getText().toLowerCase().contains(searchText.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+
+
 
 }

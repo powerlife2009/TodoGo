@@ -16,7 +16,7 @@ import java.util.List;
 public class TaskListController {
 
 
-    private final com.example.todogo.services.TaskService
+    private final TaskService taskService;
 
     @Autowired
     public TaskListController(TaskService taskService) {
@@ -38,7 +38,7 @@ public class TaskListController {
     public String search(@AuthenticationPrincipal User user,
                          @RequestParam String searchText,
                          RedirectAttributes redirectAttributes) {
-        List<Task> findTaskList = taskService.searchTaskByText(searchText, user);
+        List<Task> findTaskList = taskService.searchTaskByText(user, searchText);
         if (findTaskList.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "not found");
         }
