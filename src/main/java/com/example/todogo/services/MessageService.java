@@ -5,6 +5,7 @@ import com.example.todogo.models.MessageWay;
 import com.example.todogo.models.User;
 import com.example.todogo.repos.MessageRepos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +21,8 @@ public class MessageService {
     }
 
 
-    public void saveMessage(Message message) {
-        messageRepos.save(message);
+    public List<Message> findAllByUserAndMessageWay(User user, MessageWay messageWay) {
+        return messageRepos.findAllByUserAndMessageWay(user, messageWay, Sort.by(Sort.Direction.DESC, "id"));
     }
 
     public List<Message> allMessagesByMessageWay(MessageWay messageWay) {
@@ -36,7 +37,8 @@ public class MessageService {
         messageRepos.delete(message);
     }
 
-    public List<Message> findAllByUserAndMessageWay(User user, MessageWay messageWay) {
-        return messageRepos.findAllByUserAndMessageWay(user, messageWay);
+    public void saveMessage(Message message) {
+        messageRepos.save(message);
     }
 }
+

@@ -6,12 +6,10 @@
 <body>
 <div th:fragment="editTodo(editTask, newTask)">
 
-
     <button class="uk-button uk-button-link" type="button"
             uk-toggle th:target="${'#modal-edit'+editTask}" uk-tooltip="edit">
         <span uk-icon="pencil"></span>
     </button>
-
 
     <div th:id="${'modal-edit'+editTask}" class="uk-flex-top" uk-modal>
         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
@@ -85,7 +83,6 @@
             </form>
         </div>
     </div>
-
 </div>
 </body>
 </html>

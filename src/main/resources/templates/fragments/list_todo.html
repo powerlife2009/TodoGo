@@ -9,37 +9,33 @@
 <div th:fragment="list(tasks, newTask)">
     <tr th:each="task : ${tasks}">
 
-
         <td>
             <ul class="uk-iconnav">
                 <li>
                     <div th:replace="fragments/edit_todo :: editTodo(${task}, ${newTask})"></div>
                 </li>
                 <li>
-
-
                     <button class="uk-button uk-button-link" type="button"
-                            uk-toggle th:target="${'#modal-delete'+task}"  uk-tooltip="delete">
+                            uk-toggle th:target="${'#modal-delete'+task}" uk-tooltip="delete">
                         <span uk-icon="trash"></span>
                     </button>
 
                     <div th:id="${'modal-delete'+task}" class="uk-flex-top" uk-modal>
-                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-                                <h2>This task will be deleted</h2>
-                                <form th:action="@{/delete}" method="post">
-                                    <input type="hidden" name="id" th:value="${task.id}"/>
-                                    <div class="uk-margin">
-                                        <div class="uk-text-center">
-                                            <button class="uk-button uk-button-default uk-modal-close" type="button">
-                                                Cancel
-                                            </button>
-                                            <button class="uk-button uk-button-primary" type="submit">Delete</button>
-                                        </div>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                            <h2>This task will be deleted</h2>
+                            <form th:action="@{/delete}" method="post">
+                                <input type="hidden" name="id" th:value="${task.id}"/>
+                                <div class="uk-margin">
+                                    <div class="uk-text-center">
+                                        <button class="uk-button uk-button-default uk-modal-close" type="button">
+                                            Cancel
+                                        </button>
+                                        <button class="uk-button uk-button-primary" type="submit">Delete</button>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
-
+                    </div>
                 </li>
             </ul>
         </td>

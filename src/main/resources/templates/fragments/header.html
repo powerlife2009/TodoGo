@@ -51,7 +51,7 @@
                 <ul class="uk-navbar-nav uk-visible@s">
                     <div sec:authorize="hasRole('USER')">
                         <form th:action="@{/search}" th:method="post" class="uk-search uk-search-default">
-                            <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+                            <span class="uk-search-icon-flip" uk-search-icon></span>
                             <label>
                                 <input class="uk-search-input" th:name="searchText" type="search" placeholder="Search...">
                             </label>
@@ -86,7 +86,7 @@
                 <ul class="uk-nav uk-nav-default">
                     <li sec:authorize="hasRole('USER')">
                         <form th:action="@{/search}" th:method="post" class="uk-search uk-search-default">
-                            <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+                            <span class="uk-search-icon-flip" uk-search-icon></span>
                             <label>
                                 <input class="uk-search-input" th:name="searchText" type="search"
                                        placeholder="Search...">

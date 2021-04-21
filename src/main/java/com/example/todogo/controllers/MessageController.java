@@ -33,7 +33,6 @@ public class MessageController {
     public String mailbox(@AuthenticationPrincipal User user,
                           Model model) {
         List<Message> messageInboxList = messageService.findAllByUserAndMessageWay(user, MessageWay.INBOX);
-        Collections.reverse(messageInboxList);
         model.addAttribute("messages", messageInboxList);
         return "user/mail_page";
     }

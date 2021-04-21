@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 @Transactional(readOnly = true)
 public interface UserRepository extends JpaRepository<User, Long> {
+
     User findByUsername(String username);
 
     List<User> findByRole(Role role);
