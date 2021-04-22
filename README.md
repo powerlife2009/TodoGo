@@ -9,6 +9,6 @@ It's built on a stack:<br>
    - Thymeleaf 5,<br>
    - PostgreSQL,<br>
    - and UIKit 3 for FrontEnd.
-
-[go to TodoGo](https://todogo-project.herokuapp.com/) 
-![alt text](https://user-images.githubusercontent.com/73959785/115570805-16d23a80-a2c7-11eb-8deb-0236354ea455.png)
+____
+[go to todogo-project.herokuapp.com](https://todogo-project.herokuapp.com/) 
+![alt text](https://user-images.githubusercontent.com/73959785/115697539-50a94c80-a36c-11eb-82eb-ec5c78e15a5c.png)
