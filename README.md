@@ -27,7 +27,7 @@ The current version of the TodoGo 0.9 project offers the following features:<br>
    - administration<br>
 
 ! update on 22.04.2021:<br>
-   - __TodoGo now displays beautifully on mobile devices__
+   - __Now TodoGo displays beautifully on mobile devices__
 
 
 # Screenshots
@@ -47,6 +47,9 @@ ____
 
 # Conclusion
 
+This project is deployed on heroku.com
+# [Go to todogo-project.herokuapp.com](https://todogo-project.herokuapp.com/)
+Development continues<br>
+Feedback is welcome!
 
-[go to todogo-project.herokuapp.com](https://todogo-project.herokuapp.com/) 
 
