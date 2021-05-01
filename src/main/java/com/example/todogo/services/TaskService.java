@@ -21,6 +21,9 @@ public class TaskService {
 
 
     public List<Task> getAllTaskSortedBy(User user, String sortBy) {
+        if(sortBy.equals("priority")) {
+            return taskRepository.findAllByUser(user, Sort.by(sortBy).descending());
+        }
         return taskRepository.findAllByUser(user, Sort.by(sortBy));
     }
 
