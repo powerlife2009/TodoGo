@@ -14,7 +14,6 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "usver")
 public class User implements UserDetails {
 
     @Id
@@ -38,15 +37,14 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Task> tasks;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Message> feedbacks;
 
     public User() {
     }
-
 
     public User(String username, String password, String email) {
         this.username = username;
@@ -61,7 +59,6 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public Long getId() {
         return id;

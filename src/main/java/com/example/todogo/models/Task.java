@@ -57,7 +57,6 @@ public class Task {
     }
 
     public Date getDate() {
-
         return date;
     }
 

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -29,16 +30,16 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if (user != null) {
-            return user;
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            return user.get();
         }
         throw new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, username));
     }
 
     public boolean saveUser(User user) {
-        User userFromDb = userRepository.findByUsername(user.getUsername());
-        if (userFromDb != null) {
+        Optional<User> userFromDb = userRepository.findByUsername(user.getUsername());
+        if (userFromDb.isPresent()) {
             return false;
         }
         user.setRole(Role.ROLE_USER);
@@ -47,7 +48,7 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public List<User> findAllUsers(Role role) {
+    public List<User> getAllByRole(Role role) {
         return userRepository.findByRole(role);
     }
 
@@ -55,7 +56,7 @@ public class UserService implements UserDetailsService {
         userRepository.delete(user);
     }
 
-    public User findByUserId(Long id) {
+    public User getUserById(Long id) {
         return userRepository.getOne(id);
     }
 }

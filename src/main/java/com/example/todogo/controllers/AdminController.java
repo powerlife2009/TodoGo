@@ -37,7 +37,7 @@ public class AdminController {
 
     @GetMapping("/users")
     public String usersList(Model model) {
-        model.addAttribute("users", userService.findAllUsers(Role.ROLE_USER));
+        model.addAttribute("users", userService.getAllByRole(Role.ROLE_USER));
         return "admin/users_list";
     }
 
@@ -45,14 +45,14 @@ public class AdminController {
     @GetMapping("/users/{id}")
     public String showUser(@PathVariable("id") Long id,
                            Model model) {
-        model.addAttribute("user", userService.findByUserId(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "admin/user_edit";
     }
 
     @PostMapping("/users/remove")
     public String removeUser(@RequestParam Long id,
                              RedirectAttributes redirectAttributes) {
-        User user = userService.findByUserId(id);
+        User user = userService.getUserById(id);
         userService.deleteUser(user);
         redirectAttributes.addFlashAttribute("message", "successfully");
         return "redirect:/admin/users";
@@ -90,7 +90,7 @@ public class AdminController {
     public String answerToMessage(@ModelAttribute Message answer,
                                   @RequestParam Long idOwnerFeedback,
                                   RedirectAttributes redirectAttributes) {
-        User user = userService.findByUserId(idOwnerFeedback);
+        User user = userService.getUserById(idOwnerFeedback);
         answer.setUser(user);
         answer.setMessageWay(MessageWay.INBOX);
         messageService.saveMessage(answer);

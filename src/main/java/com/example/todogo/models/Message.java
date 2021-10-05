@@ -88,10 +88,6 @@ public class Message {
     }
 
     public String shortText() {
-        if (text.length() <= 20) {
-            return text;
-        } else {
-            return text.substring(0, 20) + "...";
-        }
+        return text.length() <= 20 ? text : text.substring(0, 20) + "...";
     }
 }
