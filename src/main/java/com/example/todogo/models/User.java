@@ -56,10 +56,6 @@ public class User implements UserDetails {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Long getId() {
         return id;
     }
@@ -96,22 +92,6 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public Set<Message> getFeedbacks() {
-        return feedbacks;
-    }
-
-    public void setFeedbacks(Set<Message> feedbacks) {
-        this.feedbacks = feedbacks;
-    }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -131,11 +111,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
