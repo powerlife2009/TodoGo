@@ -5,17 +5,10 @@
     <title>Title</title>
     <div th:fragment="header-css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- UIkit CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/css/uikit.min.css" />
-
-        <!-- UIkit JS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/css/uikit.min.css"/>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit-icons.min.js"></script>
 
-        <!--<link rel="stylesheet" th:href="@{/css/uikit.min.css}">
-        <script th:src="@{/js/uikit.min.js}"></script>
-        <script th:src="@{/js/uikit-icons.min.js}"></script>-->
         <style>
             html, body {
                 height: 100%;
@@ -61,7 +54,8 @@
                         <form th:action="@{/search}" th:method="post" class="uk-search uk-search-default">
                             <span class="uk-search-icon-flip" uk-search-icon></span>
                             <label>
-                                <input class="uk-search-input" th:name="searchText" type="search" placeholder="Search...">
+                                <input class="uk-search-input" th:name="searchText" type="search"
+                                       placeholder="Search...">
                             </label>
                         </form>
                     </div>
