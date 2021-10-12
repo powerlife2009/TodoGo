@@ -1,9 +1,16 @@
 package com.example.todogo.models;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public class Message {
 
     @Id
@@ -24,9 +31,6 @@ public class Message {
     @Enumerated(EnumType.STRING)
     private MessageWay messageWay;
 
-    public Message() {
-    }
-
     public Message(String subject, String text, MessageWay messageWay) {
         this.subject = subject;
         this.text = text;
@@ -37,54 +41,6 @@ public class Message {
         this.subject = subject;
         this.text = text;
         this.user = user;
-    }
-
-    public Boolean getMarkAsRead() {
-        return markAsRead;
-    }
-
-    public void setMarkAsRead(Boolean markAsRead) {
-        this.markAsRead = markAsRead;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public MessageWay getMessageWay() {
-        return messageWay;
-    }
-
-    public void setMessageWay(MessageWay messageWay) {
-        this.messageWay = messageWay;
     }
 
     public String shortText() {
