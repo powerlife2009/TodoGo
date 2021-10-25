@@ -3,7 +3,7 @@ package com.example.todogo.controllers;
 import com.example.todogo.models.Task;
 import com.example.todogo.models.User;
 import com.example.todogo.services.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,15 +13,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class TaskListController {
 
-
     private final TaskService taskService;
-
-    @Autowired
-    public TaskListController(TaskService taskService) {
-        this.taskService = taskService;
-    }
 
 
     @PostMapping("/sort")

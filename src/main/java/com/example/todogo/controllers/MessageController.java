@@ -4,7 +4,7 @@ import com.example.todogo.models.Message;
 import com.example.todogo.models.MessageWay;
 import com.example.todogo.models.User;
 import com.example.todogo.services.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,18 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class MessageController {
 
     private final MessageService messageService;
 
-    @Autowired
-    public MessageController(MessageService messageService) {
-        this.messageService = messageService;
-    }
 
     @GetMapping("/mail")
     public String mailbox(@AuthenticationPrincipal User user,

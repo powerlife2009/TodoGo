@@ -6,10 +6,15 @@ import com.example.todogo.models.Role;
 import com.example.todogo.models.User;
 import com.example.todogo.services.MessageService;
 import com.example.todogo.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Collections;
@@ -17,17 +22,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
+@AllArgsConstructor
 public class AdminController {
 
     private final UserService userService;
     private final MessageService messageService;
-
-    @Autowired
-    public AdminController(UserService userService, MessageService messageService) {
-        this.userService = userService;
-        this.messageService = messageService;
-    }
-
 
     @GetMapping
     public String adminPage() {
@@ -79,7 +78,7 @@ public class AdminController {
 
     @PostMapping("/feedbacks/remove")
     public String removeFeedback(@RequestParam Long id,
-                                RedirectAttributes redirectAttributes) {
+                                 RedirectAttributes redirectAttributes) {
         Message feedback = messageService.getMessageById(id);
         messageService.deleteMessage(feedback);
         redirectAttributes.addFlashAttribute("message", "successfully");

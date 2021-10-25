@@ -2,7 +2,7 @@ package com.example.todogo.controllers;
 
 import com.example.todogo.models.User;
 import com.example.todogo.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,14 +13,11 @@ import javax.validation.Valid;
 
 
 @Controller
+@AllArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/registration")
     public String registerForm(Model model) {

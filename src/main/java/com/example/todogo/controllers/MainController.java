@@ -5,7 +5,7 @@ import com.example.todogo.models.Role;
 import com.example.todogo.models.Task;
 import com.example.todogo.models.User;
 import com.example.todogo.services.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
+@AllArgsConstructor
 public class MainController {
 
     private final TaskService taskService;
-
-    @Autowired
-    public MainController(TaskService taskService) {
-        this.taskService = taskService;
-    }
 
     @GetMapping
     public String startPage(@AuthenticationPrincipal User user) {
