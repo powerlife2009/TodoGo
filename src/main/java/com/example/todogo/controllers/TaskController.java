@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
+import static com.example.todogo.constants.TodoGoConstants.*;
+
 @Controller
 @AllArgsConstructor
 public class TaskController {
@@ -27,14 +29,14 @@ public class TaskController {
                            BindingResult errors,
                            RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
-            redirectAttributes.addFlashAttribute("message", "has errors");
+            redirectAttributes.addFlashAttribute(MESSAGE, HAS_ERRORS);
         } else {
             newTask.setUser(user);
             taskService.saveTask(newTask);
-            redirectAttributes.addFlashAttribute("message", "successfully");
+            redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
         }
-        redirectAttributes.addFlashAttribute("tasks", taskService.sortTasksAsQueue(user));
-        return "redirect:/main";
+        redirectAttributes.addFlashAttribute(TASKS, taskService.sortTasksAsQueue(user));
+        return REDIRECT_TO_MAIN_PAGE;
     }
 
     @PostMapping("/delete")
@@ -42,8 +44,8 @@ public class TaskController {
                              @RequestParam Long id,
                              RedirectAttributes redirectAttributes) {
         taskService.deleteTask(id);
-        redirectAttributes.addFlashAttribute("message", "successfully");
-        redirectAttributes.addFlashAttribute("tasks", taskService.sortTasksAsQueue(user));
-        return "redirect:/main";
+        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+        redirectAttributes.addFlashAttribute(TASKS, taskService.sortTasksAsQueue(user));
+        return REDIRECT_TO_MAIN_PAGE;
     }
 }

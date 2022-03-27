@@ -20,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Collections;
 import java.util.List;
 
+import static com.example.todogo.constants.TodoGoConstants.*;
+
 @Controller
 @RequestMapping("/admin")
 @AllArgsConstructor
@@ -30,22 +32,21 @@ public class AdminController {
 
     @GetMapping
     public String adminPage() {
-        return "admin/admin_page";
+        return ADMIN_PAGE;
     }
 
 
     @GetMapping("/users")
     public String usersList(Model model) {
-        model.addAttribute("users", userService.getAllByRole(Role.ROLE_USER));
-        return "admin/users_list";
+        model.addAttribute(USERS, userService.getAllByRole(Role.ROLE_USER));
+        return ADMIN_USERS_LIST;
     }
-
 
     @GetMapping("/users/{id}")
     public String showUser(@PathVariable("id") Long id,
                            Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        return "admin/user_edit";
+        model.addAttribute(USER, userService.getUserById(id));
+        return ADMIN_USER_EDIT;
     }
 
     @PostMapping("/users/remove")
@@ -53,16 +54,16 @@ public class AdminController {
                              RedirectAttributes redirectAttributes) {
         User user = userService.getUserById(id);
         userService.deleteUser(user);
-        redirectAttributes.addFlashAttribute("message", "successfully");
-        return "redirect:/admin/users";
+        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+        return REDIRECT_TO_ADMIN_USERS;
     }
 
     @GetMapping("/feedbacks")
     public String feedbackList(Model model) {
         List<Message> messageList = messageService.allMessagesByMessageWay(MessageWay.OUTBOX);
         Collections.reverse(messageList);
-        model.addAttribute("feedbacks", messageList);
-        return "admin/feedback_list";
+        model.addAttribute(FEEDBACKS, messageList);
+        return ADMIN_FEEDBACK_LIST;
     }
 
     @GetMapping("/feedbacks/{id}")
@@ -71,9 +72,9 @@ public class AdminController {
         Message feedback = messageService.getMessageById(id);
         feedback.setMarkAsRead(true);
         messageService.saveMessage(feedback);
-        model.addAttribute("feedback", feedback);
-        model.addAttribute("answer", new Message());
-        return "admin/read_feedback";
+        model.addAttribute(FEEDBACK, feedback);
+        model.addAttribute(ANSWER, new Message());
+        return ADMIN_READ_FEEDBACK;
     }
 
     @PostMapping("/feedbacks/remove")
@@ -81,8 +82,8 @@ public class AdminController {
                                  RedirectAttributes redirectAttributes) {
         Message feedback = messageService.getMessageById(id);
         messageService.deleteMessage(feedback);
-        redirectAttributes.addFlashAttribute("message", "successfully");
-        return "redirect:/admin/feedbacks";
+        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+        return REDIRECT_TO_ADMIN_FEEDBACKS;
     }
 
     @PostMapping("/feedback/answer")
@@ -93,7 +94,7 @@ public class AdminController {
         answer.setUser(user);
         answer.setMessageWay(MessageWay.INBOX);
         messageService.saveMessage(answer);
-        redirectAttributes.addFlashAttribute("message", "successfully");
-        return "redirect:/admin/feedbacks";
+        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+        return REDIRECT_TO_ADMIN_FEEDBACKS;
     }
 }

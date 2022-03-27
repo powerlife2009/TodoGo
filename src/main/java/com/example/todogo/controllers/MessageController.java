@@ -1,5 +1,6 @@
 package com.example.todogo.controllers;
 
+import com.example.todogo.constants.TodoGoConstants;
 import com.example.todogo.models.Message;
 import com.example.todogo.models.MessageWay;
 import com.example.todogo.models.User;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.util.List;
 
+import static com.example.todogo.constants.TodoGoConstants.*;
+
 @Controller
 @AllArgsConstructor
 public class MessageController {
@@ -29,14 +32,14 @@ public class MessageController {
     public String mailbox(@AuthenticationPrincipal User user,
                           Model model) {
         List<Message> messageInboxList = messageService.findAllByUserAndMessageWay(user, MessageWay.INBOX);
-        model.addAttribute("messages", messageInboxList);
-        return "user/mail_page";
+        model.addAttribute(MESSAGES, messageInboxList);
+        return USER_MAIL_PAGE;
     }
 
     @GetMapping("/feedback")
     public String feedback(Model model) {
-        model.addAttribute("message", new Message());
-        return "user/feedback_page";
+        model.addAttribute(MESSAGE, new Message());
+        return USER_FEEDBACK_PAGE;
     }
 
 
@@ -47,13 +50,13 @@ public class MessageController {
                                RedirectAttributes redirectAttributes) {
 
         if (errors.hasErrors()) {
-            return "user/feedback_page";
+            return USER_FEEDBACK_PAGE;
         }
         message.setUser(user);
         message.setMessageWay(MessageWay.OUTBOX);
         messageService.saveMessage(message);
-        redirectAttributes.addFlashAttribute("message", "successfully");
-        return "redirect:/main";
+        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+        return REDIRECT_TO_MAIN_PAGE;
     }
 
     @PostMapping("/mail/markAsRead")
@@ -61,7 +64,7 @@ public class MessageController {
         Message message = messageService.getMessageById(id);
         message.setMarkAsRead(true);
         messageService.saveMessage(message);
-        return "redirect:/mail";
+        return REDIRECT_TO_MAIL;
     }
 
     @PostMapping("/mail/remove")
@@ -69,7 +72,7 @@ public class MessageController {
                                 RedirectAttributes redirectAttributes) {
         Message message = messageService.getMessageById(id);
         messageService.deleteMessage(message);
-        redirectAttributes.addFlashAttribute("message", "successfully");
-        return "redirect:/mail";
+        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+        return REDIRECT_TO_MAIL;
     }
 }

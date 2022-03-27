@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
+import static com.example.todogo.constants.TodoGoConstants.*;
 
 @Controller
 @AllArgsConstructor
@@ -21,20 +22,20 @@ public class UserController {
 
     @GetMapping("/registration")
     public String registerForm(Model model) {
-        model.addAttribute("user", new User());
-        return "logIn/registration";
+        model.addAttribute(USER, new User());
+        return LOGIN_REGISTRATION;
     }
 
     @PostMapping("/registration")
     public String addUser(@Valid User user, BindingResult errors, Model model) {
         if (errors.hasErrors()) {
-            return "logIn/registration";
+            return LOGIN_REGISTRATION;
         } else {
             if (!userService.saveUser(user)) {
                 model.addAttribute("messageExist", "user with this login is already registered");
-                return "logIn/registration";
+                return LOGIN_REGISTRATION;
             }
         }
-        return "redirect:/login";
+        return REDIRECT_TO_LOGIN;
     }
 }

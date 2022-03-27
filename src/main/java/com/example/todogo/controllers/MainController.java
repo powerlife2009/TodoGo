@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static com.example.todogo.constants.TodoGoConstants.*;
 
 @Controller
 @RequestMapping("/")
@@ -22,21 +23,22 @@ public class MainController {
 
     @GetMapping
     public String startPage(@AuthenticationPrincipal User user) {
-        if (user == null) {
-            return "guest_page";
+        if (user != null) {
+            if (user.getRole().equals(Role.ROLE_ADMIN)) {
+                return REDIRECT_TO_ADMIN;
+            }
+            return REDIRECT_TO_MAIN_PAGE;
         }
-        if (user.getRole() == Role.ROLE_ADMIN) {
-            return "redirect:/admin";
-        }
-        return "redirect:/main";
+
+        return GUEST_PAGE;
     }
 
     @GetMapping("/main")
     public String main(@AuthenticationPrincipal User user, Model model) {
-        model.addAttribute("newTask", new Task());
-        model.addAttribute("groups", Groups.values());
-        model.addAttribute("nearest", taskService.getTasksSortedByDateAndNearestFive(user));
-        model.addAttribute("defaultList", taskService.sortTasksAsQueue(user));
-        return "user/main_page";
+        model.addAttribute(NEW_TASK, new Task());
+        model.addAttribute(GROUPS, Groups.values());
+        model.addAttribute(NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
+        model.addAttribute(DEFAULT_LIST, taskService.sortTasksAsQueue(user));
+        return USER_MAIN_PAGE;
     }
 }
