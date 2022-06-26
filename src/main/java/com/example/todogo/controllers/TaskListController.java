@@ -1,11 +1,14 @@
 package com.example.todogo.controllers;
 
+import com.example.todogo.models.Groups;
 import com.example.todogo.models.Task;
 import com.example.todogo.models.User;
 import com.example.todogo.services.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,50 +24,62 @@ public class TaskListController {
     private final TaskService taskService;
 
 
-    @PostMapping("/sort")
-    public String sortBy(@AuthenticationPrincipal User user,
-                         @RequestParam String sortBy,
-                         RedirectAttributes redirectAttributes) {
+    @GetMapping("/sort")
+    public String sortBy(@AuthenticationPrincipal User user, @RequestParam String sortBy, Model model) {
         List<Task> sortedTaskList = taskService.getAllTaskSortedBy(user, sortBy);
-        redirectAttributes.addFlashAttribute(TASKS, sortedTaskList);
-        return REDIRECT_TO_MAIN_PAGE;
+
+        model.addAttribute(NEW_TASK, new Task());
+        model.addAttribute(GROUPS, Groups.values());
+        model.addAttribute(NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
+        model.addAttribute(TODO_LIST, sortedTaskList);
+
+        return USER_MAIN_PAGE;
     }
 
 
     @PostMapping("/search")
-    public String search(@AuthenticationPrincipal User user,
-                         @RequestParam String searchText,
-                         RedirectAttributes redirectAttributes) {
+    public String search(@AuthenticationPrincipal User user, @RequestParam String searchText, Model model) {
         List<Task> findTaskList = taskService.searchTaskByText(user, searchText);
+
         if (findTaskList.isEmpty()) {
-            redirectAttributes.addFlashAttribute(MESSAGE, NOT_FOUND);
+            model.addAttribute(MESSAGE, NOT_FOUND);
         }
-        redirectAttributes.addFlashAttribute(TASKS, findTaskList);
-        return REDIRECT_TO_MAIN_PAGE;
+
+        model.addAttribute(TODO_LIST, findTaskList);
+
+        return USER_MAIN_PAGE;
     }
 
 
-    @PostMapping("/filterByType")
-    public String filterByType(@AuthenticationPrincipal User user,
-                               @RequestParam String type,
-                               RedirectAttributes redirectAttributes) {
+    @GetMapping("/filterByType")
+    public String filterByType(@AuthenticationPrincipal User user, @RequestParam String type, Model model) {
         List<Task> filterTaskList = taskService.filterAllTasksByType(user, type);
+
         if (filterTaskList.isEmpty()) {
-            redirectAttributes.addFlashAttribute(MESSAGE, NOT_FOUND);
+            model.addAttribute(MESSAGE, NOT_FOUND);
         }
-        redirectAttributes.addFlashAttribute(TASKS, filterTaskList);
-        return REDIRECT_TO_MAIN_PAGE;
+
+        model.addAttribute(NEW_TASK, new Task());
+        model.addAttribute(GROUPS, Groups.values());
+        model.addAttribute(NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
+        model.addAttribute(TODO_LIST, filterTaskList);
+
+        return USER_MAIN_PAGE;
     }
 
-    @PostMapping("/filterByPriority")
-    public String filterByPriority(@AuthenticationPrincipal User user,
-                                   @RequestParam Integer priority,
-                                   RedirectAttributes redirectAttributes) {
+    @GetMapping("/filterByPriority")
+    public String filterByPriority(@AuthenticationPrincipal User user, @RequestParam Integer priority, Model model) {
         List<Task> filterTaskList = taskService.filterAllTasksByPriority(user, priority);
+
         if (filterTaskList.isEmpty()) {
-            redirectAttributes.addFlashAttribute(MESSAGE, NOT_FOUND);
+            model.addAttribute(MESSAGE, NOT_FOUND);
         }
-        redirectAttributes.addFlashAttribute(TASKS, filterTaskList);
-        return REDIRECT_TO_MAIN_PAGE;
+
+        model.addAttribute(NEW_TASK, new Task());
+        model.addAttribute(GROUPS, Groups.values());
+        model.addAttribute(NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
+        model.addAttribute(TODO_LIST, filterTaskList);
+
+        return USER_MAIN_PAGE;
     }
 }

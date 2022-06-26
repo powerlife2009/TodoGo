@@ -42,6 +42,7 @@ public class UserService implements UserDetailsService {
         if (userFromDb.isPresent()) {
             return false;
         }
+
         user.setRole(Role.ROLE_USER);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);

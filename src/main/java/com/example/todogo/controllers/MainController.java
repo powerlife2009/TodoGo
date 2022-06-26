@@ -25,6 +25,7 @@ public class MainController {
     public String startPage(@AuthenticationPrincipal User user) {
         if (user != null) {
             if (user.getRole().equals(Role.ROLE_ADMIN)) {
+
                 return REDIRECT_TO_ADMIN;
             }
             return REDIRECT_TO_MAIN_PAGE;
@@ -38,7 +39,8 @@ public class MainController {
         model.addAttribute(NEW_TASK, new Task());
         model.addAttribute(GROUPS, Groups.values());
         model.addAttribute(NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
-        model.addAttribute(DEFAULT_LIST, taskService.sortTasksAsQueue(user));
+        model.addAttribute(TODO_LIST, taskService.sortTasksAsQueue(user));
+
         return USER_MAIN_PAGE;
     }
 }

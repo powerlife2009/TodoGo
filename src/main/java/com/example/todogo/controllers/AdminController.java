@@ -39,6 +39,7 @@ public class AdminController {
     @GetMapping("/users")
     public String usersList(Model model) {
         model.addAttribute(USERS, userService.getAllByRole(Role.ROLE_USER));
+
         return ADMIN_USERS_LIST;
     }
 
@@ -46,6 +47,7 @@ public class AdminController {
     public String showUser(@PathVariable("id") Long id,
                            Model model) {
         model.addAttribute(USER, userService.getUserById(id));
+
         return ADMIN_USER_EDIT;
     }
 
@@ -55,6 +57,7 @@ public class AdminController {
         User user = userService.getUserById(id);
         userService.deleteUser(user);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+
         return REDIRECT_TO_ADMIN_USERS;
     }
 
@@ -63,6 +66,7 @@ public class AdminController {
         List<Message> messageList = messageService.allMessagesByMessageWay(MessageWay.OUTBOX);
         Collections.reverse(messageList);
         model.addAttribute(FEEDBACKS, messageList);
+
         return ADMIN_FEEDBACK_LIST;
     }
 
@@ -74,6 +78,7 @@ public class AdminController {
         messageService.saveMessage(feedback);
         model.addAttribute(FEEDBACK, feedback);
         model.addAttribute(ANSWER, new Message());
+
         return ADMIN_READ_FEEDBACK;
     }
 
@@ -83,6 +88,7 @@ public class AdminController {
         Message feedback = messageService.getMessageById(id);
         messageService.deleteMessage(feedback);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+
         return REDIRECT_TO_ADMIN_FEEDBACKS;
     }
 
@@ -95,6 +101,7 @@ public class AdminController {
         answer.setMessageWay(MessageWay.INBOX);
         messageService.saveMessage(answer);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+
         return REDIRECT_TO_ADMIN_FEEDBACKS;
     }
 }

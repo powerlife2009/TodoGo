@@ -29,8 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf()
+        http.csrf()
                 .and()
                     .authorizeRequests()
                     .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**").permitAll()
@@ -58,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(userService);
+
         return provider;
     }
 }

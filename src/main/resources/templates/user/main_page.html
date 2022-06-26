@@ -25,57 +25,101 @@
                     <p>SUCCESSFULLY</p>
                 </div>
             </div>
-            <div th:case="'not found'">
-                <div class="uk-alert-warning" uk-alert>
-                    <a class="uk-alert-close" uk-close></a>
-                    <p>NOT FOUND</p>
-                </div>
-            </div>
         </div>
     </div>
 
     <div class="uk-container">
 
         <div class="uk-overflow-auto">
-            <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">
+            <th:block th:if="${todoList.isEmpty()}">
+                <h1 style="text-align: center">THERE'S NOTHING HERE</h1>
+                <img class="uk-align-center"
+                     src="img/empty-list.png" width="300" height="300" alt="">
+            </th:block>
+            <th:block th:unless="${todoList.isEmpty()}">
+                <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">
 
-                <thead>
-                <tr>
+                    <thead>
+                    <tr>
 
-                    <th class="uk-width-small">Action</th>
-                    <th class="uk-table-expand">Task</th>
-                    <th class="uk-width-small">
-                        <form th:action="@{/sort}" th:method="POST">
-                            <input type="hidden" name="sortBy" th:value="${'date'}"/>
-                            <button class="uk-button uk-button-link" type="submit">DT</button>
-                        </form>
-                    </th>
-                    <th class="uk-table-shrink">
-                        <form th:action="@{/sort}" th:method="POST">
-                            <input type="hidden" name="sortBy" th:value="${'priority'}"/>
-                            <button class="uk-button uk-button-link" type="submit">PR</button>
-                        </form>
-                    </th>
-                    <th class="uk-table-shrink">
-                        <form th:action="@{/sort}" th:method="POST">
-                            <input type="hidden" name="sortBy" th:value="${'type'}"/>
-                            <button class="uk-button uk-button-link" type="submit">GR</button>
-                        </form>
-                    </th>
-                </tr>
-                </thead>
+                        <th class="uk-width-small">Action</th>
+                        <th class="uk-table-expand">Task</th>
+                        <th class="uk-width-small">
+                            <form th:action="@{/sort}" th:method="POST">
+                                <input type="hidden" name="sortBy" th:value="${'date'}"/>
+                                <button class="uk-button uk-button-link" type="submit">DT</button>
+                            </form>
+                        </th>
+                        <th class="uk-table-shrink">
+                            <form th:action="@{/sort}" th:method="POST">
+                                <input type="hidden" name="sortBy" th:value="${'priority'}"/>
+                                <button class="uk-button uk-button-link" type="submit">PR</button>
+                            </form>
+                        </th>
+                        <th class="uk-table-shrink">
+                            <form th:action="@{/sort}" th:method="POST">
+                                <input type="hidden" name="sortBy" th:value="${'type'}"/>
+                                <button class="uk-button uk-button-link" type="submit">GR</button>
+                            </form>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="task : ${todoList}">
+                        <td>
+                            <ul class="uk-iconnav">
+                                <li>
+                                    <div th:replace="fragments/edit_todo :: editTodo(${task}, ${newTask})"></div>
+                                </li>
+                                <li>
+                                    <button class="uk-button uk-button-link" type="button"
+                                            uk-toggle th:target="${'#modal-delete'+task}" uk-tooltip="delete">
+                                        <span uk-icon="trash"></span>
+                                    </button>
 
-                <tbody>
+                                    <div th:id="${'modal-delete'+task}" class="uk-flex-top" uk-modal>
+                                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                                            <h2>This task will be deleted</h2>
+                                            <form th:action="@{/delete}" method="POST">
+                                                <input type="hidden" name="id" th:value="${task.id}"/>
+                                                <div class="uk-margin">
+                                                    <div class="uk-text-center">
+                                                        <button class="uk-button uk-button-default uk-modal-close"
+                                                                type="button">Cancel
+                                                        </button>
+                                                        <button class="uk-button uk-button-primary" type="submit">Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </td>
 
-                <div th:if="${tasks==null}">
-                    <div th:replace="fragments/list_todo :: list(${defaultList}, ${newTask})"></div>
-                </div>
-                <div th:unless="${tasks==null}">
-                    <div th:replace="fragments/list_todo :: list(${tasks}, ${newTask})"></div>
-                </div>
+                        <td th:text="${task.text}"></td>
+                        <td th:text="${#dates.format(task.date, 'dd.MMM.yyyy')}"></td>
 
-                </tbody>
-            </table>
+                        <td>
+                            <th:block th:switch="${task.priority}">
+                                <th:block th:case="1">
+                                    <span class="uk-label uk-label-success">o</span>
+                                </th:block>
+                                <th:block th:case="2">
+                                    <span class="uk-label uk-label-warning">o</span>
+                                </th:block>
+                                <th:block th:case="3">
+                                    <span class="uk-label uk-label-danger">o</span>
+                                </th:block>
+                            </th:block>
+                        </td>
+
+                        <td th:text="${task.type}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </th:block>
         </div>
     </div>
 </div>

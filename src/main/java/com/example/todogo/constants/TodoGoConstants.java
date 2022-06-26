@@ -1,7 +1,5 @@
 package com.example.todogo.constants;
 
-import com.example.todogo.models.Groups;
-
 public class TodoGoConstants {
 
     public static final String GUEST_PAGE = "guest_page";
@@ -18,7 +16,6 @@ public class TodoGoConstants {
     public static final String HAS_ERRORS = "has errors";
     public static final String SUCCESSFULLY = "successfully";
     public static final String NOT_FOUND = "not found";
-    public static final String TASKS = "tasks";
     public static final String USER = "user";
     public static final String USERS = "users";
     public static final String ANSWER = "answer";
@@ -31,9 +28,8 @@ public class TodoGoConstants {
     public static final String NEW_TASK = "newTask";
     public static final String GROUPS = "groups";
     public static final String NEAREST = "nearest";
-    public static final String DEFAULT_LIST = "defaultList";
+    public static final String TODO_LIST = "todoList";
     public static final String REDIRECT_TO_LOGIN = "redirect:/login";
     public static final String LOGIN_REGISTRATION = "logIn/registration";
     public static final String REDIRECT_TO_MAIL = "redirect:/mail";
-
 }

@@ -23,6 +23,7 @@ public class UserController {
     @GetMapping("/registration")
     public String registerForm(Model model) {
         model.addAttribute(USER, new User());
+
         return LOGIN_REGISTRATION;
     }
 
@@ -33,9 +34,11 @@ public class UserController {
         } else {
             if (!userService.saveUser(user)) {
                 model.addAttribute("messageExist", "user with this login is already registered");
+
                 return LOGIN_REGISTRATION;
             }
         }
+
         return REDIRECT_TO_LOGIN;
     }
 }

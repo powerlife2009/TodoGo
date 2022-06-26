@@ -1,6 +1,5 @@
 package com.example.todogo.controllers;
 
-import com.example.todogo.constants.TodoGoConstants;
 import com.example.todogo.models.Message;
 import com.example.todogo.models.MessageWay;
 import com.example.todogo.models.User;
@@ -33,12 +32,14 @@ public class MessageController {
                           Model model) {
         List<Message> messageInboxList = messageService.findAllByUserAndMessageWay(user, MessageWay.INBOX);
         model.addAttribute(MESSAGES, messageInboxList);
+
         return USER_MAIL_PAGE;
     }
 
     @GetMapping("/feedback")
     public String feedback(Model model) {
         model.addAttribute(MESSAGE, new Message());
+
         return USER_FEEDBACK_PAGE;
     }
 
@@ -48,14 +49,15 @@ public class MessageController {
                                @Valid @ModelAttribute Message message,
                                BindingResult errors,
                                RedirectAttributes redirectAttributes) {
-
         if (errors.hasErrors()) {
             return USER_FEEDBACK_PAGE;
         }
+
         message.setUser(user);
         message.setMessageWay(MessageWay.OUTBOX);
         messageService.saveMessage(message);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+
         return REDIRECT_TO_MAIN_PAGE;
     }
 
@@ -64,6 +66,7 @@ public class MessageController {
         Message message = messageService.getMessageById(id);
         message.setMarkAsRead(true);
         messageService.saveMessage(message);
+
         return REDIRECT_TO_MAIL;
     }
 
@@ -73,6 +76,7 @@ public class MessageController {
         Message message = messageService.getMessageById(id);
         messageService.deleteMessage(message);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+
         return REDIRECT_TO_MAIL;
     }
 }

@@ -35,7 +35,9 @@ public class TaskController {
             taskService.saveTask(newTask);
             redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
         }
-        redirectAttributes.addFlashAttribute(TASKS, taskService.sortTasksAsQueue(user));
+
+        redirectAttributes.addFlashAttribute(TODO_LIST, taskService.sortTasksAsQueue(user));
+
         return REDIRECT_TO_MAIN_PAGE;
     }
 
@@ -45,7 +47,8 @@ public class TaskController {
                              RedirectAttributes redirectAttributes) {
         taskService.deleteTask(id);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
-        redirectAttributes.addFlashAttribute(TASKS, taskService.sortTasksAsQueue(user));
+        redirectAttributes.addFlashAttribute(TODO_LIST, taskService.sortTasksAsQueue(user));
+
         return REDIRECT_TO_MAIN_PAGE;
     }
 }
