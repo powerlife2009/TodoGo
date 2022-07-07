@@ -13,6 +13,5 @@ import java.util.List;
 public interface MessageRepos extends JpaRepository<Message, Long> {
 
     List<Message> findAllByMessageWay(MessageWay messageWay);
-
     List<Message> findAllByUserAndMessageWay(User user, MessageWay messageWay, Sort sort);
 }

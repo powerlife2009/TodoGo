@@ -1,6 +1,5 @@
 package com.example.todogo.models;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +23,6 @@ import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
-
 
 @Entity
 @Table(name = "user_table")
@@ -88,7 +86,6 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
-        return Collections.singletonList(authority);
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
     }
 }

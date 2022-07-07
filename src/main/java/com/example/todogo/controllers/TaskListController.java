@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -22,7 +21,6 @@ import static com.example.todogo.constants.TodoGoConstants.*;
 public class TaskListController {
 
     private final TaskService taskService;
-
 
     @GetMapping("/sort")
     public String sortBy(@AuthenticationPrincipal User user, @RequestParam String sortBy, Model model) {
@@ -36,7 +34,6 @@ public class TaskListController {
         return USER_MAIN_PAGE;
     }
 
-
     @PostMapping("/search")
     public String search(@AuthenticationPrincipal User user, @RequestParam String searchText, Model model) {
         List<Task> findTaskList = taskService.searchTaskByText(user, searchText);
@@ -49,7 +46,6 @@ public class TaskListController {
 
         return USER_MAIN_PAGE;
     }
-
 
     @GetMapping("/filterByType")
     public String filterByType(@AuthenticationPrincipal User user, @RequestParam String type, Model model) {

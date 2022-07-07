@@ -88,7 +88,7 @@
                             <tbody>
                             <tr th:each="near : ${nearest}">
                                 <td th:text="${near.text}"></td>
-                                <td th:text="${#dates.format(near.date, 'dd.MMM.yyyy')}"></td>
+                                <td th:text="${#dates.format(near.date, 'dd.MM.yyyy')}"></td>
                             </tr>
                             </tbody>
                         </table>

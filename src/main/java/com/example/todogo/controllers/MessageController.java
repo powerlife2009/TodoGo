@@ -26,7 +26,6 @@ public class MessageController {
 
     private final MessageService messageService;
 
-
     @GetMapping("/mail")
     public String mailbox(@AuthenticationPrincipal User user,
                           Model model) {
@@ -42,7 +41,6 @@ public class MessageController {
 
         return USER_FEEDBACK_PAGE;
     }
-
 
     @PostMapping("/feedback")
     public String sendFeedback(@AuthenticationPrincipal User user,

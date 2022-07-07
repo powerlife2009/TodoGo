@@ -19,7 +19,6 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-
     public List<Task> getAllTaskSortedBy(User user, String sortBy) {
         if(sortBy.equals("priority")) {
             return taskRepository.findAllByUser(user, Sort.by(sortBy).descending());
@@ -54,6 +53,4 @@ public class TaskService {
     public void deleteTask(Long id) {
         taskRepository.deleteById(id);
     }
-
-
 }

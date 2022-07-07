@@ -22,7 +22,6 @@ public class TaskController {
 
     private final TaskService taskService;
 
-
     @PostMapping("/save")
     public String saveTodo(@AuthenticationPrincipal User user,
                            @Valid @ModelAttribute Task newTask,

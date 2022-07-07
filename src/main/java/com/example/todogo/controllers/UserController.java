@@ -19,7 +19,6 @@ public class UserController {
 
     private final UserService userService;
 
-
     @GetMapping("/registration")
     public String registerForm(Model model) {
         model.addAttribute(USER, new User());
