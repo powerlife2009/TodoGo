@@ -44,11 +44,11 @@
                 <tr th:each="feedback : ${feedbacks}">
 
                     <td>
-                        <a th:href="@{/admin/feedbacks/{id}(id=${feedback.getId()})}">
-                            <div th:if="${feedback.getMarkAsRead()==false}">
+                        <a th:href="@{/admin/feedbacks/{id}(id=${feedback.id})}">
+                            <div th:if="${feedback.markAsRead == false}">
                                 <strong th:text="${feedback.shortText()}"></strong>
                             </div>
-                            <div th:if="${feedback.getMarkAsRead()==true}">
+                            <div th:if="${feedback.markAsRead == true}">
                                 <span class="uk-text-secondary" th:text="${feedback.shortText()}"></span>
                             </div>
                         </a>

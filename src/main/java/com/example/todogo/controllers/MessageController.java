@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -59,8 +60,8 @@ public class MessageController {
         return REDIRECT_TO_MAIN_PAGE;
     }
 
-    @PostMapping("/mail/markAsRead")
-    public String markAsRead(@RequestParam Long id) {
+    @PostMapping("/mail/{id}/markAsRead")
+    public String markAsRead(@PathVariable("id") Long id) {
         Message message = messageService.getMessageById(id);
         message.setMarkAsRead(true);
         messageService.saveMessage(message);
@@ -68,8 +69,8 @@ public class MessageController {
         return REDIRECT_TO_MAIL;
     }
 
-    @PostMapping("/mail/remove")
-    public String removeMessage(@RequestParam Long id,
+    @PostMapping("/mail/{id}/remove")
+    public String removeMessage(@PathVariable("id") Long id,
                                 RedirectAttributes redirectAttributes) {
         Message message = messageService.getMessageById(id);
         messageService.deleteMessage(message);

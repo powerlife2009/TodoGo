@@ -51,10 +51,10 @@ public class AdminController {
         return ADMIN_USER_EDIT;
     }
 
-    @PostMapping("/users/remove")
-    public String removeUser(@RequestParam Long id,
+    @PostMapping("/users/{id}/remove")
+    public String removeUser(@PathVariable("id") Long userId,
                              RedirectAttributes redirectAttributes) {
-        User user = userService.getUserById(id);
+        User user = userService.getUserById(userId);
         userService.deleteUser(user);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
 
@@ -71,8 +71,7 @@ public class AdminController {
     }
 
     @GetMapping("/feedbacks/{id}")
-    public String showFeedback(@PathVariable("id") Long id,
-                               Model model) {
+    public String showFeedback(@PathVariable("id") Long id, Model model) {
         Message feedback = messageService.getMessageById(id);
         feedback.setMarkAsRead(true);
         messageService.saveMessage(feedback);
@@ -82,8 +81,8 @@ public class AdminController {
         return ADMIN_READ_FEEDBACK;
     }
 
-    @PostMapping("/feedbacks/remove")
-    public String removeFeedback(@RequestParam Long id,
+    @PostMapping("/feedbacks/{id}/remove")
+    public String removeFeedback(@PathVariable("id") Long id,
                                  RedirectAttributes redirectAttributes) {
         Message feedback = messageService.getMessageById(id);
         messageService.deleteMessage(feedback);

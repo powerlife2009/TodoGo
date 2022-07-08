@@ -11,18 +11,13 @@
     <div class="uk-container uk-margin uk-margin-medium-top">
         <article class="uk-article">
 
-            <h1 class="uk-article-title">
-                subject: <a class="uk-link-reset" href=""><span th:text="${feedback.getSubject()}"></span>
-            </a>
-            </h1>
-
-            <p class="uk-article-meta">Written by <a th:href="@{/admin/users/{id}(id=${feedback.getUser().getId()})}">
-                <span th:text="${feedback.getUser().getUsername()}"></span>
-            </a></p>
+            <h1 class="uk-article-title">Written by <a th:href="@{/admin/users/{id}(id=${feedback.user.id})}">
+                <span th:text="${feedback.user.username}"></span>
+            </a></h1>
 
             <p class="uk-text-lead"></p>
 
-            <p><span th:text="${feedback.getText()}"></span></p>
+            <p><span th:text="${feedback.text}"></span></p>
 
             <div class="uk-grid-small uk-child-width-auto" uk-grid>
 
@@ -34,19 +29,14 @@
                         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 
                             <form th:action="@{/admin/feedback/answer}" method="post" th:object="${answer}">
-                                <input type="hidden" name="idOwnerFeedback" th:value="${feedback.getUser().getId()}">
+                                <input type="hidden" name="idOwnerFeedback" th:value="${feedback.user.id}">
+                                <h1 class="uk-article-title">Answer to
+                                    <span th:text="${feedback.user.username}"/>
+                                </h1>
                                 <div class="uk-margin">
                                     <div class="uk-inline">
                                         <label>
-                                            <input class="uk-input uk-form-width-large" type="text"
-                                                   th:field="*{subject}" placeholder="Subject" autofocus="autofocus">
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="uk-margin">
-                                    <div class="uk-inline">
-                                        <label>
-                                       <textarea class="uk-textarea" rows="5" cols="64" type="text" th:field="*{text}"
+                                       <textarea class="uk-textarea" rows="5" cols="64" th:field="*{text}"
                                                  placeholder="Your text"></textarea>
                                         </label>
                                     </div>
@@ -64,9 +54,7 @@
                         </div>
                     </div>
                 </div>
-
-                <form th:action="@{/admin/feedbacks/remove}" method="post">
-                    <input type="hidden" name="id" th:value="${feedback.id}"/>
+                <form th:action="@{/admin/feedbacks/{id}/remove(id=${feedback.id})}" method="post">
                     <button class="uk-button uk-button-text" type="submit">Delete</button>
                 </form>
 

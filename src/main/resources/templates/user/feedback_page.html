@@ -17,9 +17,9 @@
     <div class="uk-position-top-center uk-margin-xlarge-top">
         <form th:action="@{/feedback}" th:method="POST" th:object="${message}">
 
-            <h1 class="uk-heading-medium uk-text-center">Feedback form</h1>
+            <h1 class="uk-heading-medium uk-text-center">Send feedback</h1>
 
-            <div th:if="${#fields.hasErrors('subject')} OR ${#fields.hasErrors('text')}">
+            <div th:if="${#fields.hasErrors('text')}">
 
                 <div class="uk-text-center uk-margin">
                     <div class="uk-alert-danger" uk-alert>
@@ -30,19 +30,8 @@
 
             <div class="uk-margin">
                 <div class="uk-inline">
-
                     <label>
-                        <input class="uk-input uk-form-width-large" type="text"
-                               th:field="*{subject}" placeholder="Subject" autofocus="autofocus">
-                    </label>
-
-                </div>
-            </div>
-
-            <div class="uk-margin">
-                <div class="uk-inline">
-                    <label>
-                        <textarea class="uk-textarea" rows="5" cols="64" type="text" th:field="*{text}"
+                        <textarea class="uk-textarea" rows="5" cols="64" th:field="*{text}"
                                   placeholder="Your text"></textarea>
                     </label>
                 </div>

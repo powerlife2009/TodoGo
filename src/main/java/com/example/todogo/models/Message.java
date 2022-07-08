@@ -23,13 +23,10 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Please enter message subject")
-    private String subject;
-
     @NotBlank(message = "Please enter text")
     private String text;
 
-    private Boolean markAsRead = false;
+    private boolean markAsRead = false;
 
     @ManyToOne()
     private User user;
@@ -37,14 +34,12 @@ public class Message {
     @Enumerated(EnumType.STRING)
     private MessageWay messageWay;
 
-    public Message(String subject, String text, MessageWay messageWay) {
-        this.subject = subject;
+    public Message(String text, MessageWay messageWay) {
         this.text = text;
         this.messageWay = messageWay;
     }
 
-    public Message(String subject, String text, User user) {
-        this.subject = subject;
+    public Message(String text, User user) {
         this.text = text;
         this.user = user;
     }

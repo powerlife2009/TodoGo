@@ -22,7 +22,9 @@ function formSubmit(formName) {
 document.addEventListener('click', function(event){
     let inside = (event.target.closest('#container'));
     if(!inside){
-        let contextMenu = document.querySelector('[id^="contextMenu"]');
-        contextMenu.style.visibility = 'hidden';
+        let contextMenu = document.querySelectorAll('[id^="contextMenu"]');
+        contextMenu.forEach(item => {
+            item.style.visibility = 'hidden';
+        })
     }
 });

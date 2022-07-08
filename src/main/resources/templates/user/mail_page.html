@@ -45,8 +45,7 @@
                     <td>
                         <ul class="uk-iconnav">
                             <li>
-                                <form th:action="@{/mail/remove}" method="post">
-                                    <input type="hidden" name="id" th:value="${message.id}"/>
+                                <form th:action="@{/mail/{id}/remove(id=${message.id})}" method="post">
                                     <button class="uk-button uk-button-link" type="submit" uk-tooltip="delete">
                                         <span uk-icon="trash"></span>
                                     </button>
@@ -58,10 +57,10 @@
                     <td>
 
                         <a href="#" uk-toggle th:target="${'#modal-example'+message}">
-                            <div th:if="${message.getMarkAsRead()==false}">
+                            <div th:if="${message.markAsRead == false}">
                                 <strong th:text="${message.shortText()}"></strong>
                             </div>
-                            <div th:if="${message.getMarkAsRead()==true}">
+                            <div th:if="${message.markAsRead == true}">
                                 <span class="uk-text-secondary" th:text="${message.shortText()}"></span>
                             </div>
                         </a>
@@ -72,7 +71,7 @@
                                     <div class="uk-modal-header">
                                         <h1 class="uk-article-title">
                                             subject: <a class="uk-link-reset" href=""><span
-                                                th:text="${message.getSubject()}"></span>
+                                                th:text="${message.user.id}"></span>
                                         </a>
                                         </h1>
                                     </div>
@@ -81,12 +80,11 @@
 
                                     <p class="uk-text-lead"></p>
 
-                                    <p><span th:text="${message.getText()}"></span></p>
+                                    <p><span th:text="${message.text}"></span></p>
                                 </article>
                                 <div class="uk-margin">
                                     <div class="uk-text-center">
-                                        <form th:action="@{/mail/markAsRead}" method="post">
-                                            <input type="hidden" name="id" th:value="${message.id}">
+                                        <form th:action="@{/mail/{id}/markAsRead(id=${message.id})}" method="post">
                                             <button class="uk-button uk-button-primary" type="submit">Ok</button>
                                         </form>
                                     </div>
