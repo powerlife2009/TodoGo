@@ -24,7 +24,7 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long taskId;
 
     @NotBlank(message = "Please enter text")
     private String text;
@@ -37,7 +37,7 @@ public class Task {
     private String type;
 
     @NotNull(message = "Field priority should not be empty")
-    private Integer priority;
+    private int priority;
 
     @ManyToOne
     private User user;

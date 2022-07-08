@@ -68,9 +68,9 @@
                             <a class="uk-link-heading"
                                id="contextObject"
                                th:text="${task.text}"
-                               th:oncontextmenu="|addContextMenu(event, ${task.id})|"/>
+                               th:oncontextmenu="|addContextMenu(event, ${task.taskId})|"/>
                             <ul class="uk-nav uk-navbar-dropdown-nav"
-                                th:id="contextMenu + ${task.id}"
+                                th:id="contextMenu + ${task.taskId}"
                                 style="position: absolute; visibility: hidden; background-color: whitesmoke"
                                 onclick="hideContextMenu(this.id)">
                                 <li>
@@ -93,7 +93,7 @@
                                             </div>
 
                                             <form th:action="@{/save}" th:method="post" th:object="${newTask}">
-                                                <input type="hidden" name="id" th:value="${task.id}"/>
+                                                <input type="hidden" name="id" th:value="${task.taskId}"/>
 
                                                 <div class="uk-grid-small" uk-grid>
 
@@ -169,7 +169,7 @@
                                         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
                                             <h2>This task will be deleted</h2>
                                             <form th:action="@{/delete}" method="POST">
-                                                <input type="hidden" name="id" th:value="${task.id}"/>
+                                                <input type="hidden" name="id" th:value="${task.taskId}"/>
                                                 <div class="uk-margin">
                                                     <div class="uk-text-center">
                                                         <button class="uk-button uk-button-default uk-modal-close"

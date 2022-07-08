@@ -11,7 +11,7 @@
     <div class="uk-container uk-margin uk-margin-medium-top">
         <article class="uk-article">
 
-            <h1 class="uk-article-title">Written by <a th:href="@{/admin/users/{id}(id=${feedback.user.id})}">
+            <h1 class="uk-article-title">Written by <a th:href="@{/admin/users/{id}(id=${feedback.user.userId})}">
                 <span th:text="${feedback.user.username}"></span>
             </a></h1>
 
@@ -29,7 +29,7 @@
                         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 
                             <form th:action="@{/admin/feedback/answer}" method="post" th:object="${answer}">
-                                <input type="hidden" name="idOwnerFeedback" th:value="${feedback.user.id}">
+                                <input type="hidden" name="idOwnerFeedback" th:value="${feedback.user.userId}">
                                 <h1 class="uk-article-title">Answer to
                                     <span th:text="${feedback.user.username}"/>
                                 </h1>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <form th:action="@{/admin/feedbacks/{id}/remove(id=${feedback.id})}" method="post">
+                <form th:action="@{/admin/feedbacks/{id}/remove(id=${feedback.userId})}" method="post">
                     <button class="uk-button uk-button-text" type="submit">Delete</button>
                 </form>
 

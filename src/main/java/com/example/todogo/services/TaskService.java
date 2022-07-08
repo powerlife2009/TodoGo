@@ -20,14 +20,16 @@ public class TaskService {
     }
 
     public List<Task> getAllTaskSortedBy(User user, String sortBy) {
+        Sort sort = Sort.by(sortBy);
+
         if(sortBy.equals("priority")) {
-            return taskRepository.findAllByUser(user, Sort.by(sortBy).descending());
+            sort = sort.descending();
         }
-        return taskRepository.findAllByUser(user, Sort.by(sortBy));
+        return taskRepository.findAllByUser(user, sort);
     }
 
     public List<Task> sortTasksAsQueue(User user) {
-        return taskRepository.findAllByUser(user, Sort.by(Sort.Direction.DESC, ("id")));
+        return taskRepository.findAllByUser(user, Sort.by(Sort.Direction.DESC, ("taskId")));
     }
 
     public List<Task> filterAllTasksByType(User user, String type) {

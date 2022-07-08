@@ -21,7 +21,7 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long messageId;
 
     @NotBlank(message = "Please enter text")
     private String text;

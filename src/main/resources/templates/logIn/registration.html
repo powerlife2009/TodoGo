@@ -43,7 +43,7 @@
 
             <div class="uk-margin">
                 <label>
-                    <input class="uk-input uk-form-width-large" type="text" th:field="*{email}" placeholder="Email">
+                    <input class="uk-input uk-form-width-large" type="email" th:field="*{email}" placeholder="Email">
                 </label>
                 <div style="color:red" th:if="${#fields.hasErrors('email')}"
                      th:errors="*{email}">email Error

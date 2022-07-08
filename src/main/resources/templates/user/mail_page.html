@@ -45,7 +45,7 @@
                     <td>
                         <ul class="uk-iconnav">
                             <li>
-                                <form th:action="@{/mail/{id}/remove(id=${message.id})}" method="post">
+                                <form th:action="@{/mail/{id}/remove(id=${message.messageId})}" method="post">
                                     <button class="uk-button uk-button-link" type="submit" uk-tooltip="delete">
                                         <span uk-icon="trash"></span>
                                     </button>
@@ -70,8 +70,8 @@
                                 <article class="uk-article">
                                     <div class="uk-modal-header">
                                         <h1 class="uk-article-title">
-                                            subject: <a class="uk-link-reset" href=""><span
-                                                th:text="${message.user.id}"></span>
+                                            subject: <a class="uk-link-reset" href="">
+                                            <span th:text="${message.user.userId}"></span>
                                         </a>
                                         </h1>
                                     </div>
@@ -84,7 +84,7 @@
                                 </article>
                                 <div class="uk-margin">
                                     <div class="uk-text-center">
-                                        <form th:action="@{/mail/{id}/markAsRead(id=${message.id})}" method="post">
+                                        <form th:action="@{/mail/{id}/markAsRead(id=${message.messageId})}" method="post">
                                             <button class="uk-button uk-button-primary" type="submit">Ok</button>
                                         </form>
                                     </div>
