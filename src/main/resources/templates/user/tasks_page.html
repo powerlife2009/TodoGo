@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>My todo-List</title>
+    <title>Tasks</title>
     <div th:replace="fragments/header :: header-css"></div>
 </head>
 <body>
@@ -34,7 +34,7 @@
             <th:block th:if="${todoList.isEmpty()}">
                 <h1 style="text-align: center">THERE'S NOTHING HERE</h1>
                 <img class="uk-align-center"
-                     src="img/empty-list.png" width="300" height="300" alt="">
+                     src="/img/empty-list.png" width="300" height="300" alt="">
             </th:block>
             <th:block th:unless="${todoList.isEmpty()}">
                 <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">

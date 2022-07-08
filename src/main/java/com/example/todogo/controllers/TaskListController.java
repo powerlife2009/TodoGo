@@ -31,7 +31,7 @@ public class TaskListController {
         model.addAttribute(NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
         model.addAttribute(TODO_LIST, sortedTaskList);
 
-        return USER_MAIN_PAGE;
+        return USER_TASKS_PAGE;
     }
 
     @PostMapping("/search")
@@ -44,7 +44,7 @@ public class TaskListController {
 
         model.addAttribute(TODO_LIST, findTaskList);
 
-        return USER_MAIN_PAGE;
+        return USER_TASKS_PAGE;
     }
 
     @GetMapping("/filterByType")
@@ -60,7 +60,7 @@ public class TaskListController {
         model.addAttribute(NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
         model.addAttribute(TODO_LIST, filterTaskList);
 
-        return USER_MAIN_PAGE;
+        return USER_TASKS_PAGE;
     }
 
     @GetMapping("/filterByPriority")
@@ -76,6 +76,6 @@ public class TaskListController {
         model.addAttribute(NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
         model.addAttribute(TODO_LIST, filterTaskList);
 
-        return USER_MAIN_PAGE;
+        return USER_TASKS_PAGE;
     }
 }

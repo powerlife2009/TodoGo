@@ -43,7 +43,6 @@
                 <ul class="uk-navbar-nav">
                     <li class="uk-active">
                             <a sec:authorize="isAuthenticated()"
-                               class="uk-logo uk-text-italic"
                                uk-toggle="target: #offcanvas">
                                 <h1>TodoGO</h1>
                             </a>
@@ -55,8 +54,31 @@
 
                         <div id="offcanvas" uk-offcanvas="mode: slide; overlay: true">
                             <div class="uk-offcanvas-bar uk-flex uk-flex-column uk-width-auto">
+                                <ul class="uk-nav uk-nav-primary uk-nav-center">
+                                    <li class="uk-active" sec:authorize="hasRole('USER')">
+                                        <img src="/img/letter-t-icon-21.png" width="130" height="130" alt="">
+                                    </li>
+                                </ul>
                                 <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
-                                    <li class="uk-active"><a href="#">Tasks</a></li>
+                                    <li class="uk-active" sec:authorize="hasRole('USER')">
+                                        <a th:href="@{/home}">Home</a>
+                                    </li>
+                                    <li class="uk-active" sec:authorize="hasRole('USER')">
+                                        <a th:href="@{/myTasks}">Tasks</a>
+                                    </li>
+                                    <li class="uk-active" sec:authorize="hasRole('USER')">
+                                        <a th:href="@{/myCalendar}">Calendar</a>
+                                    </li>
+                                    <li class="uk-active" sec:authorize="hasRole('USER')">
+                                        <a th:href="@{/myNotes}">Notes</a>
+                                    </li>
+
+                                    <li class="uk-active" sec:authorize="hasRole('ADMIN')">
+                                        <a th:href="@{/admin/users}">user list</a>
+                                    </li>
+                                    <li class="uk-active" sec:authorize="hasRole('ADMIN')">
+                                        <a th:href="@{/admin/feedbacks}">messages</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

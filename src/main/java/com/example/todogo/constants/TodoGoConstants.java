@@ -4,8 +4,10 @@ public class TodoGoConstants {
 
     public static final String GUEST_PAGE = "guest_page";
     public static final String ADMIN_PAGE = "admin/admin_page";
+    public static final String USER_HOME_PAGE = "user/home_page";
     public static final String REDIRECT_TO_MAIN_PAGE = "redirect:/main";
     public static final String REDIRECT_TO_ADMIN = "redirect:/admin";
+    public static final String REDIRECT_TO_HOME = "redirect:/home";
     public static final String REDIRECT_TO_ADMIN_FEEDBACKS = "redirect:/admin/feedbacks";
     public static final String REDIRECT_TO_ADMIN_USERS = "redirect:/admin/users";
     public static final String MESSAGE = "message";
@@ -24,7 +26,9 @@ public class TodoGoConstants {
     public static final String ADMIN_FEEDBACK_LIST = "admin/feedback_list";
     public static final String ADMIN_READ_FEEDBACK = "admin/read_feedback";
     public static final String ADMIN_USER_EDIT = "admin/user_edit";
-    public static final String USER_MAIN_PAGE = "user/main_page";
+    public static final String USER_TASKS_PAGE = "user/tasks_page";
+    public static final String USER_CALENDAR_PAGE = "user/calendar_page";
+    public static final String USER_NOTES_PAGE = "user/notes_page";
     public static final String NEW_TASK = "newTask";
     public static final String GROUPS = "groups";
     public static final String NEAREST = "nearest";
