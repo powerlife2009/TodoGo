@@ -22,7 +22,7 @@ public class MessageService {
 
 
     public List<Message> findAllByUserAndMessageWay(User user, MessageWay messageWay) {
-        return messageRepos.findAllByUserAndMessageWay(user, messageWay, Sort.by(Sort.Direction.DESC, "id"));
+        return messageRepos.findAllByUserAndMessageWay(user, messageWay, Sort.by(Sort.Direction.DESC, "messageId"));
     }
 
     public List<Message> allMessagesByMessageWay(MessageWay messageWay) {
