@@ -36,29 +36,32 @@ public class TaskListController {
 
     @PostMapping("/search")
     public String search(@AuthenticationPrincipal User user, @RequestParam String searchText, Model model) {
-        List<Task> findTaskList = taskService.searchTaskByText(user, searchText);
+        List<Task> taskList = taskService.searchTaskByText(user, searchText);
 
-        if (findTaskList.isEmpty()) {
-            model.addAttribute(ACTION_RESULT, NOT_FOUND);
-        }
-
-        model.addAttribute(TODO_LIST, findTaskList);
-
-        return USER_TASKS_PAGE;
-    }
-
-    @GetMapping("/filterByType")
-    public String filterByType(@AuthenticationPrincipal User user, @RequestParam String type, Model model) {
-        List<Task> filterTaskList = taskService.filterAllTasksByType(user, type);
-
-        if (filterTaskList.isEmpty()) {
+        if (taskList.isEmpty()) {
             model.addAttribute(ACTION_RESULT, NOT_FOUND);
         }
 
         model.addAttribute(NEW_TASK, new Task());
         model.addAttribute(GROUPS, Groups.values());
         model.addAttribute(NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
-        model.addAttribute(TODO_LIST, filterTaskList);
+        model.addAttribute(TODO_LIST, taskList);
+
+        return USER_TASKS_PAGE;
+    }
+
+    @GetMapping("/filterByType")
+    public String filterByType(@AuthenticationPrincipal User user, @RequestParam String type, Model model) {
+        List<Task> filteredTaskList = taskService.filterAllTasksByType(user, type);
+
+        if (filteredTaskList.isEmpty()) {
+            model.addAttribute(ACTION_RESULT, NOT_FOUND);
+        }
+
+        model.addAttribute(NEW_TASK, new Task());
+        model.addAttribute(GROUPS, Groups.values());
+        model.addAttribute(NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
+        model.addAttribute(TODO_LIST, filteredTaskList);
 
         return USER_TASKS_PAGE;
     }
@@ -66,16 +69,16 @@ public class TaskListController {
     @GetMapping("/filterByPriority")
     public String filterByPriority(@AuthenticationPrincipal User user, @RequestParam Integer priority,
             Model model) {
-        List<Task> filterTaskList = taskService.filterAllTasksByPriority(user, priority);
+        List<Task> filteredTaskList = taskService.filterAllTasksByPriority(user, priority);
 
-        if (filterTaskList.isEmpty()) {
+        if (filteredTaskList.isEmpty()) {
             model.addAttribute(ACTION_RESULT, NOT_FOUND);
         }
 
         model.addAttribute(NEW_TASK, new Task());
         model.addAttribute(GROUPS, Groups.values());
         model.addAttribute(NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
-        model.addAttribute(TODO_LIST, filterTaskList);
+        model.addAttribute(TODO_LIST, filteredTaskList);
 
         return USER_TASKS_PAGE;
     }
