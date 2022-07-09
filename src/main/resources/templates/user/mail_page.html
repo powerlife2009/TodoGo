@@ -10,22 +10,16 @@
 <div id="page-wrapper">
     <h1 class="uk-heading-medium uk-text-center uk-margin-large-top">Inbox</h1>
     <div class="uk-text-center uk-margin uk-margin-medium-top uk-margin-xlarge-left uk-margin-xlarge-right">
-        <div th:switch="${message}">
+        <div th:switch="${action_result}">
             <div th:case="'has errors'">
-                <div class="uk-text-center uk-margin">
-                    <div class="uk-alert-danger" uk-alert>
-                        <a class="uk-alert-close" uk-close></a>
-                        <p>ERRORS</p>
-                    </div>
-                </div>
+                <script>
+                    errorMessage();
+                </script>
             </div>
             <div th:case="'successfully'">
-                <div class="uk-text-center uk-margin">
-                    <div class="uk-alert-success" uk-alert>
-                        <a class="uk-alert-close" uk-close></a>
-                        <p>SUCCESSFULLY</p>
-                    </div>
-                </div>
+                <script>
+                    successMessage();
+                </script>
             </div>
         </div>
     </div>

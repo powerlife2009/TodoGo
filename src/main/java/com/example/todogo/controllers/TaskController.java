@@ -8,11 +8,14 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+
+import java.util.Optional;
 
 import static com.example.todogo.constants.TodoGoConstants.*;
 
@@ -23,30 +26,31 @@ public class TaskController {
     private final TaskService taskService;
 
     @PostMapping("/save")
-    public String saveTodo(@AuthenticationPrincipal User user,
-                           @Valid @ModelAttribute Task newTask,
+    public String saveTodo(@Valid @ModelAttribute Task newTask,
                            BindingResult errors,
+                           @RequestParam Optional<String> taskId,
+                           @AuthenticationPrincipal User user,
                            RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
-            redirectAttributes.addFlashAttribute(MESSAGE, HAS_ERRORS);
+            redirectAttributes.addFlashAttribute(ACTION_RESULT, HAS_ERRORS);
         } else {
+            taskId.ifPresent(id -> newTask.setTaskId(Long.parseLong(id)));
+
             taskService.saveTask(newTask, user);
-            redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+            redirectAttributes.addFlashAttribute(ACTION_RESULT, SUCCESSFULLY);
         }
 
         redirectAttributes.addFlashAttribute(TODO_LIST, taskService.sortTasksAsQueue(user));
 
-        return REDIRECT_TO_MAIN_PAGE;
+        return REDIRECT_TO_TASKS_PAGE;
     }
 
-    @PostMapping("/delete")
-    public String deleteTodo(@AuthenticationPrincipal User user,
-                             @RequestParam Long id,
+    @PostMapping("/{taskId}/delete")
+    public String deleteTask(@PathVariable("taskId") Long taskId,
                              RedirectAttributes redirectAttributes) {
-        taskService.deleteTaskById(id);
-        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
-        redirectAttributes.addFlashAttribute(TODO_LIST, taskService.sortTasksAsQueue(user));
+        taskService.deleteTaskById(taskId);
+        redirectAttributes.addFlashAttribute(ACTION_RESULT, SUCCESSFULLY);
 
-        return REDIRECT_TO_MAIN_PAGE;
+        return REDIRECT_TO_TASKS_PAGE;
     }
 }

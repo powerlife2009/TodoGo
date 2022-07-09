@@ -13,6 +13,20 @@
 <body>
 <div th:replace="fragments/header :: navbar"></div>
 <div id="page-wrapper">
+    <div class="uk-text-center uk-margin uk-margin-medium-top uk-margin-xlarge-left uk-margin-xlarge-right">
+        <div th:switch="${action_result}">
+            <div th:case="'has errors'">
+                <script>
+                    errorMessage();
+                </script>
+            </div>
+            <div th:case="'successfully'">
+                <script>
+                    successMessage();
+                </script>
+            </div>
+        </div>
+    </div>
     <div class="uk-position-top-center uk-margin-xlarge-top">
         <form th:action="@{/feedback}" th:method="POST" th:object="${message}">
 

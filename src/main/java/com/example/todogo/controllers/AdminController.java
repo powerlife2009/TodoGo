@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Collections;
 import java.util.List;
 
 import static com.example.todogo.constants.TodoGoConstants.*;
@@ -35,7 +33,6 @@ public class AdminController {
         return ADMIN_PAGE;
     }
 
-
     @GetMapping("/users")
     public String usersList(Model model) {
         model.addAttribute(USERS, userService.getAllByRole(Role.ROLE_USER));
@@ -43,20 +40,20 @@ public class AdminController {
         return ADMIN_USERS_LIST;
     }
 
-    @GetMapping("/users/{id}")
-    public String showUser(@PathVariable("id") Long userId, Model model) {
+    @GetMapping("/users/{userId}")
+    public String showUser(@PathVariable("userId") Long userId, Model model) {
         model.addAttribute(USER, userService.getUserById(userId));
 
         return ADMIN_USER_EDIT;
     }
 
-    @PostMapping("/users/{id}/remove")
-    public String removeUser(@PathVariable("id") Long userId,
-                             RedirectAttributes redirectAttributes) {
+    @PostMapping("/users/{userId}/remove")
+    public String removeUser(@PathVariable("userId") Long userId,
+                             Model model) {
         userService.deleteUserById(userId);
-        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+        model.addAttribute(ACTION_RESULT, SUCCESSFULLY);
 
-        return REDIRECT_TO_ADMIN_USERS;
+        return usersList(model);
     }
 
     @GetMapping("/feedbacks")
@@ -67,9 +64,9 @@ public class AdminController {
         return ADMIN_FEEDBACK_LIST;
     }
 
-    @GetMapping("/feedbacks/{id}")
-    public String showFeedback(@PathVariable("id") Long messageId, Model model) {
-        Message feedback = messageService.setMessageAsRead(messageId);
+    @GetMapping("/feedbacks/{feedbackId}")
+    public String showFeedback(@PathVariable("feedbackId") Long feedbackId, Model model) {
+        Message feedback = messageService.setMessageAsRead(feedbackId);
 
         model.addAttribute(FEEDBACK, feedback);
         model.addAttribute(ANSWER, new Message());
@@ -77,23 +74,22 @@ public class AdminController {
         return ADMIN_READ_FEEDBACK;
     }
 
-    @PostMapping("/feedbacks/{id}/remove")
-    public String removeFeedback(@PathVariable("id") Long messageId,
-                                 RedirectAttributes redirectAttributes) {
-        messageService.deleteMessageById(messageId);
-        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+    @PostMapping("/feedbacks/{feedbackId}/remove")
+    public String removeFeedback(@PathVariable("feedbackId") Long feedbackId, Model model) {
+        messageService.deleteMessageById(feedbackId);
+        model.addAttribute(ACTION_RESULT, SUCCESSFULLY);
 
-        return REDIRECT_TO_ADMIN_FEEDBACKS;
+        return feedbackList(model);
     }
 
     @PostMapping("/feedback/answer")
     public String answerToMessage(@ModelAttribute Message answer,
                                   @RequestParam Long idOwnerFeedback,
-                                  RedirectAttributes redirectAttributes) {
+                                  Model model) {
         User user = userService.getUserById(idOwnerFeedback);
         messageService.saveNewMessage(answer, user, MessageWay.INBOX);
-        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+        model.addAttribute(ACTION_RESULT, SUCCESSFULLY);
 
-        return REDIRECT_TO_ADMIN_FEEDBACKS;
+        return feedbackList(model);
     }
 }

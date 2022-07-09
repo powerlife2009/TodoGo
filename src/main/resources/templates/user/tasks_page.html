@@ -12,18 +12,21 @@
 <div id="page-wrapper">
     <div class="uk-text-center uk-margin uk-margin-medium-top uk-margin-xlarge-left uk-margin-xlarge-right">
 
-        <div th:switch="${message}">
-            <div th:case="'has errors'">
-                <div class="uk-alert-danger" uk-alert>
-                    <a class="uk-alert-close" uk-close></a>
-                    <p>ERRORS</p>
-                </div>
-            </div>
+        <div th:switch="${action_result}">
             <div th:case="'successfully'">
-                <div class="uk-alert-success" uk-alert>
-                    <a class="uk-alert-close" uk-close></a>
-                    <p>SUCCESSFULLY</p>
-                </div>
+                <script>
+                    successMessage();
+                </script>
+            </div>
+            <div th:case="'not found'">
+                <script>
+                    warningMessage();
+                </script>
+            </div>
+            <div th:case="'has errors'">
+                <script>
+                    errorMessage();
+                </script>
             </div>
         </div>
     </div>
@@ -93,7 +96,7 @@
                                             </div>
 
                                             <form th:action="@{/save}" th:method="post" th:object="${newTask}">
-                                                <input type="hidden" name="id" th:value="${task.taskId}"/>
+                                                <input type="hidden" name="taskId" th:value="${task.taskId}"/>
 
                                                 <div class="uk-grid-small" uk-grid>
 
@@ -127,6 +130,7 @@
                                                                 <input type="radio" th:name="priority"
                                                                        value="3" th:checked="${task.priority == 3}">
                                                             </label> 3
+
                                                         </div>
 
                                                     </div>
@@ -168,8 +172,7 @@
                                     <div th:id="${'modal-delete'+task}" class="uk-flex-top" uk-modal>
                                         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
                                             <h2>This task will be deleted</h2>
-                                            <form th:action="@{/delete}" method="POST">
-                                                <input type="hidden" name="id" th:value="${task.taskId}"/>
+                                            <form th:action="@{/{taskId}/delete(taskId = ${task.taskId})}" method="POST">
                                                 <div class="uk-margin">
                                                     <div class="uk-text-center">
                                                         <button class="uk-button uk-button-default uk-modal-close"

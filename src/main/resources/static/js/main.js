@@ -19,12 +19,34 @@ function formSubmit(formName) {
     document.getElementById(formName).submit();
 }
 
-document.addEventListener('click', function(event){
+document.addEventListener('click', function (event) {
     let inside = (event.target.closest('#container'));
-    if(!inside){
+    if (!inside) {
         let contextMenu = document.querySelectorAll('[id^="contextMenu"]');
         contextMenu.forEach(item => {
             item.style.visibility = 'hidden';
         })
     }
 });
+
+function successMessage() {
+    UIkit.notification({
+        message: '<span uk-icon=\'icon: check\'></span> Completed',
+        pos: 'top-center',
+        status: 'success'
+    });
+}
+
+function errorMessage() {
+    UIkit.notification({
+        message: '<span uk-icon=\'icon: ban\'></span> Error',
+        pos: 'top-center',
+        status: 'danger'});
+}
+
+function warningMessage() {
+    UIkit.notification({
+        message: '<span uk-icon=\'icon: warning\'></span> NotFound',
+        pos: 'top-center',
+        status: 'warning'});
+}

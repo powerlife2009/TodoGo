@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,9 +26,9 @@ public class MessageController {
     private final MessageService messageService;
 
     @GetMapping("/mail")
-    public String mailbox(@AuthenticationPrincipal User user,
-                          Model model) {
-        List<Message> messageInboxList = messageService.findAllByUserAndMessageWay(user, MessageWay.INBOX);
+    public String mailbox(@AuthenticationPrincipal User user, Model model) {
+        List<Message> messageInboxList =
+                messageService.findAllByUserAndMessageWay(user, MessageWay.INBOX);
         model.addAttribute(MESSAGES, messageInboxList);
 
         return USER_MAIL_PAGE;
@@ -46,15 +45,18 @@ public class MessageController {
     public String sendFeedback(@AuthenticationPrincipal User user,
                                @Valid @ModelAttribute Message message,
                                BindingResult errors,
-                               RedirectAttributes redirectAttributes) {
+                               Model model) {
         if (errors.hasErrors()) {
+            model.addAttribute(ACTION_RESULT, HAS_ERRORS);
+
             return USER_FEEDBACK_PAGE;
         }
 
         messageService.saveNewMessage(message, user, MessageWay.OUTBOX);
-        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+        model.addAttribute(ACTION_RESULT, SUCCESSFULLY);
+        model.addAttribute(MESSAGE, new Message());
 
-        return REDIRECT_TO_MAIN_PAGE;
+        return USER_FEEDBACK_PAGE;
     }
 
     @PostMapping("/mail/{id}/markAsRead")
@@ -65,11 +67,11 @@ public class MessageController {
     }
 
     @PostMapping("/mail/{id}/remove")
-    public String removeMessage(@PathVariable("id") Long id,
-                                RedirectAttributes redirectAttributes) {
+    public String removeMessage(@AuthenticationPrincipal User user, @PathVariable("id") Long id,
+            Model model) {
         messageService.deleteMessageById(id);
-        redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
+        model.addAttribute(ACTION_RESULT, SUCCESSFULLY);
 
-        return REDIRECT_TO_MAIL;
+        return mailbox(user, model);
     }
 }

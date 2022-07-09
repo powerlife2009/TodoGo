@@ -39,7 +39,7 @@ public class TaskListController {
         List<Task> findTaskList = taskService.searchTaskByText(user, searchText);
 
         if (findTaskList.isEmpty()) {
-            model.addAttribute(MESSAGE, NOT_FOUND);
+            model.addAttribute(ACTION_RESULT, NOT_FOUND);
         }
 
         model.addAttribute(TODO_LIST, findTaskList);
@@ -52,7 +52,7 @@ public class TaskListController {
         List<Task> filterTaskList = taskService.filterAllTasksByType(user, type);
 
         if (filterTaskList.isEmpty()) {
-            model.addAttribute(MESSAGE, NOT_FOUND);
+            model.addAttribute(ACTION_RESULT, NOT_FOUND);
         }
 
         model.addAttribute(NEW_TASK, new Task());
@@ -64,11 +64,12 @@ public class TaskListController {
     }
 
     @GetMapping("/filterByPriority")
-    public String filterByPriority(@AuthenticationPrincipal User user, @RequestParam Integer priority, Model model) {
+    public String filterByPriority(@AuthenticationPrincipal User user, @RequestParam Integer priority,
+            Model model) {
         List<Task> filterTaskList = taskService.filterAllTasksByPriority(user, priority);
 
         if (filterTaskList.isEmpty()) {
-            model.addAttribute(MESSAGE, NOT_FOUND);
+            model.addAttribute(ACTION_RESULT, NOT_FOUND);
         }
 
         model.addAttribute(NEW_TASK, new Task());

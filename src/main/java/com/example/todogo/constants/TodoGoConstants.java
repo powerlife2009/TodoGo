@@ -5,12 +5,13 @@ public class TodoGoConstants {
     public static final String GUEST_PAGE = "guest_page";
     public static final String ADMIN_PAGE = "admin/admin_page";
     public static final String USER_HOME_PAGE = "user/home_page";
-    public static final String REDIRECT_TO_MAIN_PAGE = "redirect:/main";
+    public static final String REDIRECT_TO_TASKS_PAGE = "redirect:/myTasks";
     public static final String REDIRECT_TO_ADMIN = "redirect:/admin";
     public static final String REDIRECT_TO_HOME = "redirect:/home";
     public static final String REDIRECT_TO_ADMIN_FEEDBACKS = "redirect:/admin/feedbacks";
     public static final String REDIRECT_TO_ADMIN_USERS = "redirect:/admin/users";
     public static final String MESSAGE = "message";
+    public static final String ACTION_RESULT = "action_result";
     public static final String MESSAGES = "messages";
     public static final String FEEDBACK = "feedback";
     public static final String USER_MAIL_PAGE = "user/mail_page";

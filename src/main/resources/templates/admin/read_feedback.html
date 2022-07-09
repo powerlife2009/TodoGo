@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <form th:action="@{/admin/feedbacks/{id}/remove(id=${feedback.userId})}" method="post">
+                <form th:action="@{/admin/feedbacks/{id}/remove(id=${feedback.user.userId})}" method="post">
                     <button class="uk-button uk-button-text" type="submit">Delete</button>
                 </form>
 
