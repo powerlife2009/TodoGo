@@ -42,15 +42,15 @@
             <div class="uk-navbar-left">
                 <ul class="uk-navbar-nav">
                     <li class="uk-active">
-                            <a sec:authorize="isAuthenticated()"
-                               uk-toggle="target: #offcanvas">
-                                <h1>TodoGO</h1>
-                            </a>
-                            <a sec:authorize="isAnonymous()"
-                               class="uk-logo uk-text-italic"
-                               th:href="@{/}">
-                                <h1>TodoGO</h1>
-                            </a>
+                        <a sec:authorize="isAuthenticated()"
+                           uk-toggle="target: #offcanvas">
+                            <h1>TodoGO</h1>
+                        </a>
+                        <a sec:authorize="isAnonymous()"
+                           class="uk-logo uk-text-italic"
+                           th:href="@{/}">
+                            <h1>TodoGO</h1>
+                        </a>
 
                         <div id="offcanvas" uk-offcanvas="mode: slide; overlay: true">
                             <div class="uk-offcanvas-bar uk-flex uk-flex-column uk-width-auto">

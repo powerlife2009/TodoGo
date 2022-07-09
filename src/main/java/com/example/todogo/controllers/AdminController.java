@@ -44,9 +44,8 @@ public class AdminController {
     }
 
     @GetMapping("/users/{id}")
-    public String showUser(@PathVariable("id") Long id,
-                           Model model) {
-        model.addAttribute(USER, userService.getUserById(id));
+    public String showUser(@PathVariable("id") Long userId, Model model) {
+        model.addAttribute(USER, userService.getUserById(userId));
 
         return ADMIN_USER_EDIT;
     }
@@ -54,8 +53,7 @@ public class AdminController {
     @PostMapping("/users/{id}/remove")
     public String removeUser(@PathVariable("id") Long userId,
                              RedirectAttributes redirectAttributes) {
-        User user = userService.getUserById(userId);
-        userService.deleteUser(user);
+        userService.deleteUserById(userId);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
 
         return REDIRECT_TO_ADMIN_USERS;
@@ -63,18 +61,16 @@ public class AdminController {
 
     @GetMapping("/feedbacks")
     public String feedbackList(Model model) {
-        List<Message> messageList = messageService.allMessagesByMessageWay(MessageWay.OUTBOX);
-        Collections.reverse(messageList);
+        List<Message> messageList = messageService.getAllMessagesByMessageWay(MessageWay.OUTBOX);
         model.addAttribute(FEEDBACKS, messageList);
 
         return ADMIN_FEEDBACK_LIST;
     }
 
     @GetMapping("/feedbacks/{id}")
-    public String showFeedback(@PathVariable("id") Long id, Model model) {
-        Message feedback = messageService.getMessageById(id);
-        feedback.setMarkAsRead(true);
-        messageService.saveMessage(feedback);
+    public String showFeedback(@PathVariable("id") Long messageId, Model model) {
+        Message feedback = messageService.setMessageAsRead(messageId);
+
         model.addAttribute(FEEDBACK, feedback);
         model.addAttribute(ANSWER, new Message());
 
@@ -82,10 +78,9 @@ public class AdminController {
     }
 
     @PostMapping("/feedbacks/{id}/remove")
-    public String removeFeedback(@PathVariable("id") Long id,
+    public String removeFeedback(@PathVariable("id") Long messageId,
                                  RedirectAttributes redirectAttributes) {
-        Message feedback = messageService.getMessageById(id);
-        messageService.deleteMessage(feedback);
+        messageService.deleteMessageById(messageId);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
 
         return REDIRECT_TO_ADMIN_FEEDBACKS;
@@ -96,9 +91,7 @@ public class AdminController {
                                   @RequestParam Long idOwnerFeedback,
                                   RedirectAttributes redirectAttributes) {
         User user = userService.getUserById(idOwnerFeedback);
-        answer.setUser(user);
-        answer.setMessageWay(MessageWay.INBOX);
-        messageService.saveMessage(answer);
+        messageService.saveNewMessage(answer, user, MessageWay.INBOX);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
 
         return REDIRECT_TO_ADMIN_FEEDBACKS;

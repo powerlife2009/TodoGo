@@ -30,8 +30,7 @@ public class TaskController {
         if (errors.hasErrors()) {
             redirectAttributes.addFlashAttribute(MESSAGE, HAS_ERRORS);
         } else {
-            newTask.setUser(user);
-            taskService.saveTask(newTask);
+            taskService.saveTask(newTask, user);
             redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
         }
 
@@ -44,7 +43,7 @@ public class TaskController {
     public String deleteTodo(@AuthenticationPrincipal User user,
                              @RequestParam Long id,
                              RedirectAttributes redirectAttributes) {
-        taskService.deleteTask(id);
+        taskService.deleteTaskById(id);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
         redirectAttributes.addFlashAttribute(TODO_LIST, taskService.sortTasksAsQueue(user));
 

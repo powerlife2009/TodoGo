@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -52,19 +51,15 @@ public class MessageController {
             return USER_FEEDBACK_PAGE;
         }
 
-        message.setUser(user);
-        message.setMessageWay(MessageWay.OUTBOX);
-        messageService.saveMessage(message);
+        messageService.saveNewMessage(message, user, MessageWay.OUTBOX);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
 
         return REDIRECT_TO_MAIN_PAGE;
     }
 
     @PostMapping("/mail/{id}/markAsRead")
-    public String markAsRead(@PathVariable("id") Long id) {
-        Message message = messageService.getMessageById(id);
-        message.setMarkAsRead(true);
-        messageService.saveMessage(message);
+    public String markAsRead(@PathVariable("id") Long messageId) {
+        messageService.setMessageAsRead(messageId);
 
         return REDIRECT_TO_MAIL;
     }
@@ -72,8 +67,7 @@ public class MessageController {
     @PostMapping("/mail/{id}/remove")
     public String removeMessage(@PathVariable("id") Long id,
                                 RedirectAttributes redirectAttributes) {
-        Message message = messageService.getMessageById(id);
-        messageService.deleteMessage(message);
+        messageService.deleteMessageById(id);
         redirectAttributes.addFlashAttribute(MESSAGE, SUCCESSFULLY);
 
         return REDIRECT_TO_MAIL;

@@ -1,10 +1,10 @@
 package com.example.todogo.controllers;
 
 import com.example.todogo.models.Groups;
-import com.example.todogo.models.Role;
 import com.example.todogo.models.Task;
 import com.example.todogo.models.User;
 import com.example.todogo.services.TaskService;
+import com.example.todogo.util.TodoGoUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -12,9 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.util.Objects;
 
 import static com.example.todogo.constants.TodoGoConstants.*;
 
@@ -26,7 +24,15 @@ public class MainController {
     private final TaskService taskService;
 
     @GetMapping
-    public String startPage() {
+    public String startPage(@AuthenticationPrincipal User user, Model model) {
+        if (Objects.nonNull(user)) {
+            if (user.isAdmin()) {
+                return ADMIN_PAGE;
+            } else if (user.isUser()) {
+                return toHomePage(model);
+            }
+        }
+
         return GUEST_PAGE;
     }
 
@@ -41,16 +47,8 @@ public class MainController {
     }
 
     @GetMapping("/home")
-    public String toHomePage(@AuthenticationPrincipal User user, Model model) {
-        if (user.getRole().equals(Role.ROLE_ADMIN)) {
-            return ADMIN_PAGE;
-        }
-
-        LocalDate localDate = LocalDate.now();
-        String formattedDate = localDate.format(DateTimeFormatter
-                .ofLocalizedDate(FormatStyle.FULL));
-
-        model.addAttribute("dateToday", formattedDate);
+    public String toHomePage(Model model) {
+        model.addAttribute(DATE_TODAY, TodoGoUtils.getDateToday());
 
         return USER_HOME_PAGE;
     }

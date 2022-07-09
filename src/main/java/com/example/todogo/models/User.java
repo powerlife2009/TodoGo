@@ -64,6 +64,14 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+    public boolean isAdmin() {
+        return this.role.equals(Role.ROLE_ADMIN);
+    }
+
+    public boolean isUser() {
+        return this.role.equals(Role.ROLE_USER);
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

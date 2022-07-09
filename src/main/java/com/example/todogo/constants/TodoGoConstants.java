@@ -36,4 +36,5 @@ public class TodoGoConstants {
     public static final String REDIRECT_TO_LOGIN = "redirect:/login";
     public static final String LOGIN_REGISTRATION = "logIn/registration";
     public static final String REDIRECT_TO_MAIL = "redirect:/mail";
+    public static final String DATE_TODAY = "dateToday";
 }

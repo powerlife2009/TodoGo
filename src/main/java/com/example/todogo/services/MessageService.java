@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -25,20 +26,34 @@ public class MessageService {
         return messageRepos.findAllByUserAndMessageWay(user, messageWay, Sort.by(Sort.Direction.DESC, "messageId"));
     }
 
-    public List<Message> allMessagesByMessageWay(MessageWay messageWay) {
-        return messageRepos.findAllByMessageWay(messageWay);
+    public List<Message> getAllMessagesByMessageWay(MessageWay messageWay) {
+        List<Message> messageList = messageRepos.findAllByMessageWay(messageWay);
+        Collections.reverse(messageList);
+
+        return messageList;
     }
 
     public Message getMessageById(Long id) {
         return messageRepos.getOne(id);
     }
 
-    public void deleteMessage(Message message) {
-        messageRepos.delete(message);
+    public void deleteMessageById(long messageId) {
+        messageRepos.deleteById(messageId);
     }
 
-    public void saveMessage(Message message) {
+    public void saveNewMessage(Message message, User user, MessageWay messageWay) {
+        message.setUser(user);
+        message.setMessageWay(messageWay);
+
         messageRepos.save(message);
+    }
+
+    public Message setMessageAsRead(Long id) {
+        Message message = getMessageById(id);
+        message.setMarkAsRead(true);
+        messageRepos.save(message);
+
+        return message;
     }
 }
 

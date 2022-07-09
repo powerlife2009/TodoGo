@@ -52,8 +52,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findByRole(role);
     }
 
-    public void deleteUser(User user) {
-        userRepository.delete(user);
+    public void deleteUserById(long userId) {
+        userRepository.deleteById(userId);
     }
 
     public User getUserById(Long id) {

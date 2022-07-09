@@ -48,11 +48,12 @@ public class TaskService {
         return taskRepository.findAllByUserAndTextContainingIgnoreCase(user, searchText);
     }
 
-    public void saveTask(Task task) {
+    public void saveTask(Task task, User user) {
+        task.setUser(user);
         taskRepository.save(task);
     }
 
-    public void deleteTask(Long id) {
+    public void deleteTaskById(Long id) {
         taskRepository.deleteById(id);
     }
 }
