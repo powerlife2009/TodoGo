@@ -6,9 +6,8 @@
     <div th:replace="fragments/header :: header-css"></div>
 </head>
 <body>
-<div th:replace="fragments/header :: navbar"></div>
-
 <div id="page-wrapper">
+    <div th:replace="fragments/header :: navbar"></div>
     <div class="uk-position-top-center uk-margin-xlarge-top">
         <form th:action="@{/registration}" th:method="POST" th:object="${user}">
 

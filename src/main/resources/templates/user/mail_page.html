@@ -8,7 +8,7 @@
 <body>
 <div id="page-wrapper" data-src="/img/1093402.jpg" uk-img>
     <div th:replace="fragments/header :: navbar"></div>
-    <h1 class="uk-heading-medium uk-text-center uk-margin-large-top">Inbox</h1>
+
     <div class="uk-text-center uk-margin uk-margin-medium-top uk-margin-xlarge-left uk-margin-xlarge-right">
         <div th:switch="${action_result}">
             <div th:case="'has errors'">
@@ -24,6 +24,7 @@
         </div>
     </div>
 
+    <h1 class="uk-heading-medium uk-text-center uk-margin-large-top">Inbox</h1>
     <div class="uk-container uk-margin-large-top">
         <div class="uk-overflow-auto">
             <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">
@@ -49,7 +50,6 @@
                     </td>
 
                     <td>
-
                         <a href="#" uk-toggle th:target="${'#modal-example'+message}">
                             <div th:if="${message.markAsRead == false}">
                                 <strong th:text="${message.shortText()}"></strong>
@@ -86,7 +86,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </td>
                 </tr>
                 </tbody>
