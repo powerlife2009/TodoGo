@@ -60,3 +60,11 @@ function createCKEditor() {
             console.error(error);
         });
 }
+
+function showCKEditor() {
+    document.getElementById('ckeditor-div').hidden = false;
+}
+
+function hideCKEditor() {
+    document.getElementById('ckeditor-div').hidden = true;
+}

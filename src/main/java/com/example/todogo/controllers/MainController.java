@@ -4,6 +4,7 @@ import com.example.todogo.models.Groups;
 import com.example.todogo.models.Note;
 import com.example.todogo.models.Task;
 import com.example.todogo.models.User;
+import com.example.todogo.services.NoteService;
 import com.example.todogo.services.TaskService;
 import com.example.todogo.util.TodoGoUtils;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,8 @@ import static com.example.todogo.constants.TodoGoConstants.*;
 public class MainController {
 
     private final TaskService taskService;
+
+    private final NoteService noteService;
 
     @GetMapping
     public String startPage(@AuthenticationPrincipal User user, Model model) {
@@ -60,8 +63,9 @@ public class MainController {
     }
 
     @GetMapping("/myNotes")
-    public String toNotesPage(Model model) {
-        model.addAttribute("newNote", new Note());
+    public String toNotesPage(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute(NEW_NOTE, new Note());
+        model.addAttribute(NOTE_LIST, noteService.getNotesByUser(user));
 
         return USER_NOTES_PAGE;
     }

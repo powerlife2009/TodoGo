@@ -6,6 +6,7 @@ import com.example.todogo.repos.NoteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class NoteService {
@@ -21,5 +22,9 @@ public class NoteService {
         note.setCreatedDate(new Date());
 
         noteRepository.save(note);
+    }
+
+    public List<Note> getNotesByUser(User user) {
+        return noteRepository.findAllByUser(user);
     }
 }

@@ -25,6 +25,9 @@ public class Note {
     private Long noteId;
 
     @NotBlank(message = "Please enter text")
+    private String title;
+
+    @NotBlank(message = "Please enter text")
     private String text;
 
     @Temporal(TemporalType.DATE)

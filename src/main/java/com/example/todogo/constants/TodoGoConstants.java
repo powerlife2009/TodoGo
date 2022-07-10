@@ -32,9 +32,11 @@ public class TodoGoConstants {
     public static final String USER_CALENDAR_PAGE = "user/calendar_page";
     public static final String USER_NOTES_PAGE = "user/notes_page";
     public static final String NEW_TASK = "newTask";
+    public static final String NEW_NOTE = "newNote";
     public static final String GROUPS = "groups";
     public static final String NEAREST = "nearest";
     public static final String TODO_LIST = "todoList";
+    public static final String NOTE_LIST = "noteList";
     public static final String REDIRECT_TO_LOGIN = "redirect:/login";
     public static final String LOGIN_REGISTRATION = "logIn/registration";
     public static final String REDIRECT_TO_MAIL = "redirect:/mail";
