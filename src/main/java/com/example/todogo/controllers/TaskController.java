@@ -40,8 +40,6 @@ public class TaskController {
             redirectAttributes.addFlashAttribute(ACTION_RESULT, SUCCESSFULLY);
         }
 
-        redirectAttributes.addFlashAttribute(TODO_LIST, taskService.sortTasksAsQueue(user));
-
         return REDIRECT_TO_TASKS_PAGE;
     }
 

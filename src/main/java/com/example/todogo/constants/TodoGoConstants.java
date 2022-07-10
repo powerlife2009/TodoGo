@@ -6,6 +6,7 @@ public class TodoGoConstants {
     public static final String ADMIN_PAGE = "admin/admin_page";
     public static final String USER_HOME_PAGE = "user/home_page";
     public static final String REDIRECT_TO_TASKS_PAGE = "redirect:/myTasks";
+    public static final String REDIRECT_TO_NOTES_PAGE = "redirect:/myNotes";
     public static final String REDIRECT_TO_ADMIN = "redirect:/admin";
     public static final String REDIRECT_TO_HOME = "redirect:/home";
     public static final String REDIRECT_TO_ADMIN_FEEDBACKS = "redirect:/admin/feedbacks";

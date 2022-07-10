@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MessageRepos extends JpaRepository<Message, Long> {
+public interface MessageRepository extends JpaRepository<Message, Long> {
 
     List<Message> findAllByMessageWay(MessageWay messageWay);
     List<Message> findAllByUserAndMessageWay(User user, MessageWay messageWay, Sort sort);

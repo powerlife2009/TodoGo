@@ -41,12 +41,22 @@ function errorMessage() {
     UIkit.notification({
         message: '<span uk-icon=\'icon: ban\'></span> Error',
         pos: 'top-center',
-        status: 'danger'});
+        status: 'danger'
+    });
 }
 
 function warningMessage() {
     UIkit.notification({
         message: '<span uk-icon=\'icon: warning\'></span> NotFound',
         pos: 'top-center',
-        status: 'warning'});
+        status: 'warning'
+    });
+}
+
+function createCKEditor() {
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
 }

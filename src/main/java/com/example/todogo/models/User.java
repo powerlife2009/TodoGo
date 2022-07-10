@@ -58,6 +58,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Message> feedbacks;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Note> notes;
+
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;

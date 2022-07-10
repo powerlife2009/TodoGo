@@ -1,6 +1,7 @@
 package com.example.todogo.controllers;
 
 import com.example.todogo.models.Groups;
+import com.example.todogo.models.Note;
 import com.example.todogo.models.Task;
 import com.example.todogo.models.User;
 import com.example.todogo.services.TaskService;
@@ -55,12 +56,12 @@ public class MainController {
 
     @GetMapping("/myCalendar")
     public String toCalendarPage() {
-
         return USER_CALENDAR_PAGE;
     }
 
     @GetMapping("/myNotes")
-    public String toNotesPage() {
+    public String toNotesPage(Model model) {
+        model.addAttribute("newNote", new Note());
 
         return USER_NOTES_PAGE;
     }

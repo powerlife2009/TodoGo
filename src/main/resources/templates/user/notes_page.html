@@ -9,8 +9,39 @@
 <div id="page-wrapper" data-src="/img/1093402.jpg" uk-img>
     <div th:replace="fragments/header :: navbar"></div>
 
+    <div class="uk-text-center uk-margin uk-margin-medium-top uk-margin-xlarge-left uk-margin-xlarge-right">
+        <div th:switch="${action_result}">
+            <div th:case="'has errors'">
+                <script>
+                    errorMessage();
+                </script>
+            </div>
+            <div th:case="'successfully'">
+                <script>
+                    successMessage();
+                </script>
+            </div>
+        </div>
+    </div>
+
     <div class="uk-margin-xlarge-top uk-position-top-center">
-        <h1 class="uk-heading-small uk-text-center">In development</h1>
+        <div class="uk-container">
+            <form th:action="@{/myNotes/create}" method="post" th:object="${newNote}">
+            <textarea th:field="*{text}"
+                      name="editor"
+                      id="editor"
+                      rows="10"
+                      cols="80"
+                      placeholder="Enter text">
+            </textarea>
+            <script>
+                createCKEditor();
+            </script>
+                <div class="uk-text-center">
+                    <button class="uk-button uk-button-secondary uk-margin-small-top" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
 
 </div>
