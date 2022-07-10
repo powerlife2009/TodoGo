@@ -6,10 +6,9 @@
     <div th:replace="fragments/header :: header-css"></div>
 </head>
 <body>
-
-<div th:replace="fragments/header :: navbar"></div>
-<div th:replace="fragments/user_navbar :: userNavbar"></div>
 <div id="page-wrapper" data-src="/img/1093402.jpg" uk-img>
+    <div th:replace="fragments/header :: navbar"></div>
+    <div th:replace="fragments/user_navbar :: userNavbar"></div>
     <div class="uk-text-center uk-margin uk-margin-medium-top uk-margin-xlarge-left uk-margin-xlarge-right">
 
         <div th:switch="${action_result}">
@@ -172,7 +171,8 @@
                                     <div th:id="${'modal-delete'+task}" class="uk-flex-top" uk-modal>
                                         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
                                             <h2>This task will be deleted</h2>
-                                            <form th:action="@{/{taskId}/delete(taskId = ${task.taskId})}" method="POST">
+                                            <form th:action="@{/{taskId}/delete(taskId = ${task.taskId})}"
+                                                  method="POST">
                                                 <div class="uk-margin">
                                                     <div class="uk-text-center">
                                                         <button class="uk-button uk-button-default uk-modal-close"
@@ -212,7 +212,7 @@
         </div>
     </div>
 </div>
-<div class="uk-text-center uk-margin">
+<div class="uk-text-center uk-margin-bottom">
     <a href="#" uk-totop uk-scroll></a>
 </div>
 

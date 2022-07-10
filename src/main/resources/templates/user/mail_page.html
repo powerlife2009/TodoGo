@@ -6,8 +6,8 @@
     <div th:replace="fragments/header :: header-css"></div>
 </head>
 <body>
-<div th:replace="fragments/header :: navbar"></div>
 <div id="page-wrapper" data-src="/img/1093402.jpg" uk-img>
+    <div th:replace="fragments/header :: navbar"></div>
     <h1 class="uk-heading-medium uk-text-center uk-margin-large-top">Inbox</h1>
     <div class="uk-text-center uk-margin uk-margin-medium-top uk-margin-xlarge-left uk-margin-xlarge-right">
         <div th:switch="${action_result}">
@@ -78,7 +78,8 @@
                                 </article>
                                 <div class="uk-margin">
                                     <div class="uk-text-center">
-                                        <form th:action="@{/mail/{id}/markAsRead(id=${message.messageId})}" method="post">
+                                        <form th:action="@{/mail/{id}/markAsRead(id=${message.messageId})}"
+                                              method="post">
                                             <button class="uk-button uk-button-primary" type="submit">Ok</button>
                                         </form>
                                     </div>
@@ -93,7 +94,7 @@
         </div>
     </div>
 </div>
-<div class="uk-text-center uk-margin">
+<div class="uk-text-center uk-margin-bottom">
     <a href="#" uk-totop uk-scroll></a>
 </div>
 <footer id="page-footer">

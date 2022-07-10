@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-
-</head>
 <body>
 
 <div th:fragment="footer">
-
-    <nav class="uk-background-muted" uk-navbar>
-
+    <nav id="footer-background" uk-navbar>
         <div class="uk-navbar-left">
             <ul class="uk-navbar-nav">
                 <div class="uk-navbar-item">
@@ -24,11 +18,10 @@
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
                 <li>
-                    <h1 class="uk-text-muted">TodoGO</h1>
+                    <h1 class="uk-text-secondary">TodoGO</h1>
                 </li>
             </ul>
         </div>
-
     </nav>
 </div>
 </body>

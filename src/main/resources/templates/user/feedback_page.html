@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <title>Feedback</title>
     <div th:replace="fragments/header :: header-css"></div>
-    <style>
-        textarea {
-            resize: none;
-        }
-    </style>
 </head>
 <body>
-<div th:replace="fragments/header :: navbar"></div>
 <div id="page-wrapper" data-src="/img/1093402.jpg" uk-img>
+    <div th:replace="fragments/header :: navbar"></div>
     <div class="uk-text-center uk-margin uk-margin-medium-top uk-margin-xlarge-left uk-margin-xlarge-right">
         <div th:switch="${action_result}">
             <div th:case="'has errors'">
@@ -44,7 +39,7 @@
             <div class="uk-margin">
                 <div class="uk-inline">
                     <label>
-                        <textarea class="uk-textarea" rows="5" cols="64" th:field="*{text}"
+                        <textarea id="textarea-size" class="uk-textarea" rows="5" cols="64" th:field="*{text}"
                                   placeholder="Your text"></textarea>
                     </label>
                 </div>

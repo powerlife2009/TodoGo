@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>404 Not found</title>
+    <title th:text="${status + ' ' + error}"/>
     <div th:replace="fragments/header :: header-css"></div>
 </head>
 <body>
@@ -16,7 +16,7 @@
         </article>
     </div>
 </div>
-<footer id="page-footer" class="uk-margin-top" uk-sticky>
+<footer id="page-footer">
     <div th:replace="fragments/footer :: footer"></div>
 </footer>
 </body>
