@@ -25,7 +25,7 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    @PostMapping("/save")
+    @PostMapping("/myTasks/save")
     public String saveTodo(@Valid @ModelAttribute Task newTask,
                            BindingResult errors,
                            @RequestParam Optional<String> taskId,
@@ -43,7 +43,7 @@ public class TaskController {
         return REDIRECT_TO_TASKS_PAGE;
     }
 
-    @PostMapping("/{taskId}/delete")
+    @PostMapping("/myTasks/{taskId}/delete")
     public String deleteTask(@PathVariable("taskId") Long taskId,
                              RedirectAttributes redirectAttributes) {
         taskService.deleteTaskById(taskId);

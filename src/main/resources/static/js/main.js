@@ -62,9 +62,11 @@ function createCKEditor() {
 }
 
 function showCKEditor() {
+    document.getElementById('note-nav').hidden = true;
     document.getElementById('ckeditor-div').hidden = false;
 }
 
 function hideCKEditor() {
+    document.getElementById('note-nav').hidden = false;
     document.getElementById('ckeditor-div').hidden = true;
 }

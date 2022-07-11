@@ -22,7 +22,7 @@ public class TaskListController {
 
     private final TaskService taskService;
 
-    @GetMapping("/sort")
+    @GetMapping("/myTasks/sort")
     public String sortBy(@AuthenticationPrincipal User user, @RequestParam String sortBy, Model model) {
         List<Task> sortedTaskList = taskService.getAllTaskSortedBy(user, sortBy);
 
@@ -34,7 +34,7 @@ public class TaskListController {
         return USER_TASKS_PAGE;
     }
 
-    @PostMapping("/search")
+    @PostMapping("/myTasks/search")
     public String search(@AuthenticationPrincipal User user, @RequestParam String searchText, Model model) {
         List<Task> taskList = taskService.searchTaskByText(user, searchText);
 
@@ -50,7 +50,7 @@ public class TaskListController {
         return USER_TASKS_PAGE;
     }
 
-    @GetMapping("/filterByType")
+    @GetMapping("/myTasks/filterByType")
     public String filterByType(@AuthenticationPrincipal User user, @RequestParam String type, Model model) {
         List<Task> filteredTaskList = taskService.filterAllTasksByType(user, type);
 
@@ -66,7 +66,7 @@ public class TaskListController {
         return USER_TASKS_PAGE;
     }
 
-    @GetMapping("/filterByPriority")
+    @GetMapping("/myTasks/filterByPriority")
     public String filterByPriority(@AuthenticationPrincipal User user, @RequestParam Integer priority,
             Model model) {
         List<Task> filteredTaskList = taskService.filterAllTasksByPriority(user, priority);

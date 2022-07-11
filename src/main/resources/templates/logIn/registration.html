@@ -6,9 +6,9 @@
     <div th:replace="fragments/header :: header-css"></div>
 </head>
 <body>
-<div id="page-wrapper">
+<div id="page-wrapper" class="uk-background-fixed uk-background-cover" data-src="/img/1093402.jpg" uk-img>
     <div th:replace="fragments/header :: navbar"></div>
-    <div class="uk-position-top-center uk-margin-xlarge-top">
+    <div class="uk-card uk-card-default uk-card-body uk-position-top-center uk-margin-xlarge-top">
         <form th:action="@{/registration}" th:method="POST" th:object="${user}">
 
             <h1 class="uk-heading-medium uk-text-center">Registration</h1>

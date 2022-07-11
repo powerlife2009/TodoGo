@@ -19,7 +19,7 @@
                                 <h1>new todo</h1>
                             </div>
 
-                            <form th:action="@{/save}" th:method="post" th:object="${newTask}">
+                            <form th:action="@{/myTasks/save}" th:method="post" th:object="${newTask}">
 
                                 <div class="uk-grid-small" uk-grid>
 
@@ -95,20 +95,20 @@
                     <div uk-dropdown="pos: bottom-center; mode: click">
                         <ul class="uk-nav uk-navbar-dropdown-nav uk-text-center">
 
-                            <form th:action="@{/filterByPriority}" th:method="GET">
+                            <form th:action="@{/myTasks/filterByPriority}" th:method="GET">
                                 <input type="hidden" name="priority" th:value="${1}">
                                 <button class="uk-button uk-button-link" type="submit">
                                     <span class="uk-label uk-label-success">not important</span>
                                 </button>
                             </form>
 
-                            <form th:action="@{/filterByPriority}" th:method="GET">
+                            <form th:action="@{/myTasks/filterByPriority}" th:method="GET">
                                 <input type="hidden" name="priority" th:value="${2}">
                                 <button class="uk-button uk-button-link" type="submit">
                                     <span class="uk-label uk-label-warning">normal</span>
                                 </button>
                             </form>
-                            <form th:action="@{/filterByPriority}" th:method="GET">
+                            <form th:action="@{/myTasks/filterByPriority}" th:method="GET">
                                 <input type="hidden" name="priority" th:value="${3}">
                                 <button class="uk-button uk-button-link" type="submit">
                                     <span class="uk-label uk-label-danger">important</span>
@@ -124,7 +124,7 @@
                         <ul class="uk-nav uk-navbar-dropdown-nav">
                             <h3>Groups</h3>
                             <div th:each="group : ${groups}">
-                                <form th:action="@{/filterByType}" th:method="GET">
+                                <form th:action="@{/myTasks/filterByType}" th:method="GET">
                                     <input type="hidden" name="type" th:value="${group}">
                                     <button class="uk-button uk-button-text" type="submit">
                                         <span th:text="${group}"></span>

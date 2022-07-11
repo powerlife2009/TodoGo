@@ -6,7 +6,7 @@
     <div th:replace="fragments/header :: header-css"></div>
 </head>
 <body>
-<div id="page-wrapper" class="uk-background-fixed" data-src="/img/1093402.jpg" uk-img>
+
     <div th:replace="fragments/header :: navbar"></div>
     <div th:replace="fragments/user_navbar :: userNavbar"></div>
 
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="uk-container">
+    <div class="uk-container uk-margin-medium-top">
 
         <div class="uk-overflow-auto">
             <th:block th:if="${todoList.isEmpty()}">
@@ -43,19 +43,19 @@
                     <tr>
                         <th class="uk-table-expand">Task</th>
                         <th class="uk-width-small">
-                            <form id="date-sort" th:action="@{/sort}" th:method="GET">
+                            <form id="date-sort" th:action="@{/myTasks/sort}" th:method="GET">
                                 <input type="hidden" name="sortBy" th:value="${'date'}"/>
                                 <a href="#" onclick="formSubmit('date-sort')">DT</a>
                             </form>
                         </th>
                         <th class="uk-table-shrink">
-                            <form id="priority-sort" th:action="@{/sort}" th:method="GET">
+                            <form id="priority-sort" th:action="@{/myTasks/sort}" th:method="GET">
                                 <input type="hidden" name="sortBy" th:value="${'priority'}"/>
                                 <a href="#" onclick="formSubmit('priority-sort')">PR</a>
                             </form>
                         </th>
                         <th class="uk-table-shrink">
-                            <form id="type-sort" th:action="@{/sort}" th:method="GET">
+                            <form id="type-sort" th:action="@{/myTasks/sort}" th:method="GET">
                                 <input type="hidden" name="sortBy" th:value="${'type'}"/>
                                 <a href="#" onclick="formSubmit('type-sort')">GR</a>
                             </form>
@@ -92,7 +92,7 @@
                                                 <h1>edit todo</h1>
                                             </div>
 
-                                            <form th:action="@{/save}" th:method="post" th:object="${newTask}">
+                                            <form th:action="@{/myTasks/save}" th:method="post" th:object="${newTask}">
                                                 <input type="hidden" name="taskId" th:value="${task.taskId}"/>
 
                                                 <div class="uk-grid-small" uk-grid>
@@ -169,7 +169,7 @@
                                     <div th:id="${'modal-delete'+task}" class="uk-flex-top" uk-modal>
                                         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
                                             <h2>This task will be deleted</h2>
-                                            <form th:action="@{/{taskId}/delete(taskId = ${task.taskId})}"
+                                            <form th:action="@{/myTasks/{taskId}/delete(taskId = ${task.taskId})}"
                                                   method="POST">
                                                 <div class="uk-margin">
                                                     <div class="uk-text-center">
@@ -214,7 +214,7 @@
     <a href="#" uk-totop uk-scroll></a>
 </div>
 
-<footer id="page-footer">
+<footer id="page-footer" class="uk-margin-top">
     <div th:replace="fragments/footer :: footer"></div>
 </footer>
 
