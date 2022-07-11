@@ -24,13 +24,13 @@
     <div class="uk-position-top-center uk-margin-xlarge-top">
         <form th:action="@{/feedback}" th:method="POST" th:object="${message}">
 
-            <h1 class="uk-heading-medium uk-text-center">Send feedback</h1>
+            <h1 class="uk-heading-medium uk-text-center" th:text="#{send-feedback}"></h1>
 
             <div th:if="${#fields.hasErrors('text')}">
 
                 <div class="uk-text-center uk-margin">
                     <div class="uk-alert-danger" uk-alert>
-                        <p>Please, fill in form fields and push the button «Send».</p>
+                        <p th:text="#{please-fill-in-form-fields-and-push-the-button-send}"></p>
                     </div>
                 </div>
             </div>
@@ -39,12 +39,12 @@
                 <div class="uk-inline">
                     <label>
                         <textarea id="textarea-size" class="uk-textarea" rows="5" cols="64" th:field="*{text}"
-                                  placeholder="Your text"></textarea>
+                                  th:placeholder="#{your-text}"></textarea>
                     </label>
                 </div>
             </div>
             <div class="uk-text-center">
-                <button class="uk-button uk-button-secondary" type="submit">Send</button>
+                <button class="uk-button uk-button-secondary" type="submit" th:text="#{send}"></button>
             </div>
         </form>
     </div>

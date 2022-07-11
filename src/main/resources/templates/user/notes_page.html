@@ -35,23 +35,26 @@
 
     <div id="ckeditor-div" class="uk-margin-auto uk-margin-auto-vertical uk-width-1-2@s" hidden>
         <form th:action="@{/myNotes/create}" method="post" th:object="${newNote}">
+            <div class="uk-margin-medium-top">
+                <h2 class="uk-text-center" th:text="#{new-note}"></h2>
             <input class="uk-input uk-form-width-xlarge uk-margin-small-bottom"
-                   type="text" th:field="*{title}" placeholder="Enter title"/>
+                   type="text" th:field="*{title}" th:placeholder="#{enter-title}"/>
             <textarea th:field="*{text}"
                       name="editor"
                       id="editor"
-                      placeholder="Enter text">
+                      th:placeholder="#{enter-text}">
             </textarea>
             <script>
                 createCKEditor();
             </script>
             <div class="uk-text-center">
-                <button class="uk-button uk-button-secondary uk-margin-small-top" type="submit">Save</button>
+                <button class="uk-button uk-button-secondary uk-margin-small-top" type="submit" th:text="#{save}"></button>
                 <button class="uk-button uk-button-default uk-margin-small-top"
                         type="button"
+                        th:text="#{cancel}"
                         onclick="hideCKEditor()">
-                    Cancel
                 </button>
+            </div>
             </div>
         </form>
     </div>

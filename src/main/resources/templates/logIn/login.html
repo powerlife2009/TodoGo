@@ -12,13 +12,13 @@
     <div class="uk-card uk-card-default uk-card-body uk-position-top-center uk-margin-xlarge-top">
         <form th:action="@{/login}" method="post">
 
-            <h1 class="uk-heading-medium uk-text-center">Sign In</h1>
+            <h1 class="uk-heading-medium uk-text-center" th:text="#{sign-in}"></h1>
 
             <div th:if="${param.error}" class="error">
 
                 <div class="uk-text-center uk-margin">
                     <div class="uk-alert-danger" uk-alert>
-                        <p>Invalid login or password</p>
+                        <p th:text="#{invalid-login-or-password}"></p>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
             <div class="uk-margin">
                 <div class="uk-text-center">
                     <button class="uk-button uk-button-secondary" type="submit">Sign In</button>
-                    <a class="uk-link-heading uk-margin-left" href="/registration">Sign Up</a>
+                    <a class="uk-link-heading uk-margin-left" href="/registration" th:text="#{sign-up}"></a>
                 </div>
             </div>
         </form>

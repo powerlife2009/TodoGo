@@ -22,14 +22,14 @@
         </div>
     </div>
 
-    <h1 class="uk-heading-medium uk-text-center uk-margin-large-top">Inbox</h1>
+    <h1 class="uk-heading-medium uk-text-center uk-margin-large-top" th:text="#{inbox}"></h1>
     <div class="uk-container uk-margin-large-top">
         <div class="uk-overflow-auto">
             <table class="uk-table uk-table-hover uk-table-divider uk-background-muted">
                 <thead>
                 <tr>
-                    <th class="uk-width-small">Action</th>
-                    <th class="uk-table-expand">Message</th>
+                    <th class="uk-width-small" th:text="#{action}"></th>
+                    <th class="uk-table-expand" th:text="#{message}"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,7 +68,7 @@
                                         </h1>
                                     </div>
 
-                                    <p class="uk-article-meta">Written by ADMIN</p>
+                                    <p class="uk-article-meta" th:text="#{written-by-admin}"></p>
 
                                     <p class="uk-text-lead"></p>
 
@@ -78,7 +78,7 @@
                                     <div class="uk-text-center">
                                         <form th:action="@{/mail/{id}/markAsRead(id=${message.messageId})}"
                                               method="post">
-                                            <button class="uk-button uk-button-primary" type="submit">Ok</button>
+                                            <button class="uk-button uk-button-primary" type="submit" th:text="#{ok}"></button>
                                         </form>
                                     </div>
                                 </div>

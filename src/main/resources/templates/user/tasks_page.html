@@ -32,7 +32,7 @@
 
         <div class="uk-overflow-auto">
             <th:block th:if="${todoList.isEmpty()}">
-                <h1 style="text-align: center">THERE'S NOTHING HERE</h1>
+                <h1 style="text-align: center" th:text="#{there-is-nothing-here}"></h1>
                 <img class="uk-align-center"
                      src="/img/empty-list.png" width="300" height="300" alt="">
             </th:block>
@@ -45,19 +45,19 @@
                         <th class="uk-width-small">
                             <form id="date-sort" th:action="@{/myTasks/sort}" th:method="GET">
                                 <input type="hidden" name="sortBy" th:value="${'date'}"/>
-                                <a href="#" onclick="formSubmit('date-sort')">DT</a>
+                                <a href="#" onclick="formSubmit('date-sort')" th:text="#{dt}"></a>
                             </form>
                         </th>
                         <th class="uk-table-shrink">
                             <form id="priority-sort" th:action="@{/myTasks/sort}" th:method="GET">
                                 <input type="hidden" name="sortBy" th:value="${'priority'}"/>
-                                <a href="#" onclick="formSubmit('priority-sort')">PR</a>
+                                <a href="#" onclick="formSubmit('priority-sort')" th:text="#{pr}"></a>
                             </form>
                         </th>
                         <th class="uk-table-shrink">
                             <form id="type-sort" th:action="@{/myTasks/sort}" th:method="GET">
                                 <input type="hidden" name="sortBy" th:value="${'type'}"/>
-                                <a href="#" onclick="formSubmit('type-sort')">GR</a>
+                                <a href="#" onclick="formSubmit('type-sort')" th:text="#{gr}"></a>
                             </form>
                         </th>
                     </tr>
@@ -153,7 +153,9 @@
 
                                                 <div class="uk-margin">
                                                     <div class="uk-text-center">
-                                                        <button class="uk-button uk-button-primary" type="submit">Save
+                                                        <button class="uk-button uk-button-primary"
+                                                                type="submit"
+                                                                th:text="#{save}">
                                                         </button>
                                                     </div>
                                                 </div>
@@ -168,15 +170,18 @@
                                     </a>
                                     <div th:id="${'modal-delete'+task}" class="uk-flex-top" uk-modal>
                                         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-                                            <h2>This task will be deleted</h2>
+                                            <h2 th:text="#{this-task-will-be-deleted}"></h2>
                                             <form th:action="@{/myTasks/{taskId}/delete(taskId = ${task.taskId})}"
                                                   method="POST">
                                                 <div class="uk-margin">
                                                     <div class="uk-text-center">
                                                         <button class="uk-button uk-button-default uk-modal-close"
-                                                                type="button">Cancel
+                                                                type="button"
+                                                                th:text="#{cancel}">
                                                         </button>
-                                                        <button class="uk-button uk-button-primary" type="submit">Delete
+                                                        <button class="uk-button uk-button-primary"
+                                                                type="submit"
+                                                                th:text="#{delete}">
                                                         </button>
                                                     </div>
                                                 </div>

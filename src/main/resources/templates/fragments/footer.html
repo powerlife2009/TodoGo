@@ -10,7 +10,7 @@
                     TodoGo | copyright(c).
                 </div>
                 <div class="uk-navbar-item" sec:authorize="hasRole('USER')">
-                    <a class="uk-text-right" th:href="@{/feedback}">Feedback</a>
+                    <a class="uk-text-right" th:href="@{/feedback}" th:text="#{feedback}"></a>
                 </div>
             </ul>
         </div>
@@ -18,12 +18,11 @@
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
                 <li>
-                    <h1 class="uk-text-secondary">TodoGO</h1>
+                    <h1 class="uk-text-secondary" th:text="#{todo-go}"></h1>
                 </li>
             </ul>
         </div>
     </nav>
 </div>
 </body>
-
 </html>
