@@ -21,7 +21,6 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-
     public List<Message> findAllByUserAndMessageWay(User user, MessageWay messageWay) {
         return messageRepository.findAllByUserAndMessageWay(user, messageWay, Sort.by(Sort.Direction.DESC, "messageId"));
     }
@@ -56,4 +55,3 @@ public class MessageService {
         return message;
     }
 }
-

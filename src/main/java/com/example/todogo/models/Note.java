@@ -36,4 +36,12 @@ public class Note {
 
     @ManyToOne
     private User user;
+
+    public String getShortTitle() {
+        if (title.length() > 21) {
+            return this.title.substring(0, 21).concat("...");
+        }
+
+        return title;
+    }
 }

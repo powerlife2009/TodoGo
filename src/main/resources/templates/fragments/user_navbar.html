@@ -147,6 +147,34 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <div>
+                        <a class="uk-navbar-toggle" href="#"
+                           uk-icon="icon: search; ratio: 3.5"
+                           th:uk-tooltip="#{search}">
+                        </a>
+                        <div class="uk-navbar-dropdown"
+                             uk-drop="mode: click; cls-drop: uk-navbar-dropdown; boundary: !.uk-navbar; flip: false">
+                            <div class="uk-grid-small uk-flex-middle"
+                                 uk-grid>
+                                <div class="uk-width-expand">
+                                    <form th:action="@{/myTasks/search}" th:method="post"
+                                          class="uk-search uk-search-navbar uk-width-1-1">
+                                        <input class="uk-search-input"
+                                               th:name="searchText"
+                                               type="search"
+                                               placeholder="Search"
+                                               autofocus/>
+                                    </form>
+                                </div>
+                                <div class="uk-width-auto">
+                                    <a class="uk-navbar-dropdown-close" href="#" uk-close></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
