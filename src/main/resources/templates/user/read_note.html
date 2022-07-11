@@ -8,7 +8,9 @@
 <body>
 <div id="page-wrapper" class="uk-background-fixed uk-background-cover" data-src="/img/1093402.jpg" uk-img>
     <div th:replace="fragments/header :: navbar"></div>
-    <input id="noteText" type="hidden" th:value="${note.text}">
+    <input id="noteText"
+           type="hidden"
+           th:value="${note.text}"/>
 <div class="uk-modal-container">
     <div class="uk-card uk-card-default uk-card-body uk-position-center">
         <h1 class="uk-card-title uk-text-center" th:text="${note.title}"></h1>

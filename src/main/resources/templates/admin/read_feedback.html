@@ -11,9 +11,11 @@
     <div class="uk-container uk-margin uk-margin-medium-top">
         <article class="uk-article">
 
-            <h1 class="uk-article-title">Written by <a th:href="@{/admin/users/{id}(id=${feedback.user.userId})}">
+            <h1 class="uk-article-title">
+                Written by <a th:href="@{/admin/users/{id}(id=${feedback.user.userId})}">
                 <span th:text="${feedback.user.username}"></span>
-            </a></h1>
+            </a>
+            </h1>
 
             <p class="uk-text-lead"></p>
 
@@ -21,32 +23,44 @@
 
             <div class="uk-grid-small uk-child-width-auto" uk-grid>
 
-
                 <div>
-                    <a class="uk-button uk-button-text" uk-toggle th:target="${'#modal-example'+feedback}">Reply</a>
+                    <a class="uk-button uk-button-text"
+                       uk-toggle
+                       th:target="${'#modal-example'+feedback}">
+                        Reply
+                    </a>
 
                     <div th:id="${'modal-example'+feedback}" class="uk-flex-top" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 
                             <form th:action="@{/admin/feedback/answer}" method="post" th:object="${answer}">
-                                <input type="hidden" name="idOwnerFeedback" th:value="${feedback.user.userId}">
+                                <input type="hidden"
+                                       name="idOwnerFeedback"
+                                       th:value="${feedback.user.userId}"/>
                                 <h1 class="uk-article-title">Answer to
                                     <span th:text="${feedback.user.username}"/>
                                 </h1>
                                 <div class="uk-margin">
                                     <div class="uk-inline">
                                         <label>
-                                       <textarea class="uk-textarea" rows="5" cols="64" th:field="*{text}"
-                                                 placeholder="Your text"></textarea>
+                                       <textarea class="uk-textarea"
+                                                 rows="5" cols="64"
+                                                 th:field="*{text}"
+                                                 placeholder="Your text">
+                                       </textarea>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="uk-margin">
                                     <div class="uk-text-center">
-                                        <button class="uk-button uk-button-default uk-modal-close" type="button">
+                                        <button class="uk-button uk-button-default uk-modal-close"
+                                                type="button">
                                             Cancel
                                         </button>
-                                        <button class="uk-button uk-button-primary" type="submit">Reply</button>
+                                        <button class="uk-button uk-button-primary"
+                                                type="submit">
+                                            Reply
+                                        </button>
                                     </div>
                                 </div>
                             </form>

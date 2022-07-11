@@ -38,13 +38,19 @@
             <div class="uk-margin">
                 <div class="uk-inline">
                     <label>
-                        <textarea id="textarea-size" class="uk-textarea" rows="5" cols="64" th:field="*{text}"
-                                  th:placeholder="#{your-text}"></textarea>
+                        <textarea id="textarea-size"
+                                  class="uk-textarea"
+                                  rows="5" cols="64"
+                                  th:field="*{text}"
+                                  th:placeholder="#{your-text}">
+                        </textarea>
                     </label>
                 </div>
             </div>
             <div class="uk-text-center">
-                <button class="uk-button uk-button-secondary" type="submit" th:text="#{send}"></button>
+                <button class="uk-button uk-button-secondary"
+                        type="submit"
+                        th:text="#{send}"></button>
             </div>
         </form>
     </div>

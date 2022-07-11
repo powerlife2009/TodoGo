@@ -23,7 +23,10 @@
 
             <div class="uk-margin">
                 <label>
-                    <input class="uk-input uk-form-width-large" type="text" th:field="*{username}" placeholder="Login">
+                    <input class="uk-input uk-form-width-large"
+                           type="text"
+                           th:field="*{username}"
+                           placeholder="Login"/>
                 </label>
                 <div style="color:red" th:if="${#fields.hasErrors('username')}"
                      th:errors="*{username}" th:text="#{userName-error}">
@@ -32,8 +35,10 @@
 
             <div class="uk-margin">
                 <label>
-                    <input class="uk-input uk-form-width-large" type="password" th:field="*{password}"
-                           placeholder="Password">
+                    <input class="uk-input uk-form-width-large"
+                           type="password"
+                           th:field="*{password}"
+                           placeholder="Password"/>
                 </label>
                 <div style="color:red" th:if="${#fields.hasErrors('password')}"
                      th:errors="*{password}" th:text="#{password-error}">
@@ -42,14 +47,20 @@
 
             <div class="uk-margin">
                 <label>
-                    <input class="uk-input uk-form-width-large" type="email" th:field="*{email}" placeholder="Email">
+                    <input class="uk-input uk-form-width-large"
+                           type="email"
+                           th:field="*{email}"
+                           placeholder="Email"/>
                 </label>
                 <div style="color:red" th:if="${#fields.hasErrors('email')}"
                      th:errors="*{email}" th:text="#{email-error}">
                 </div>
             </div>
             <div class="uk-text-center">
-                <button class="uk-button uk-button-secondary" type="submit" th:text="#{sign-up}"></button>
+                <button class="uk-button uk-button-secondary"
+                        type="submit"
+                        th:text="#{sign-up}">
+                </button>
             </div>
         </form>
     </div>
