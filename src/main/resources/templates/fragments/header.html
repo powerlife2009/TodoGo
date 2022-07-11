@@ -69,7 +69,7 @@
             <div class="uk-navbar-right uk-margin-right">
                 <ul class="uk-navbar-nav uk-visible@s">
                     <div sec:authorize="hasRole('USER')">
-                        <form th:action="@{/myTasks/search}" th:method="post" class="uk-search uk-search-default">
+                        <form th:action="@{/global-search}" th:method="post" class="uk-search uk-search-default">
                             <span class="uk-search-icon-flip" uk-search-icon></span>
                             <label>
                                 <input class="uk-search-input"

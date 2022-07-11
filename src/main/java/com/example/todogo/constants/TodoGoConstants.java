@@ -7,10 +7,6 @@ public class TodoGoConstants {
     public static final String USER_HOME_PAGE = "user/home_page";
     public static final String REDIRECT_TO_TASKS_PAGE = "redirect:/myTasks";
     public static final String REDIRECT_TO_NOTES_PAGE = "redirect:/myNotes";
-    public static final String REDIRECT_TO_ADMIN = "redirect:/admin";
-    public static final String REDIRECT_TO_HOME = "redirect:/home";
-    public static final String REDIRECT_TO_ADMIN_FEEDBACKS = "redirect:/admin/feedbacks";
-    public static final String REDIRECT_TO_ADMIN_USERS = "redirect:/admin/users";
     public static final String MESSAGE = "message";
     public static final String ACTION_RESULT = "action_result";
     public static final String MESSAGES = "messages";
@@ -31,6 +27,7 @@ public class TodoGoConstants {
     public static final String USER_TASKS_PAGE = "user/tasks_page";
     public static final String USER_CALENDAR_PAGE = "user/calendar_page";
     public static final String USER_NOTES_PAGE = "user/notes_page";
+    public static final String GLOBAL_SEARCH_PAGE = "global_search_page";
     public static final String NEW_TASK = "newTask";
     public static final String NEW_NOTE = "newNote";
     public static final String GROUPS = "groups";

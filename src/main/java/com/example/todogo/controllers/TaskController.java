@@ -1,5 +1,6 @@
 package com.example.todogo.controllers;
 
+import com.example.todogo.constants.TodoGoConstants;
 import com.example.todogo.models.Task;
 import com.example.todogo.models.User;
 import com.example.todogo.services.TaskService;
@@ -17,8 +18,6 @@ import javax.validation.Valid;
 
 import java.util.Optional;
 
-import static com.example.todogo.constants.TodoGoConstants.*;
-
 @Controller
 @AllArgsConstructor
 public class TaskController {
@@ -32,23 +31,23 @@ public class TaskController {
                            @AuthenticationPrincipal User user,
                            RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
-            redirectAttributes.addFlashAttribute(ACTION_RESULT, HAS_ERRORS);
+            redirectAttributes.addFlashAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.HAS_ERRORS);
         } else {
             taskId.ifPresent(id -> newTask.setTaskId(Long.parseLong(id)));
 
             taskService.saveTask(newTask, user);
-            redirectAttributes.addFlashAttribute(ACTION_RESULT, SUCCESSFULLY);
+            redirectAttributes.addFlashAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
         }
 
-        return REDIRECT_TO_TASKS_PAGE;
+        return TodoGoConstants.REDIRECT_TO_TASKS_PAGE;
     }
 
     @PostMapping("/myTasks/{taskId}/delete")
     public String deleteTask(@PathVariable("taskId") Long taskId,
                              RedirectAttributes redirectAttributes) {
         taskService.deleteTaskById(taskId);
-        redirectAttributes.addFlashAttribute(ACTION_RESULT, SUCCESSFULLY);
+        redirectAttributes.addFlashAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
 
-        return REDIRECT_TO_TASKS_PAGE;
+        return TodoGoConstants.REDIRECT_TO_TASKS_PAGE;
     }
 }

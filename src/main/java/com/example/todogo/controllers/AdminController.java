@@ -1,5 +1,6 @@
 package com.example.todogo.controllers;
 
+import com.example.todogo.constants.TodoGoConstants;
 import com.example.todogo.models.Message;
 import com.example.todogo.models.MessageWay;
 import com.example.todogo.models.Role;
@@ -18,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-import static com.example.todogo.constants.TodoGoConstants.*;
-
 @Controller
 @RequestMapping("/admin")
 @AllArgsConstructor
@@ -30,28 +29,28 @@ public class AdminController {
 
     @GetMapping
     public String adminPage() {
-        return ADMIN_PAGE;
+        return TodoGoConstants.ADMIN_PAGE;
     }
 
     @GetMapping("/users")
     public String usersList(Model model) {
-        model.addAttribute(USERS, userService.getAllByRole(Role.ROLE_USER));
+        model.addAttribute(TodoGoConstants.USERS, userService.getAllByRole(Role.ROLE_USER));
 
-        return ADMIN_USERS_LIST;
+        return TodoGoConstants.ADMIN_USERS_LIST;
     }
 
     @GetMapping("/users/{userId}")
     public String showUser(@PathVariable("userId") Long userId, Model model) {
-        model.addAttribute(USER, userService.getUserById(userId));
+        model.addAttribute(TodoGoConstants.USER, userService.getUserById(userId));
 
-        return ADMIN_USER_EDIT;
+        return TodoGoConstants.ADMIN_USER_EDIT;
     }
 
     @PostMapping("/users/{userId}/remove")
     public String removeUser(@PathVariable("userId") Long userId,
                              Model model) {
         userService.deleteUserById(userId);
-        model.addAttribute(ACTION_RESULT, SUCCESSFULLY);
+        model.addAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
 
         return usersList(model);
     }
@@ -59,25 +58,25 @@ public class AdminController {
     @GetMapping("/feedbacks")
     public String feedbackList(Model model) {
         List<Message> messageList = messageService.getAllMessagesByMessageWay(MessageWay.OUTBOX);
-        model.addAttribute(FEEDBACKS, messageList);
+        model.addAttribute(TodoGoConstants.FEEDBACKS, messageList);
 
-        return ADMIN_FEEDBACK_LIST;
+        return TodoGoConstants.ADMIN_FEEDBACK_LIST;
     }
 
     @GetMapping("/feedbacks/{feedbackId}")
     public String showFeedback(@PathVariable("feedbackId") Long feedbackId, Model model) {
         Message feedback = messageService.setMessageAsRead(feedbackId);
 
-        model.addAttribute(FEEDBACK, feedback);
-        model.addAttribute(ANSWER, new Message());
+        model.addAttribute(TodoGoConstants.FEEDBACK, feedback);
+        model.addAttribute(TodoGoConstants.ANSWER, new Message());
 
-        return ADMIN_READ_FEEDBACK;
+        return TodoGoConstants.ADMIN_READ_FEEDBACK;
     }
 
     @PostMapping("/feedbacks/{feedbackId}/remove")
     public String removeFeedback(@PathVariable("feedbackId") Long feedbackId, Model model) {
         messageService.deleteMessageById(feedbackId);
-        model.addAttribute(ACTION_RESULT, SUCCESSFULLY);
+        model.addAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
 
         return feedbackList(model);
     }
@@ -88,7 +87,7 @@ public class AdminController {
                                   Model model) {
         User user = userService.getUserById(idOwnerFeedback);
         messageService.saveNewMessage(answer, user, MessageWay.INBOX);
-        model.addAttribute(ACTION_RESULT, SUCCESSFULLY);
+        model.addAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
 
         return feedbackList(model);
     }

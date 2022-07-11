@@ -1,5 +1,6 @@
 package com.example.todogo.controllers;
 
+import com.example.todogo.constants.TodoGoConstants;
 import com.example.todogo.models.Message;
 import com.example.todogo.models.MessageWay;
 import com.example.todogo.models.User;
@@ -17,8 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.example.todogo.constants.TodoGoConstants.*;
-
 @Controller
 @AllArgsConstructor
 public class MessageController {
@@ -29,16 +28,16 @@ public class MessageController {
     public String mailbox(@AuthenticationPrincipal User user, Model model) {
         List<Message> messageInboxList =
                 messageService.findAllByUserAndMessageWay(user, MessageWay.INBOX);
-        model.addAttribute(MESSAGES, messageInboxList);
+        model.addAttribute(TodoGoConstants.MESSAGES, messageInboxList);
 
-        return USER_MAIL_PAGE;
+        return TodoGoConstants.USER_MAIL_PAGE;
     }
 
     @GetMapping("/feedback")
     public String feedback(Model model) {
-        model.addAttribute(MESSAGE, new Message());
+        model.addAttribute(TodoGoConstants.MESSAGE, new Message());
 
-        return USER_FEEDBACK_PAGE;
+        return TodoGoConstants.USER_FEEDBACK_PAGE;
     }
 
     @PostMapping("/feedback")
@@ -47,30 +46,30 @@ public class MessageController {
                                BindingResult errors,
                                Model model) {
         if (errors.hasErrors()) {
-            model.addAttribute(ACTION_RESULT, HAS_ERRORS);
+            model.addAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.HAS_ERRORS);
 
-            return USER_FEEDBACK_PAGE;
+            return TodoGoConstants.USER_FEEDBACK_PAGE;
         }
 
         messageService.saveNewMessage(message, user, MessageWay.OUTBOX);
-        model.addAttribute(ACTION_RESULT, SUCCESSFULLY);
-        model.addAttribute(MESSAGE, new Message());
+        model.addAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
+        model.addAttribute(TodoGoConstants.MESSAGE, new Message());
 
-        return USER_FEEDBACK_PAGE;
+        return TodoGoConstants.USER_FEEDBACK_PAGE;
     }
 
     @PostMapping("/mail/{id}/markAsRead")
     public String markAsRead(@PathVariable("id") Long messageId) {
         messageService.setMessageAsRead(messageId);
 
-        return REDIRECT_TO_MAIL;
+        return TodoGoConstants.REDIRECT_TO_MAIL;
     }
 
     @PostMapping("/mail/{id}/remove")
     public String removeMessage(@AuthenticationPrincipal User user, @PathVariable("id") Long id,
             Model model) {
         messageService.deleteMessageById(id);
-        model.addAttribute(ACTION_RESULT, SUCCESSFULLY);
+        model.addAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
 
         return mailbox(user, model);
     }

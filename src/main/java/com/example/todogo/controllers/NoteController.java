@@ -1,5 +1,6 @@
 package com.example.todogo.controllers;
 
+import com.example.todogo.constants.TodoGoConstants;
 import com.example.todogo.models.Note;
 import com.example.todogo.models.User;
 import com.example.todogo.services.NoteService;
@@ -16,16 +17,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-import static com.example.todogo.constants.TodoGoConstants.ACTION_RESULT;
-import static com.example.todogo.constants.TodoGoConstants.HAS_ERRORS;
-import static com.example.todogo.constants.TodoGoConstants.REDIRECT_TO_NOTES_PAGE;
-import static com.example.todogo.constants.TodoGoConstants.SUCCESSFULLY;
-
 @Controller
 @AllArgsConstructor
 public class NoteController {
 
     private final NoteService noteService;
+
+    @GetMapping("/myNotes")
+    public String toNotesPage(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute(TodoGoConstants.NEW_NOTE, new Note());
+        model.addAttribute(TodoGoConstants.NOTE_LIST, noteService.getNotesByUser(user));
+
+        return TodoGoConstants.USER_NOTES_PAGE;
+    }
 
     @GetMapping("/myNotes/{noteId}/read")
     public String readNote(@PathVariable("noteId") long noteId, Model model) {
@@ -40,12 +44,12 @@ public class NoteController {
             @AuthenticationPrincipal User user,
             RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
-            redirectAttributes.addFlashAttribute(ACTION_RESULT, HAS_ERRORS);
+            redirectAttributes.addFlashAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.HAS_ERRORS);
         } else {
             noteService.saveNote(newNote, user);
-            redirectAttributes.addFlashAttribute(ACTION_RESULT, SUCCESSFULLY);
+            redirectAttributes.addFlashAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
         }
 
-        return REDIRECT_TO_NOTES_PAGE;
+        return TodoGoConstants.REDIRECT_TO_NOTES_PAGE;
     }
 }
