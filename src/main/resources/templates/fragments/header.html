@@ -41,29 +41,29 @@
                                 </ul>
                                 <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
                                     <li class="uk-active" sec:authorize="hasRole('USER')">
-                                        <a th:href="@{/home}" th:text="#{home}"></a>
+                                        <a class="uk-link" th:href="@{/home}" th:text="#{home}"></a>
                                     </li>
                                     <li class="uk-active" sec:authorize="hasRole('USER')">
-                                        <a th:href="@{/myTasks}" th:text="#{tasks}"></a>
+                                        <a class="uk-link" th:href="@{/myTasks}" th:text="#{tasks}"></a>
                                     </li>
                                     <li class="uk-active" sec:authorize="hasRole('USER')">
-                                        <a th:href="@{/myCalendar}" th:text="#{calendar}"></a>
+                                        <a class="uk-link" th:href="@{/myCalendar}" th:text="#{calendar}"></a>
                                     </li>
                                     <li class="uk-active" sec:authorize="hasRole('USER')">
-                                        <a th:href="@{/myNotes}" th:text="#{notes}"></a>
+                                        <a class="uk-link" th:href="@{/myNotes}" th:text="#{notes}"></a>
                                     </li>
                                     <li class="uk-active" sec:authorize="hasRole('USER')">
-                                        <a th:href="@{/myContacts}" th:text="#{contacts}"></a>
+                                        <a class="uk-link" th:href="@{/myContacts}" th:text="#{contacts}"></a>
                                     </li>
                                     <li class="uk-active" sec:authorize="hasRole('USER')">
-                                        <a th:href="@{/myPasswords}" th:text="#{passwords}"></a>
+                                        <a class="uk-link" th:href="@{/myPasswords}" th:text="#{passwords}"></a>
                                     </li>
 
                                     <li class="uk-active" sec:authorize="hasRole('ADMIN')">
-                                        <a th:href="@{/admin/users}" th:text="#{tasks}"></a>
+                                        <a class="uk-link" th:href="@{/admin/users}" th:text="#{tasks}"></a>
                                     </li>
                                     <li class="uk-active" sec:authorize="hasRole('ADMIN')">
-                                        <a th:href="@{/admin/feedbacks}" th:text="#{messages}"></a>
+                                        <a class="uk-link" th:href="@{/admin/feedbacks}" th:text="#{messages}"></a>
                                     </li>
                                 </ul>
                             </div>
