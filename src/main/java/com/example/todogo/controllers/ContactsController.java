@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ContactsController {
 
     @GetMapping("/myContacts")
-    public String toCalendarPage() {
+    public String toContactsPage() {
         return TodoGoConstants.USER_CONTACTS_PAGE;
     }
 }
