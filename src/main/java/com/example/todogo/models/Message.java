@@ -28,7 +28,7 @@ public class Message {
 
     private boolean markAsRead = false;
 
-    @ManyToOne()
+    @ManyToOne
     private User user;
 
     @Enumerated(EnumType.STRING)
