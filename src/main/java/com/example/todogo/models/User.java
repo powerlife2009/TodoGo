@@ -22,6 +22,7 @@ import javax.validation.constraints.Size;
 import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -60,6 +61,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Note> notes;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Contact> contacts;
 
     public User(String username, String password, String email) {
         this.username = username;

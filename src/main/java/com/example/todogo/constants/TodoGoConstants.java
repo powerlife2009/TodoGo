@@ -26,6 +26,7 @@ public class TodoGoConstants {
     public static final String ADMIN_USER_EDIT = "admin/user_edit";
     public static final String USER_TASKS_PAGE = "user/tasks_page";
     public static final String USER_CALENDAR_PAGE = "user/calendar_page";
+    public static final String USER_CONTACTS_PAGE = "user/contacts_page";
     public static final String USER_NOTES_PAGE = "user/notes_page";
     public static final String GLOBAL_SEARCH_PAGE = "global_search_page";
     public static final String NEW_TASK = "newTask";

@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @AllArgsConstructor
-public class CalendarController {
+public class ContactsController {
 
-    @GetMapping("/myCalendar")
+    @GetMapping("/myContacts")
     public String toCalendarPage() {
-        return TodoGoConstants.USER_CALENDAR_PAGE;
+        return TodoGoConstants.USER_CONTACTS_PAGE;
     }
 }
