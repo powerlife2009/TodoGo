@@ -65,6 +65,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Contact> contacts;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Password> passwords;
+
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
