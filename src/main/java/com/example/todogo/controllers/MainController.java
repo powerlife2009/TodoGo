@@ -1,7 +1,11 @@
 package com.example.todogo.controllers;
 
 import com.example.todogo.constants.TodoGoConstants;
+import com.example.todogo.models.Note;
+import com.example.todogo.models.Task;
 import com.example.todogo.models.User;
+import com.example.todogo.services.NoteService;
+import com.example.todogo.services.TaskService;
 import com.example.todogo.util.TodoGoUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,12 +16,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Objects;
 
 @Controller
 @RequestMapping("/")
 @AllArgsConstructor
 public class MainController {
+
+    private TaskService taskService;
+
+    private NoteService noteService;
 
     @GetMapping
     public String startPage(@AuthenticationPrincipal User user, Model model) {
@@ -41,7 +50,12 @@ public class MainController {
 
     @PostMapping("/global-search")
     public String globalSearch(@AuthenticationPrincipal User user,
-                               @RequestParam String searchText, Model model) {
+            @RequestParam String searchText, Model model) {
+        List<Task> tasks = taskService.searchTaskByText(user, searchText);
+        List<Note> notes = noteService.searchNoteByText(user, searchText);
+
+        model.addAttribute("foundTasks", tasks);
+        model.addAttribute("foundNotes", notes);
 
         return TodoGoConstants.GLOBAL_SEARCH_PAGE;
     }

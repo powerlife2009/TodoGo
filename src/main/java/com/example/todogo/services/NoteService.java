@@ -5,7 +5,6 @@ import com.example.todogo.models.User;
 import com.example.todogo.repos.NoteRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +30,10 @@ public class NoteService {
         Collections.reverse(allByUser);
 
         return allByUser;
+    }
+
+    public List<Note> searchNoteByText(User user, String searchText) {
+        return noteRepository.findAllByUserAndTextContainingIgnoreCase(user, searchText);
     }
 
     public Note getNoteById(long noteId) {

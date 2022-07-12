@@ -70,3 +70,17 @@ function hideCKEditor() {
     document.getElementById('note-nav').hidden = false;
     document.getElementById('ckeditor-div').hidden = true;
 }
+
+function switchTabInGlobalSearch(elementId) {
+    let switchableElement = document.getElementById(elementId);
+
+    let tabs = document.querySelectorAll('[id^="search-tab-"]');
+    tabs.forEach(item => {
+        if (item.id !== switchableElement.id) {
+            item.style.display = 'none';
+        }
+    })
+
+    switchableElement.style.display = "block";
+}
+

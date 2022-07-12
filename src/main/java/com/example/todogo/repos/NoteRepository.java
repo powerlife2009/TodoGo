@@ -11,4 +11,6 @@ import java.util.List;
 public interface NoteRepository extends JpaRepository<Note, Long> {
 
     List<Note> findAllByUser(User user);
+
+    List<Note> findAllByUserAndTextContainingIgnoreCase(User user, String searching);
 }
