@@ -52,6 +52,12 @@
                                     <li class="uk-active" sec:authorize="hasRole('USER')">
                                         <a th:href="@{/myNotes}" th:text="#{notes}"></a>
                                     </li>
+                                    <li class="uk-active" sec:authorize="hasRole('USER')">
+                                        <a th:href="@{/myContacts}" th:text="#{contacts}"></a>
+                                    </li>
+                                    <li class="uk-active" sec:authorize="hasRole('USER')">
+                                        <a th:href="@{/myPasswords}" th:text="#{passwords}"></a>
+                                    </li>
 
                                     <li class="uk-active" sec:authorize="hasRole('ADMIN')">
                                         <a th:href="@{/admin/users}" th:text="#{tasks}"></a>

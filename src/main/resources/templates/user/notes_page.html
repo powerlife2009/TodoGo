@@ -71,10 +71,10 @@
         <div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
             <div th:each="note : ${noteList}">
                 <div class="uk-card uk-card-default uk-card-body">
-                    <a th:href="@{/myNotes/{noteId}/read(noteId = ${note.noteId})}">
+                    <a class="uk-link-toggle" th:href="@{/myNotes/{noteId}/read(noteId = ${note.noteId})}">
                         <h3 class="uk-card-title" th:text="${note.getShortTitle()}"></h3>
+                        <p th:text="${note.text}"></p>
                     </a>
-                    <p th:text="${note.text}"></p>
                 </div>
             </div>
         </div>
