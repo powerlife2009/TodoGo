@@ -32,7 +32,7 @@ public class NoteService {
         return allByUser;
     }
 
-    public Note getNoteById(long noteId) {
-        return noteRepository.getOne(noteId);
+    public void deleteNoteById(Long noteId) {
+        noteRepository.deleteById(noteId);
     }
 }

@@ -9,19 +9,27 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
+@RequestMapping("/myTasks")
 @AllArgsConstructor
-public class TaskListController {
+public class TasksController {
 
     private final TaskService taskService;
 
-    @GetMapping("/myTasks")
+    @GetMapping
     public String toMyTasksPage(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute(TodoGoConstants.NEW_TASK, new Task());
         model.addAttribute(TodoGoConstants.GROUPS, Groups.values());
@@ -31,7 +39,7 @@ public class TaskListController {
         return TodoGoConstants.USER_TASKS_PAGE;
     }
 
-    @PostMapping("/myTasks/sort")
+    @PostMapping("/sort")
     public String sortBy(@AuthenticationPrincipal User user, @RequestParam String sortBy, Model model) {
         List<Task> sortedTaskList = taskService.getAllTaskSortedBy(user, sortBy);
 
@@ -40,7 +48,7 @@ public class TaskListController {
         return TodoGoConstants.USER_TASKS_PAGE;
     }
 
-    @PostMapping("/myTasks/search")
+    @PostMapping("/search")
     public String search(@AuthenticationPrincipal User user, @RequestParam String searchText, Model model) {
         List<Task> taskList = taskService.searchTaskByText(user, searchText);
 
@@ -49,7 +57,7 @@ public class TaskListController {
         return TodoGoConstants.USER_TASKS_PAGE;
     }
 
-    @PostMapping("/myTasks/filterByType")
+    @PostMapping("/filterByType")
     public String filterByType(@AuthenticationPrincipal User user, @RequestParam String type, Model model) {
         List<Task> filteredTaskList = taskService.filterAllTasksByType(user, type);
 
@@ -58,7 +66,7 @@ public class TaskListController {
         return TodoGoConstants.USER_TASKS_PAGE;
     }
 
-    @PostMapping("/myTasks/filterByPriority")
+    @PostMapping("/filterByPriority")
     public String filterByPriority(@AuthenticationPrincipal User user, @RequestParam Integer priority,
             Model model) {
         List<Task> filteredTaskList = taskService.filterAllTasksByPriority(user, priority);
@@ -66,6 +74,33 @@ public class TaskListController {
         addAttributes(filteredTaskList, model, user);
 
         return TodoGoConstants.USER_TASKS_PAGE;
+    }
+
+    @PostMapping("/save")
+    public String saveTodo(@Valid @ModelAttribute Task newTask,
+            BindingResult errors,
+            @RequestParam Optional<String> taskId,
+            @AuthenticationPrincipal User user,
+            RedirectAttributes redirectAttributes) {
+        if (errors.hasErrors()) {
+            redirectAttributes.addFlashAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.HAS_ERRORS);
+        } else {
+            taskId.ifPresent(id -> newTask.setTaskId(Long.parseLong(id)));
+
+            taskService.saveTask(newTask, user);
+            redirectAttributes.addFlashAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
+        }
+
+        return TodoGoConstants.REDIRECT_TO_TASKS_PAGE;
+    }
+
+    @PostMapping("/{taskId}/delete")
+    public String deleteTask(@PathVariable("taskId") Long taskId,
+            RedirectAttributes redirectAttributes) {
+        taskService.deleteTaskById(taskId);
+        redirectAttributes.addFlashAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
+
+        return TodoGoConstants.REDIRECT_TO_TASKS_PAGE;
     }
 
     private void addAttributes(List<Task> tasks, Model model, User user) {
