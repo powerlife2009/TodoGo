@@ -11,18 +11,21 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/myNotes")
 @AllArgsConstructor
 public class NoteController {
 
     private final NoteService noteService;
 
-    @GetMapping("/myNotes")
+    @GetMapping
     public String toNotesPage(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute(TodoGoConstants.NEW_NOTE, new Note());
         model.addAttribute(TodoGoConstants.NOTE_LIST, noteService.getNotesByUser(user));
@@ -30,7 +33,7 @@ public class NoteController {
         return TodoGoConstants.USER_NOTES_PAGE;
     }
 
-    @PostMapping("/myNotes/create")
+    @PostMapping("/create")
     public String createNote(@Valid @ModelAttribute Note newNote,
             BindingResult errors,
             @AuthenticationPrincipal User user,
@@ -41,6 +44,15 @@ public class NoteController {
             noteService.saveNote(newNote, user);
             redirectAttributes.addFlashAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
         }
+
+        return TodoGoConstants.REDIRECT_TO_NOTES_PAGE;
+    }
+
+    @PostMapping("/{noteId}/delete")
+    public String deleteNote(@PathVariable("noteId") Long noteId,
+            RedirectAttributes redirectAttributes) {
+        noteService.deleteNoteById(noteId);
+        redirectAttributes.addFlashAttribute(TodoGoConstants.ACTION_RESULT, TodoGoConstants.SUCCESSFULLY);
 
         return TodoGoConstants.REDIRECT_TO_NOTES_PAGE;
     }
