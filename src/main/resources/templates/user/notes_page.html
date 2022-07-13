@@ -36,7 +36,7 @@
         </div>
     </nav>
 
-    <div id="ckeditor-div" class="uk-margin-auto uk-margin-auto-vertical uk-width-1-2@s" hidden>
+    <div id="ckeditor-div" class="uk-margin-auto uk-margin-auto-vertical uk-width-1-2@s" style="display:none;">
         <form th:action="@{/myNotes/create}" method="post" th:object="${newNote}">
             <div class="uk-margin-medium-top">
                 <h2 class="uk-text-center" th:text="#{new-note}"></h2>
@@ -68,16 +68,39 @@
     </div>
 
     <div class="uk-container uk-margin-large-top">
-        <div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
+        <div class="cards">
             <div th:each="note : ${noteList}">
-                <div class="uk-card uk-card-default uk-card-body">
-                    <a class="uk-link-toggle" th:href="@{/myNotes/{noteId}/read(noteId = ${note.noteId})}">
-                        <h3 class="uk-card-title" th:text="${note.getShortTitle()}"></h3>
-                        <p th:text="${note.text}"></p>
-                    </a>
-                </div>
+                <article class="card">
+                    <header>
+                        <a class="uk-link-toggle"
+                           th:id="${note.text}"
+                           uk-toggle
+                           th:target="${'#read-note'+note}"
+                           th:onclick="formatText([[${note.noteId}]], [[${note.text}]])">
+                            <h2 th:text="${note.getShortTitle()}"></h2>
+                        </a>
+                        <div th:id="${'read-note'+note}" class="uk-flex-top" uk-modal>
+                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                                <button class="uk-modal-close-outside"
+                                        type="button"
+                                        uk-close>
+                                </button>
+
+                                <div class="uk-text-center">
+                                    <h1 th:text="${note.title}"></h1>
+                                </div>
+
+                                <div th:id="note-text + ${note.noteId}" class="uk-text-center"></div>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="content">
+                        <p style="word-break: break-all" th:text="${note.getShortText()}"></p>
+                    </div>
+                </article>
             </div>
         </div>
+
     </div>
 </div>
 <div class="uk-text-center">

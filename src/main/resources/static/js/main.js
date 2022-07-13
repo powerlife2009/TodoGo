@@ -62,13 +62,21 @@ function createCKEditor() {
 }
 
 function showCKEditor() {
-    document.getElementById('note-nav').hidden = true;
-    document.getElementById('ckeditor-div').hidden = false;
+    document.getElementById('note-nav').style.display = 'none';
+    document.getElementById('ckeditor-div').style.display = 'block';
 }
 
 function hideCKEditor() {
-    document.getElementById('note-nav').hidden = false;
-    document.getElementById('ckeditor-div').hidden = true;
+    document.getElementById('note-nav').style.display = 'block';
+    document.getElementById('ckeditor-div').style.display = 'none';
+}
+
+function formatText(noteId, noteText) {
+    let dom = document.getElementById('note-text' + noteId);
+    dom.innerHTML = noteText;
+
+    console.log(noteId);
+    console.log(noteText);
 }
 
 function switchTabInGlobalSearch(elementId) {
