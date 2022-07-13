@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +28,7 @@ public class Note {
     @NotBlank(message = "Please enter text")
     private String title;
 
+    @Lob
     @NotBlank(message = "Please enter text")
     private String text;
 
@@ -38,10 +40,19 @@ public class Note {
     private User user;
 
     public String getShortTitle() {
-        if (title.length() > 21) {
-            return this.title.substring(0, 21).concat("...");
+        if (this.title.length() > 11) {
+            return this.title.substring(0, 11).concat("...");
         }
 
-        return title;
+        return this.title;
+    }
+
+    public String getShortText() {
+        text = text.replaceAll("<.*?>", "");
+        if (text.length() > 276) {
+            return text.substring(0, 276).concat("...");
+        }
+
+        return this.text;
     }
 }
