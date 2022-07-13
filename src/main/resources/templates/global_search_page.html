@@ -40,9 +40,13 @@
                             </div>
                             <div id="search-tab-notes" style="display: none">
                                 <li th:each="note : ${foundNotes}">
-                                    <a>
+                                    <a th:id="${note.text}"
+                                       uk-toggle
+                                       th:target="${'#read-note'+note}"
+                                       th:onclick="formatText([[${note.noteId}]], [[${note.text}]])">
                                         <p th:text="${note.title}"></p>
                                     </a>
+                                    <div th:replace="fragments/note-modal :: note-modal(note = ${note})"></div>
                                 </li>
                             </div>
                         </ul>

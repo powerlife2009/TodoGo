@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="note-modal(note)">
+    <div th:id="${'read-note'+note}" class="uk-flex-top" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+            <a uk-toggle th:target="${'#modal-delete'+note}" uk-tooltip="delete">
+                <span uk-icon="trash"></span>
+            </a>
+            <div th:id="${'modal-delete'+note}" class="uk-flex-top" uk-modal>
+                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                    <h2 th:text="#{this-note-will-be-deleted}"></h2>
+                    <form th:action="@{/myNotes/{noteId}/delete(noteId = ${note.noteId})}"
+                          method="POST">
+                        <div class="uk-margin">
+                            <div class="uk-text-center">
+                                <button class="uk-button uk-button-default uk-modal-close"
+                                        type="button"
+                                        th:text="#{cancel}">
+                                </button>
+                                <button class="uk-button uk-button-primary"
+                                        type="submit"
+                                        th:text="#{delete}">
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <button class="uk-modal-close-outside"
+                    type="button"
+                    uk-close>
+            </button>
+
+            <div class="uk-text-center">
+                <h1 th:text="${note.title}"></h1>
+            </div>
+
+            <div th:id="note-text + ${note.noteId}" class="uk-text-center"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

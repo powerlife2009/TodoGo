@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NoteService {
@@ -33,7 +34,9 @@ public class NoteService {
     }
 
     public List<Note> searchNoteByText(long userId, String searchText) {
-        return noteRepository.findAllByUserUserIdAndTextContainingIgnoreCase(userId, searchText);
+        return noteRepository.findAllByUserUserId(userId).stream()
+                .filter(note -> note.getText().contains(searchText))
+                .collect(Collectors.toList());
     }
 
     public Note getNoteById(long noteId) {
