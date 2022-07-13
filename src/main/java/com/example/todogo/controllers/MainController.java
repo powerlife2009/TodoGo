@@ -54,8 +54,8 @@ public class MainController {
         List<Task> tasks = taskService.searchTaskByText(user.getUserId(), searchText);
         List<Note> notes = noteService.searchNoteByText(user.getUserId(), searchText);
 
-        model.addAttribute("foundTasks", tasks);
-        model.addAttribute("foundNotes", notes);
+        model.addAttribute(TodoGoConstants.FOUND_TASKS, tasks);
+        model.addAttribute(TodoGoConstants.FOUND_NOTES, notes);
 
         return TodoGoConstants.GLOBAL_SEARCH_PAGE;
     }

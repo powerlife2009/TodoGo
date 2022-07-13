@@ -40,4 +40,6 @@ public class TodoGoConstants {
     public static final String LOGIN_REGISTRATION = "logIn/registration";
     public static final String REDIRECT_TO_MAIL = "redirect:/mail";
     public static final String DATE_TODAY = "dateToday";
+    public static final String FOUND_TASKS = "foundTasks";
+    public static final String FOUND_NOTES = "foundNotes";
 }
