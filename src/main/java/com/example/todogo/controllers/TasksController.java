@@ -50,7 +50,7 @@ public class TasksController {
     }
 
     @PostMapping("/search")
-    public String search(@AuthenticationPrincipal User user, @RequestParam String searchText, Model model) {
+    public String searchTasks(@AuthenticationPrincipal User user, @RequestParam String searchText, Model model) {
         List<Task> taskList =
                 taskService.searchTaskByText(user.getUserId(), searchText);
 

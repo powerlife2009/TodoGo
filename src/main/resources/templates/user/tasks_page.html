@@ -8,7 +8,7 @@
 <body>
 <div id="page-wrapper" class="uk-background-fixed uk-background-cover" data-src="/img/1093402.jpg" uk-img>
     <div th:replace="fragments/header :: navbar"></div>
-    <div th:replace="fragments/user_navbar :: userNavbar"></div>
+    <div th:replace="fragments/tasks_navbar :: tasksNavbar"></div>
 
     <div th:switch="${action_result}">
         <div th:case="'successfully'">
