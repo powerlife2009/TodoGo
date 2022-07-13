@@ -19,33 +19,33 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<Task> getAllTaskSortedBy(User user, String sortBy) {
+    public List<Task> getAllTaskSortedBy(long userId, String sortBy) {
         Sort sort = Sort.by(sortBy);
 
         if(sortBy.equals("priority")) {
             sort = sort.descending();
         }
-        return taskRepository.findAllByUser(user, sort);
+        return taskRepository.findAllByUserUserId(userId, sort);
     }
 
-    public List<Task> sortTasksAsQueue(User user) {
-        return taskRepository.findAllByUser(user, Sort.by(Sort.Direction.DESC, ("taskId")));
+    public List<Task> sortTasksAsQueue(long userId) {
+        return taskRepository.findAllByUserUserId(userId, Sort.by(Sort.Direction.DESC, ("taskId")));
     }
 
-    public List<Task> filterAllTasksByType(User user, String type) {
-        return taskRepository.findAllByUserAndType(user, type);
+    public List<Task> filterAllTasksByType(long userId, String type) {
+        return taskRepository.findAllByUserUserIdAndType(userId, type);
     }
 
-    public List<Task> filterAllTasksByPriority(User user, Integer priority) {
-        return taskRepository.findAllByUserAndPriority(user, priority);
+    public List<Task> filterAllTasksByPriority(long userId, Integer priority) {
+        return taskRepository.findAllByUserUserIdAndPriority(userId, priority);
     }
 
-    public List<Task> getTasksSortedByDateAndNearestFive(User user) {
-        return taskRepository.findFirst5ByUserOrderByDateAsc(user);
+    public List<Task> getTasksSortedByDateAndNearestFive(long userId) {
+        return taskRepository.findFirst5ByUserUserIdOrderByDateAsc(userId);
     }
 
-    public List<Task> searchTaskByText(User user, String searchText) {
-        return taskRepository.findAllByUserAndTextContainingIgnoreCase(user, searchText);
+    public List<Task> searchTaskByText(long userId, String searchText) {
+        return taskRepository.findAllByUserUserIdAndTextContainingIgnoreCase(userId, searchText);
     }
 
     public void saveTask(Task task, User user) {

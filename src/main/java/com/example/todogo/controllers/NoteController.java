@@ -28,7 +28,7 @@ public class NoteController {
     @GetMapping
     public String toNotesPage(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute(TodoGoConstants.NEW_NOTE, new Note());
-        model.addAttribute(TodoGoConstants.NOTE_LIST, noteService.getNotesByUser(user));
+        model.addAttribute(TodoGoConstants.NOTE_LIST, noteService.getNotesByUserId(user.getUserId()));
 
         return TodoGoConstants.USER_NOTES_PAGE;
     }

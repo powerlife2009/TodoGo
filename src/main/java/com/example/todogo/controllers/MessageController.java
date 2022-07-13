@@ -27,7 +27,7 @@ public class MessageController {
     @GetMapping("/mail")
     public String mailbox(@AuthenticationPrincipal User user, Model model) {
         List<Message> messageInboxList =
-                messageService.findAllByUserAndMessageWay(user, MessageWay.INBOX);
+                messageService.findAllByUserIdAndMessageWay(user.getUserId(), MessageWay.INBOX);
         model.addAttribute(TodoGoConstants.MESSAGES, messageInboxList);
 
         return TodoGoConstants.USER_MAIL_PAGE;

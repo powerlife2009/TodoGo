@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NoteService {
@@ -25,11 +26,21 @@ public class NoteService {
         noteRepository.save(note);
     }
 
-    public List<Note> getNotesByUser(User user) {
-        List<Note> allByUser = noteRepository.findAllByUser(user);
+    public List<Note> getNotesByUserId(long userId) {
+        List<Note> allByUser = noteRepository.findAllByUserUserId(userId);
         Collections.reverse(allByUser);
 
         return allByUser;
+    }
+
+    public List<Note> searchNoteByText(long userId, String searchText) {
+        return noteRepository.findAllByUserUserId(userId).stream()
+                .filter(note -> note.getText().contains(searchText))
+                .collect(Collectors.toList());
+    }
+
+    public Note getNoteById(long noteId) {
+        return noteRepository.getOne(noteId);
     }
 
     public void deleteNoteById(Long noteId) {

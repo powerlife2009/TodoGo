@@ -9,10 +9,52 @@
 <div id="page-wrapper" class="uk-background-fixed" data-src="/img/1093402.jpg" uk-img>
     <div th:replace="fragments/header :: navbar"></div>
 
-    <div class="uk-margin-xlarge-top uk-position-top-center">
-        <h1 class="uk-heading-small uk-text-center" th:text="#{in-development}"></h1>
+    <div class="uk-position-center uk-margin-medium">
+        <div class="uk-width-2xlarge uk-margin">
+            <div class="uk-text-center" uk-grid>
+                <div class="uk-width-1-4">
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <ul class="uk-nav">
+                            <li>
+                                <a onclick="switchTabInGlobalSearch('search-tab-tasks')">
+                                    <span th:text="#{tasks} + ' (' + ${foundTasks.size()} + ')'"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="switchTabInGlobalSearch('search-tab-notes')">
+                                    <span th:text="#{notes} + ' (' + ${foundNotes.size()} + ')'"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="uk-width-3-4">
+                    <div class="uk-card uk-card-default uk-card-body" style="height: 400px">
+                        <ul class="uk-nav">
+                            <div id="search-tab-tasks">
+                                <li th:each="task : ${foundTasks}">
+                                    <a>
+                                        <p th:text="${task.text}"></p>
+                                    </a>
+                                </li>
+                            </div>
+                            <div id="search-tab-notes" style="display: none">
+                                <li th:each="note : ${foundNotes}">
+                                    <a th:id="${note.text}"
+                                       uk-toggle
+                                       th:target="${'#read-note'+note}"
+                                       th:onclick="formatText([[${note.noteId}]], [[${note.text}]])">
+                                        <p th:text="${note.title}"></p>
+                                    </a>
+                                    <div th:replace="fragments/note-modal :: note-modal(note = ${note})"></div>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 </div>
 </body>
 </html>

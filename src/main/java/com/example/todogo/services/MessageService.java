@@ -21,8 +21,8 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    public List<Message> findAllByUserAndMessageWay(User user, MessageWay messageWay) {
-        return messageRepository.findAllByUserAndMessageWay(user, messageWay, Sort.by(Sort.Direction.DESC, "messageId"));
+    public List<Message> findAllByUserIdAndMessageWay(long userId, MessageWay messageWay) {
+        return messageRepository.findAllByUserUserIdAndMessageWay(userId, messageWay, Sort.by(Sort.Direction.DESC, "messageId"));
     }
 
     public List<Message> getAllMessagesByMessageWay(MessageWay messageWay) {
