@@ -9,48 +9,48 @@
 <div id="page-wrapper" class="uk-background-fixed" data-src="/img/1093402.jpg" uk-img>
     <div th:replace="fragments/header :: navbar"></div>
 
-    <div class="uk-position-center">
+    <div class="uk-position-center uk-margin-medium">
         <div class="uk-width-2xlarge uk-margin">
-            <div class="uk-card uk-card-medium uk-card-default">
-                <div class="uk-card-title">
-                    <p class="uk-text-center" th:text="#{search}"></p>
+            <div class="uk-text-center" uk-grid>
+                <div class="uk-width-1-4">
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <ul class="uk-nav">
+                            <li>
+                                <a onclick="switchTabInGlobalSearch('search-tab-tasks')">
+                                    <span th:text="#{tasks} + ' (' + ${foundTasks.size()} + ')'"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="switchTabInGlobalSearch('search-tab-notes')">
+                                    <span th:text="#{notes} + ' (' + ${foundNotes.size()} + ')'"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="uk-card-body">
-                    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-4@s uk-margin" uk-grid>
-                        <div class="uk-card-media-left uk-cover-container">
-                            <ul class="uk-nav">
-                                <li>
-                                    <a onclick="switchTabInGlobalSearch('search-tab-tasks')">
-                                        <span th:text="#{tasks} + ' (' + ${foundTasks.size()} + ')'"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a onclick="switchTabInGlobalSearch('search-tab-notes')">
-                                        <span th:text="#{notes} + ' (' + ${foundNotes.size()} + ')'"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <ul class="uk-nav">
-                                <div id="search-tab-tasks">
-                                    <li th:each="task : ${foundTasks}">
+                <div class="uk-width-3-4">
+                    <div class="uk-card uk-card-default uk-card-body" style="height: 400px">
+                        <ul class="uk-nav">
+                            <div id="search-tab-tasks">
+                                <li th:each="task : ${foundTasks}">
+                                    <a>
                                         <p th:text="${task.text}"></p>
-                                    </li>
-                                </div>
-                                <div id="search-tab-notes" style="display: none">
-                                    <li th:each="note : ${foundNotes}">
+                                    </a>
+                                </li>
+                            </div>
+                            <div id="search-tab-notes" style="display: none">
+                                <li th:each="note : ${foundNotes}">
+                                    <a>
                                         <p th:text="${note.title}"></p>
-                                    </li>
-                                </div>
-                            </ul>
-                        </div>
+                                    </a>
+                                </li>
+                            </div>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>
