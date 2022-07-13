@@ -39,4 +39,8 @@ public class NoteService {
     public Note getNoteById(long noteId) {
         return noteRepository.getOne(noteId);
     }
+
+    public void deleteNoteById(Long noteId) {
+        noteRepository.deleteById(noteId);
+    }
 }
