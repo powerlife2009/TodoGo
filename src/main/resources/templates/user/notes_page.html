@@ -22,19 +22,21 @@
         </div>
     </div>
 
-    <nav id="note-nav" class="uk-navbar-container uk-navbar-transparent" uk-navbar>
-        <div class="uk-navbar-center">
-            <ul class="uk-navbar-nav uk-margin-top">
-                <li>
-                    <a href="#" uk-icon="icon: plus-circle; ratio: 3.5"
-                       th:uk-tooltip="#{create-note}"
-                       uk-toggle
-                       onclick="showCKEditor()">
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div id="note-nav">
+        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+            <div class="uk-navbar-center">
+                <ul class="uk-navbar-nav uk-margin-top">
+                    <li>
+                        <a href="#" uk-icon="icon: plus-circle; ratio: 3.5"
+                           th:uk-tooltip="#{create-note}"
+                           uk-toggle
+                           onclick="showCKEditor()">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
     <div id="ckeditor-div" class="uk-margin-auto uk-margin-auto-vertical uk-width-1-2@s" style="display:none;">
         <form th:action="@{/myNotes/create}" method="post" th:object="${newNote}">
