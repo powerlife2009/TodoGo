@@ -33,15 +33,16 @@ public class TasksController {
     public String toMyTasksPage(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute(TodoGoConstants.NEW_TASK, new Task());
         model.addAttribute(TodoGoConstants.GROUPS, Groups.values());
-        model.addAttribute(TodoGoConstants.NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
-        model.addAttribute(TodoGoConstants.TODO_LIST, taskService.sortTasksAsQueue(user));
+        model.addAttribute(TodoGoConstants.NEAREST,
+                taskService.getTasksSortedByDateAndNearestFive(user.getUserId()));
+        model.addAttribute(TodoGoConstants.TODO_LIST, taskService.sortTasksAsQueue(user.getUserId()));
 
         return TodoGoConstants.USER_TASKS_PAGE;
     }
 
     @PostMapping("/sort")
     public String sortBy(@AuthenticationPrincipal User user, @RequestParam String sortBy, Model model) {
-        List<Task> sortedTaskList = taskService.getAllTaskSortedBy(user, sortBy);
+        List<Task> sortedTaskList = taskService.getAllTaskSortedBy(user.getUserId(), sortBy);
 
         addAttributes(sortedTaskList, model, user);
 
@@ -50,7 +51,8 @@ public class TasksController {
 
     @PostMapping("/search")
     public String search(@AuthenticationPrincipal User user, @RequestParam String searchText, Model model) {
-        List<Task> taskList = taskService.searchTaskByText(user, searchText);
+        List<Task> taskList =
+                taskService.searchTaskByText(user.getUserId(), searchText);
 
         addAttributes(taskList, model, user);
 
@@ -59,7 +61,7 @@ public class TasksController {
 
     @PostMapping("/filterByType")
     public String filterByType(@AuthenticationPrincipal User user, @RequestParam String type, Model model) {
-        List<Task> filteredTaskList = taskService.filterAllTasksByType(user, type);
+        List<Task> filteredTaskList = taskService.filterAllTasksByType(user.getUserId(), type);
 
         addAttributes(filteredTaskList, model, user);
 
@@ -69,7 +71,7 @@ public class TasksController {
     @PostMapping("/filterByPriority")
     public String filterByPriority(@AuthenticationPrincipal User user, @RequestParam Integer priority,
             Model model) {
-        List<Task> filteredTaskList = taskService.filterAllTasksByPriority(user, priority);
+        List<Task> filteredTaskList = taskService.filterAllTasksByPriority(user.getUserId(), priority);
 
         addAttributes(filteredTaskList, model, user);
 
@@ -110,7 +112,8 @@ public class TasksController {
 
         model.addAttribute(TodoGoConstants.NEW_TASK, new Task());
         model.addAttribute(TodoGoConstants.GROUPS, Groups.values());
-        model.addAttribute(TodoGoConstants.NEAREST, taskService.getTasksSortedByDateAndNearestFive(user));
+        model.addAttribute(TodoGoConstants.NEAREST,
+                taskService.getTasksSortedByDateAndNearestFive(user.getUserId()));
         model.addAttribute(TodoGoConstants.TODO_LIST, tasks);
     }
 }

@@ -25,15 +25,15 @@ public class NoteService {
         noteRepository.save(note);
     }
 
-    public List<Note> getNotesByUser(User user) {
-        List<Note> allByUser = noteRepository.findAllByUser(user);
+    public List<Note> getNotesByUserId(long userId) {
+        List<Note> allByUser = noteRepository.findAllByUserUserId(userId);
         Collections.reverse(allByUser);
 
         return allByUser;
     }
 
-    public List<Note> searchNoteByText(User user, String searchText) {
-        return noteRepository.findAllByUserAndTextContainingIgnoreCase(user, searchText);
+    public List<Note> searchNoteByText(long userId, String searchText) {
+        return noteRepository.findAllByUserUserIdAndTextContainingIgnoreCase(userId, searchText);
     }
 
     public Note getNoteById(long noteId) {

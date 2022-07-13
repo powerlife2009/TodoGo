@@ -51,8 +51,8 @@ public class MainController {
     @PostMapping("/global-search")
     public String globalSearch(@AuthenticationPrincipal User user,
             @RequestParam String searchText, Model model) {
-        List<Task> tasks = taskService.searchTaskByText(user, searchText);
-        List<Note> notes = noteService.searchNoteByText(user, searchText);
+        List<Task> tasks = taskService.searchTaskByText(user.getUserId(), searchText);
+        List<Note> notes = noteService.searchNoteByText(user.getUserId(), searchText);
 
         model.addAttribute("foundTasks", tasks);
         model.addAttribute("foundNotes", notes);
