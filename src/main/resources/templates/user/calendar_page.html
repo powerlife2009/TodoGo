@@ -10,15 +10,9 @@
     <div th:replace="fragments/header :: navbar"></div>
 
     <h1 class="uk-text-center">
-        <a>
-            <span uk-icon="icon: chevron-left; ratio: 2"></span>
-        </a>
-
+        <span uk-icon="icon: chevron-left; ratio: 2"></span>
         <span class="uk-text-center" th:text="${monthName} + ', ' + ${currentYear}"></span>
-
-        <a onclick="fire_ajax_submit(event)">
-            <span uk-icon="icon: chevron-right; ratio: 2"></span>
-        </a>
+        <span uk-icon="icon: chevron-right; ratio: 2"></span>
     </h1>
 
     <div class="uk-margin-large-top uk-margin-xlarge-left uk-margin-xlarge-right">
