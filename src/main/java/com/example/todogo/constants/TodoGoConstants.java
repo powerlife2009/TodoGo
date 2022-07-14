@@ -42,4 +42,9 @@ public class TodoGoConstants {
     public static final String DATE_TODAY = "dateToday";
     public static final String FOUND_TASKS = "foundTasks";
     public static final String FOUND_NOTES = "foundNotes";
+    public static final String CURRENT_DAY = "currentDay";
+    public static final String MONTH_NAME = "monthName";
+    public static final String CURRENT_YEAR = "currentYear";
+    public static final String DAYS_OF_MONTH = "daysOfMonth";
+    public static final String FIRST_DAY_OF_WEEK = "firstDayOfWeek";
 }
