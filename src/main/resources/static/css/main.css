@@ -50,9 +50,16 @@ html, body {
     height: 100%;
 }
 
-.gallery {
+.month-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(5, 5vw);
+    grid-gap: 15px;
+}
+
+.weeks-line {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(1, 5vw);
     grid-gap: 15px;
 }
