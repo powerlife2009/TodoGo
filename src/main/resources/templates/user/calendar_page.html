@@ -10,19 +10,36 @@
     <div th:replace="fragments/header :: navbar"></div>
 
     <h1 class="uk-text-center">
-        <a>
-            <span uk-icon="icon: chevron-left; ratio: 2"></span>
-        </a>
-
+        <span uk-icon="icon: chevron-left; ratio: 2"></span>
         <span class="uk-text-center" th:text="${monthName} + ', ' + ${currentYear}"></span>
-
-        <a>
-            <span uk-icon="icon: chevron-right; ratio: 2"></span>
-        </a>
+        <span uk-icon="icon: chevron-right; ratio: 2"></span>
     </h1>
 
     <div class="uk-margin-large-top uk-margin-xlarge-left uk-margin-xlarge-right">
-        <div class="gallery">
+        <div class="weeks-line">
+            <div class="uk-text-center uk-text-middle">
+                <span class="uk-text-middle uk-text-bold" th:text="#{mo}"></span>
+            </div>
+            <div class="uk-text-center">
+                <span class="uk-text-middle uk-text-bold" th:text="#{tu}"></span>
+            </div>
+            <div class="uk-text-center">
+                <span class="uk-text-middle uk-text-bold" th:text="#{we}"></span>
+            </div>
+            <div class="uk-text-center">
+                <span class="uk-text-middle uk-text-bold" th:text="#{th}"></span>
+            </div>
+            <div class="uk-text-center">
+                <span class="uk-text-middle uk-text-bold" th:text="#{fr}"></span>
+            </div>
+            <div class="uk-text-center">
+                <span class="uk-text-middle uk-text-bold" th:text="#{sa}"></span>
+            </div>
+            <div class="uk-text-center">
+                <span class="uk-text-middle uk-text-bold" th:text="#{su}"></span>
+            </div>
+        </div>
+        <div class="month-grid">
             <th:block th:each="i: ${#numbers.sequence(1, firstDayOfWeek - 1)}">
                 <div class="card uk-card-default" style="background: grey"></div>
             </th:block>
