@@ -7,9 +7,6 @@ import java.time.format.FormatStyle;
 public class TodoGoUtils {
 
     public static String getDateToday() {
-        LocalDate localDate = LocalDate.now();
-
-        return localDate.format(DateTimeFormatter
-                .ofLocalizedDate(FormatStyle.FULL));
+        return LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
     }
 }
