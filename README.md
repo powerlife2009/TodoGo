@@ -31,8 +31,6 @@ The current version of the TodoGo 0.9 project offers the following features:<br>
 
 # Conclusion
 
-This project is deployed on heroku.com
-# [Go to todogo-project.herokuapp.com](https://todogo-project.herokuapp.com/)
 Development continues<br>
 Feedback is welcome!
 
