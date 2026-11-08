@@ -3,10 +3,10 @@
 TodoGo is my training project, the purpose of which is to learn
 with the Spring Framework.<br>
 It's built on a stack:<br>
-   - Spring Boot , <br>
+   - Spring Boot 3.5 and Java 17,<br>
    - Spring Data JPA,<br>
-   - Spring Security 5,<br>
-   - Thymeleaf 5,<br>
+   - Spring Security 6,<br>
+   - Thymeleaf 3,<br>
    - PostgreSQL,<br>
    - and UIKit 3 for FrontEnd.
 
