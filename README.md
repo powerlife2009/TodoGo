@@ -26,6 +26,11 @@ The current version of the TodoGo 0.9 project offers the following features:<br>
    - feedback form<br>
    - administration<br>
 
+# Tests
+
+Run the automated tests with Java 17 and `mvn test`. Repository tests use an
+in-memory H2 database, so they do not modify the local PostgreSQL database.
+
 ! update on 22.04.2021:<br>
    - __Now TodoGo displays beautifully on mobile devices__
 
