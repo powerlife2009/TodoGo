@@ -1,7 +1,7 @@
 HELP.md
 target/
 .mvn-repository/
-!.mvn/wrapper/maven-wrapper.jar
+.gradle/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -32,7 +32,3 @@ build/
 
 ### VS Code ###
 .vscode/
-/.mvn/wrapper/maven-wrapper.jar
-/.mvn/
-/mvnw
-/mvnw.cmd
