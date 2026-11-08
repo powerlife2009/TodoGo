@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   client-backend:
     image: client:0.0.1
@@ -8,10 +7,13 @@ services:
     ports:
       - "8181:8181"
     depends_on:
-      - service-db
+      service-db:
+        condition: service_healthy
     environment:
-      - SERVER_PORT= 8181
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://service-db/todo_go_db
+      SERVER_PORT: 8181
+      SPRING_DATASOURCE_URL: jdbc:postgresql://service-db:5432/todo_go_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres_pass
 
   service-db:
     image: postgres:14.7-alpine
@@ -19,7 +21,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres_pass
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready", "-d", "books_db" ]
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d todo_go_db" ]
       interval: 10s
       timeout: 3s
       retries: 3

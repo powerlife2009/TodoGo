@@ -1,0 +1,6 @@
+.git
+.gradle
+.mvn-repository
+.idea
+build
+target
